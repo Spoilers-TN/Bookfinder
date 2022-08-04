@@ -16,15 +16,6 @@ fun Application.configureRouting() {
     }
     install(AutoHeadResponse)
 
-    install(StatusPages) {
-        exception<AuthenticationException> { call, cause ->
-            call.respond(HttpStatusCode.Unauthorized)
-        }
-        exception<AuthorizationException> { call, cause ->
-            call.respond(HttpStatusCode.Forbidden)
-        }
-
-    }
     install(Webjars) {
         path = "/webjars" //defaults to /webjars
     }
@@ -50,6 +41,9 @@ fun Application.configureRouting() {
         get("/webjars") {
             call.respondText("<script src='/webjars/jquery/jquery.js'></script>", ContentType.Text.Html)
         }
+        get("/teapot") {
+            call.respondText(text = "418: I'm a teapot \uD83E\uDED6", status = HttpStatusCode.fromValue(418))
+        }
     }
 }
 
@@ -63,6 +57,3 @@ data class Type(val name: String) {
     @Location("/list/{page}")
     data class List(val type: Type, val page: Int)
 }
-
-class AuthenticationException : RuntimeException()
-class AuthorizationException : RuntimeException()
