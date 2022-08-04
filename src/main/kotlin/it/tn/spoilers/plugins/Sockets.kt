@@ -18,6 +18,7 @@ import io.ktor.server.request.*
 import io.ktor.server.routing.*
 
 fun Application.configureSockets() {
+    log.info("[!] Starting Plugin - Sockets.kt")
 
     install(WebSockets) {
         pingPeriod = Duration.ofSeconds(15)
@@ -39,6 +40,7 @@ fun Application.configureSockets() {
             }
         }
     }
+    log.info("[✓] Started Plugin - Sockets.kt")
 }
 
 /**

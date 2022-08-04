@@ -9,6 +9,7 @@ import io.ktor.server.plugins.forwardedheaders.*
 import io.ktor.server.application.*
 
 fun Application.configureHeaders() {
+    log.info("[!] Starting Plugin - Headers.kt")
     install(CachingHeaders) {
         options { call, outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
@@ -23,4 +24,5 @@ fun Application.configureHeaders() {
     }
     install(ForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
     install(XForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
+    log.info("[✓] Started Plugin - Headers.kt")
 }

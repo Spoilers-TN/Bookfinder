@@ -10,7 +10,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureAuthentication() {
-
+    log.info("[!] Starting Plugin - Authentication.kt")
     authentication {
         oauth("auth-oauth-google") {
             urlProvider = { "http://localhost:8080/callback" }
@@ -85,6 +85,7 @@ fun Application.configureAuthentication() {
             }
         }
     }
+    log.info("[✓] Started Plugin - Authentication.kt")
 }
 
 class UserSession(accessToken: String)

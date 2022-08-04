@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "it.tn.spoilers"
-version = "0.0.1"
+version = "2022.8.4-Alpha"
 application {
     mainClass.set("it.tn.spoilers.ApplicationKt")
 

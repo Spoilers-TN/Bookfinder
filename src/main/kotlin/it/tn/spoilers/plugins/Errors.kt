@@ -6,6 +6,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 
 fun Application.configureErrors() {
+    log.info("[!] Starting Plugin - Errors.kt")
     install(StatusPages) {
         status(HttpStatusCode.NotFound) { call, status ->
             call.respondText(text = "404: Not Found", status = HttpStatusCode.NotFound)
@@ -33,6 +34,7 @@ fun Application.configureErrors() {
             }
         }
     }
+    log.info("[✓] Started Plugin - Errors.kt")
 }
 
 class AuthenticationException : RuntimeException()

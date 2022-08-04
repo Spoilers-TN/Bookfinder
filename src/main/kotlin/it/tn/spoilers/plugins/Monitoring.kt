@@ -11,6 +11,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureMonitoring() {
+    log.info("[!] Starting Plugin - Monitoring.kt")
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
@@ -28,4 +29,5 @@ fun Application.configureMonitoring() {
             call.respond(appMicrometerRegistry.scrape())
         }
     }
+    log.info("[✓] Started Plugin - Monitoring.kt")
 }

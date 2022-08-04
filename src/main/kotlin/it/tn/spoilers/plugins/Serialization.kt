@@ -8,6 +8,7 @@ import io.ktor.server.request.*
 import io.ktor.server.routing.*
 
 fun Application.configureSerialization() {
+    log.info("[!] Starting Plugin - Serialization.kt")
     install(ContentNegotiation) {
         json()
     }
@@ -17,4 +18,5 @@ fun Application.configureSerialization() {
             call.respond(mapOf("hello" to "world"))
         }
     }
+    log.info("[✓] Started Plugin - Serialization.kt")
 }

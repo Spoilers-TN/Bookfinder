@@ -5,6 +5,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.cors.routing.*
 
 fun Application.configureCORS() {
+    log.info("[!] Starting Plugin - CORS.kt")
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Put)
@@ -14,4 +15,5 @@ fun Application.configureCORS() {
         allowHeader("MyCustomHeader")
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
+    log.info("[✓] Started Plugin - CORS.kt")
 }

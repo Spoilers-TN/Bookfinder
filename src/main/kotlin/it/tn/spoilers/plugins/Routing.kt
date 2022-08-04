@@ -12,6 +12,7 @@ import io.ktor.server.response.*
 import java.io.File
 
 fun Application.configureRouting() {
+    log.info("[!] Starting Plugin - Routing.kt")
     install(Locations) {
     }
     install(AutoHeadResponse)
@@ -45,6 +46,7 @@ fun Application.configureRouting() {
             call.respondText(text = "418: I'm a teapot \uD83E\uDED6", status = HttpStatusCode.fromValue(418))
         }
     }
+    log.info("[✓] Started Plugin - Routing.kt")
 }
 
 @Location("/location/{name}")
