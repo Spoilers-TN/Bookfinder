@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html lang="it">
+<head>
+
+    <!-- FORMATTAZIONE DEFAULT -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cerca libri usati nel catalogo | Bookfinder</title>
+    <meta name="description" content="Cerca libri usati oggi su Bookfinder, libri scolastici scontati, nessuna commissione.">
+    <meta name="keywords" content="Cerca Libri, Scolastici, Usato, Garantito, Sconti, Prezzo basso">
+
+    <!-- FAVICONS E MANIFST -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-icon-180x180.png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta property="og:type" content="website">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#343A40">
+
+    <!-- REFERENZE BOOSTRAP -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- STILE GENERALE -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- STILE FOOTER E NAVBAR -->
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/dropdown.css">
+
+    <!-- STILI PERSONALIZZATI PER OGNI PAGINA -->
+    <link rel="stylesheet" href="assets/css/deckcard.css">
+
+</head>
+
+<body>
+
+{{> ph-navbar}}
+
+<div class="container" style="margin-top: 30px; margin-bottom: 30px">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center"><img src="assets/img/emoji/magnifier.webp" style="max-height: 70px;margin-bottom: -20px;margin-top: -20px; margin-bottom: 20px; margin-top: 15px">
+                    <h1 class="text-center">Cerca su Bookfinder</h1>
+                    <p class="text-center">Trova tra titoli, autori, categorie...</p>
+                    <div class="row">
+                        <div class="col justify-self-center">
+                            <div class="input-group">
+                                <div class="input-group-prepend"></div><input class="form-control" type="text" style="background: #F6f6f6;border-top-left-radius: 8px;border-bottom-left-radius: 8px;" placeholder="Cerca in tutte le categorie...">
+                                <div class="input-group-append"><button class="btn btn-warning" type="button" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;"><i class="fas fa-search"></i>&nbsp;Cerca</button></div>
+                            </div>
+                        </div>
+                        <div class="col col-md-auto justify-self-sm-center">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" aria-expanded="true" data-toggle="dropdown" type="button">Ordine</button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">Consigliati per te</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Alfabetico (A-Z)</a>
+                                    <a class="dropdown-item" href="#">Alfabetico (Z-A)</a>
+                                    <a class="dropdown-item" href="#">Prezzo più economico</a>
+                                    <a class="dropdown-item" href="#">Per stato di utlizzo</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- NON RIMUOVERE! Filtri di ricerca (Da introdurre in futuro) -->
+<div class="container" style="display: none">
+    <div class="row">
+
+        <div class="col-md-3" style="padding: 30px;">
+            <p style="margin-bottom: 0px;font-weight: bold;">Filtra recensioni:</p>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-10" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-10" style="color: rgb(249,207,59);border-width: 0px;border-color: rgb(0,0,0);">
+                    <strong>★★★★★</strong>
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-bottom: -25px;">
+                <input class="form-check-input" type="checkbox" id="formCheck-11" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-11" style="color: rgb(249,207,59);border-width: 0px;border-color: rgb(0,0,0);">
+                    <strong>★★★★</strong>
+                    <span style="color: rgb(180,178,172);"><strong>★</strong><br></span><br>
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-bottom: -25px;">
+                <input class="form-check-input" type="checkbox" id="formCheck-12" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-12" style="color: rgb(249,207,59);border-width: 0px;border-color: rgb(0,0,0);">
+                    <strong>★★★</strong><span style="color: rgb(180,178,172);">
+                <strong>★★</strong><br></span><br>
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-bottom: -25px;">
+                <input class="form-check-input" type="checkbox" id="formCheck-13" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-13" style="color: rgb(249,207,59);border-width: 0px;border-color: rgb(0,0,0);">
+                    <strong>★★</strong><span style="color: rgb(180,178,172);"><strong>★★★</strong><br></span><br>
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-bottom: -25px;">
+                <input class="form-check-input" type="checkbox" id="formCheck-14" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-14" style="color: rgb(249,207,59);border-width: 0px;border-color: rgb(0,0,0);">
+                    <strong>★</strong><span style="color: rgb(180,178,172);"><strong>★★★★</strong><br></span><br></label></div>
+        </div>
+
+
+
+        <div class="col-md-3" style="padding: 30px;">
+            <p style="margin-bottom: 0px;font-weight: bold;">Filtra per stato:</p>
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-1" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Nuovo</strong></label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-2" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-2" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Come nuovo</strong></label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-3" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-3" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>In buone condizioni</strong><br></label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-4" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-4" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Usato</strong></label>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-3" style="padding: 30px;">
+            <p style="margin-bottom: 0px;font-weight: bold;">Filtra per prezzo:</p>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-7" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-7" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Meno di 5 euro</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-8" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-8" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Tra 5-15 euro</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-9" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-9" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Tra 15-30 euro</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-18" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-18" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Tra 30-50 euro</strong>
+                </label>
+            </div>
+
+            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-19" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-19" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>Più di 50 euro</strong>
+                </label>
+            </div>
+        </div>
+
+
+
+        <div class="col" style="padding: 30px;">
+            <p style="margin-bottom: 0px;font-weight: bold;">Filtra per grado:</p>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-5" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-5" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>1° Superiore</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-23" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-23" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>2° Superiore</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-22" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-22" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>3° Superiore</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-21" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-21" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>4° Superiore</strong>
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck-20" style="margin-top: 7.8px;">
+                <label class="form-check-label" for="formCheck-20" style="color: rgb(92,92,90);border-width: 0px;border-color: rgb(0,0,0);font-size: 15px;">
+                    <strong>5° Superiore</strong>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- GRIGLIA DEI RISULTATI -->
+
+<div class="container">
+
+    <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
+
+    <div class="row gy-3">
+        <div class="col-md" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;" src="/assets/img/general/antologia.webp" alt="Copertina libro non caricata">
+
+                <div class="card-body mt-auto d-flex flex-column">
+
+              <span class="cc-venditore">
+                <a href="?profile=leoni_nicola" class="cc-venditore">Leoni Nicola</a>
+              </span>
+
+                    <h5 class="card-title" href="?query=titololibro">
+                        <b>Laboratorio di Letteratura 2 - Dal Barocco al Romanticismo</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>2017</b> - <i>In buone condizioni</i></p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac 19.99</b></button>
+                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;" src="https://www.libraccio.it/images/9788868023065_0_500_0_75.jpg" alt="Copertina libro non caricata">
+
+                <div class="card-body mt-auto d-flex flex-column">
+
+              <span class="cc-venditore">
+                <a href="?profile=leoni_nicola" class="cc-venditore">Leoni Nicola</a>
+              </span>
+
+                    <h5 class="card-title" href="?query=titololibro">
+                        <b>L'ABC del Comunismo</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>1992</b> - <i>Quasi distrutto</i></p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac 0.49</b></button>
+                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;" src="/assets/img/general/notfound.webp" alt="Copertina libro non caricata">
+                <div class="card-body">
+
+              <span class="cc-venditore">
+                <a href="?profile=venditore" class="cc-venditore">Nome venditore</a>
+              </span>
+
+                    <h5 class="card-title fw-bold" href="?query=titololibro">
+                        <b>Titolo del libro</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>[AAAA]</b> - <i>Stato del libro</i> - Cantami, o Diva, del Pelìde Achille l'ira funesta che infiniti addusse lutti agli Achei, molte anzi tempo all'Orco generose travolse alme d'eroi, e di cani e d'augelli orrido pasto lor salme abbandonò (così di Giove l'alto consiglio s'adempía), da quando primamente disgiunse aspra contesa il re de' prodi Atride Achille.</p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac ????</b></button>
+                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
+
+    <div class="row gy-3">
+
+        {{> Snippet-Book}}
+
+        {{> Snippet-Book}}
+
+        {{> Snippet-Book}}
+
+
+    </div>
+
+    <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
+
+    <div class="row gy-3">
+
+        {{> Snippet-Book}}
+
+        {{> Snippet-Book}}
+
+        {{> Snippet-Book}}
+
+
+    </div>
+
+</div>
+
+<!-- PLACEHOLDER DEL FOOTER -->
+{{> footer}}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<div class="col-md" style="margin-bottom: 40px;">
+    <div class="card mt-auto d-flex flex-column h-100 text-center">
+        <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;" src="{{book.image}}" alt="Copertina libro non caricata">
+        <div class="card-body">
+
+              <span class="cc-venditore">
+                <a href="?profile=venditore" class="cc-venditore">{{book.seller}}</a>
+              </span>
+
+            <h5 class="card-title fw-bold" href="?query=titololibro">
+                <b>{{book.title}}</b>
+            </h5>
+
+            <span class="cc-stato">
+                <p>Edizione <b>[AAAA]</b> - <i>{{book.status}}</i></p>
+              </span>
+
+            <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac ????</b></button>
+                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                </div>
+              </span>
+
+        </div>
+    </div>
+</div>

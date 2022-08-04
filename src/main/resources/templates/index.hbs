@@ -20,14 +20,14 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-icon-180x180.png">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
     <meta property="og:type" content="website">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/assets/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#343A40">
@@ -57,7 +57,7 @@
 <body data-aos-easing="ease" data-aos-duration="750" data-aos-delay="200" cz-shortcut-listen="true" style="overflow-x: hidden;">
 
 <!-- PLACEHOLDER DELLA NAVBAR -->
-{{> header}}
+{{> ph-navbar}}
 
 <!-- HEADER PRINCIPALE -->
 <div class="sfondo">
@@ -67,7 +67,7 @@
                 <h1 class="cover-heading" style="text-shadow: 18px 11px 22px rgba(130,130,130, 1);">Immagina un sito dove compri e vendi libri scolastici usati senza commissioni.</h1>
                 <p style="text-shadow: 18px 11px 22px rgba(130,130,130, 1);">Con Bookfinder, non ti serve immaginare. Accedi ora per iniziare a consultare gli annunci.</p>
                 <p class="lead">
-                    <a class="btn btn-lg btn-warning action-button" role="button" href="#" style="padding-top: 8px;padding-bottom: 8px;padding-right: 14px;padding-left: 14px;"><i class="far fa-user"></i>&nbsp;Accedi con Google</a>
+                    <a class="btn btn-lg btn-warning action-button" role="button" href="login" style="padding-top: 8px;padding-bottom: 8px;padding-right: 14px;padding-left: 14px;"><i class="far fa-user"></i>&nbsp;Accedi con Google</a>
                 </p>
             </main>
 
@@ -139,7 +139,7 @@
 <section id="come-funziona" style="padding-top: 15px; padding-bottom: 15px">
     <div class="container">
         <div class="row">
-            <div class="col col-auto"><img class="img-fluid" src="assets/img/index/vendi.webp" alt="Immagine vendita" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
+            <div class="col col-auto"><img class="img-fluid" src="/assets/img/index/vendi.webp" alt="Immagine vendita" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
             <div class="col text-right text-sm-center align-self-center">
                 <h1>Compra o vendi libri</h1>
                 <p style="font-size: 24px;">Grazie a Bookfinder puoi accordarti con il venditore o il compratore per l'acquisto del libro! La privacy è garantita grazie al sistema di richieste.</p>
@@ -156,7 +156,7 @@
                 <h1>Log-In facile e veloce</h1>
                 <p style="font-size: 24px;">Per accedere a Bookfinder non ti basterà far altro che usare la tua email d'istituto tramite Google e sarai nel sito in tempo zero. I venditori sono tutti studenti di una scuola superiore!</p>
             </div>
-            <div class="col col-auto"><img src="assets/img/index/scuola.webp" class="img-fluid" data-aos-once="true" data-aos="slide-left" alt="Immagine scuola" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
+            <div class="col col-auto"><img src="/assets/img/index/scuola.webp" class="img-fluid" data-aos-once="true" data-aos="slide-left" alt="Immagine scuola" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
         </div>
     </div>
 </section>
@@ -165,7 +165,7 @@
 <section style="padding-top: 15px; padding-bottom: 15px">
     <div class="container">
         <div class="row">
-            <div class="col col-auto"><img src="assets/img/index/recensione.webp" class="img-fluid" data-aos-once="true" data-aos="slide-right" alt="Immagine utente" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
+            <div class="col col-auto"><img src="/assets/img/index/recensione.webp" class="img-fluid" data-aos-once="true" data-aos="slide-right" alt="Immagine utente" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
             <div class="col text-right text-sm-center align-self-center" data-aos="slide-left" data-aos-once="true">
                 <h1>Venditori affidabili</h1>
                 <p style="font-size: 24px;">Grazie al sistema delle recensioni puoi sapere subito se il venditore è affidabile o meno, puoi lasciare dei feedback a fine acquisto anche tu!</p>
@@ -182,7 +182,7 @@
                 <h1>Privacy Garantita</h1>
                 <p style="font-size: 24px;">Grazie al sistema di richieste la privacy è garantita. Inoltre il successivo scambio di messaggi avviene via mail senza che Bookfinder possa accedere ai tuoi messaggi.</p>
             </div>
-            <div class="col col-auto"><img src="assets/img/index/privacy.webp" class="img-fluid" data-aos-once="true" data-aos="slide-left" alt="Immagine della privacy" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
+            <div class="col col-auto"><img src="/assets/img/index/privacy.webp" class="img-fluid" data-aos-once="true" data-aos="slide-left" alt="Immagine della privacy" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
         </div>
     </div>
 </section>
@@ -191,7 +191,7 @@
 <section style="padding-top: 15px; padding-bottom: 15px">
     <div class="container">
         <div class="row">
-            <div class="col col-auto"><img src="assets/img/index/studenti.webp" class="img-fluid" data-aos-once="true" data-aos="slide-right" alt="Immagine che raffigura degli studenti" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
+            <div class="col col-auto"><img src="/assets/img/index/studenti.webp" class="img-fluid" data-aos-once="true" data-aos="slide-right" alt="Immagine che raffigura degli studenti" style="max-width: 200px; padding-bottom: 30px; padding-top: 30px"></div>
             <div class="col text-right text-sm-center align-self-center" data-aos="slide-left" data-aos-once="true">
                 <h1>Sito creato da studenti per gli studenti</h1>
                 <p style="font-size: 24px;">Il sito è stato pensato e ideato da una classe di studenti nell'abito del progetto di Cooperativa Formativa Scolastica, "Spoilers".</p>
