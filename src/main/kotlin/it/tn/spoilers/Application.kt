@@ -6,6 +6,7 @@ import it.tn.spoilers.plugins.*
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
+        configureErrors()
         configureCompression()
         configureHeaders()
         configureStaticRoutes()
