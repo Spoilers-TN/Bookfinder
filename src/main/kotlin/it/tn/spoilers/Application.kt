@@ -12,7 +12,7 @@ fun main() {
         configureStaticRoutes()
         configureCORS()
         configureFrontend()
-        configureSecurity()
+        configureAuthentication()
         configureMonitoring()
         configureSerialization()
         configureSockets()
