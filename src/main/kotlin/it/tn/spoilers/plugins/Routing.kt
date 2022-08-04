@@ -7,10 +7,9 @@ import io.ktor.server.plugins.autohead.*
 import io.ktor.server.http.content.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.webjars.*
-import java.time.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
-import io.ktor.server.request.*
+import java.io.File
 
 fun Application.configureRouting() {
     install(Locations) {
@@ -45,8 +44,8 @@ fun Application.configureRouting() {
             call.respondText("Inside $it")
         }
         // Static plugin. Try to access `/static/index.html`
-        static("/static") {
-            resources("static")
+        static("/assets") {
+            resources("assets")
         }
         get("/webjars") {
             call.respondText("<script src='/webjars/jquery/jquery.js'></script>", ContentType.Text.Html)

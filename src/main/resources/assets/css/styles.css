@@ -1,0 +1,28 @@
+div.sfondo{
+	background-image: url('/assets/img/general/sfondo.webp');
+  height: 670px;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+div.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}

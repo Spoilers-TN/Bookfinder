@@ -1,0 +1,8 @@
+.carousel-image {
+  size: 20%;
+}
+
+.carousel-inner > .item > img {
+  width: 20%;
+  height: 20%;
+}

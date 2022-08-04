@@ -10,7 +10,7 @@ import io.ktor.server.routing.*
 
 fun Application.configureTemplating() {
     install(Mustache) {
-        mustacheFactory = DefaultMustacheFactory("templates/mustache")
+        mustacheFactory = DefaultMustacheFactory("templates/public")
     }
 
     routing {
