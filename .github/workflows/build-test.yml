@@ -25,5 +25,7 @@ jobs:
         - name: Enter in repo dir
           run: cd /home/runner/work/Bookfinder-Kotlin/Bookfinder-Kotlin
           
-        - name: Test Gradle Build
-          run: chmod +x gradlew && ./gradlew :test --tests "it.tn.spoilers.ApplicationTest"
+        - name: Setup and execute Gradle 'test' task
+          uses: gradle/gradle-build-action@v2
+          with:
+            arguments: test
