@@ -3,8 +3,9 @@ name: Endpoint Test
 on:
   push:
     branches: [ master ]
-
-test:
+  
+jobs:
+  test:
     runs-on: ubuntu-latest
     steps:
         - name: Checkout Repository
