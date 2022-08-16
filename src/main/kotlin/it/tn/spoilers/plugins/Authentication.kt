@@ -130,7 +130,7 @@ fun Application.configureAuthentication() {
             if (UserSession != null && UserData != null) {
                 call.respond(
                     MustacheContent(
-                        "settings.hbs", mapOf(
+                        "dashboard.hbs", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
                                 surname = UserData.familyName,
