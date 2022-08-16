@@ -81,7 +81,7 @@ fun Application.configureAuthentication() {
                         UserDataFromJson.locale
                     )
                 )
-                call.respondRedirect("/profile")
+                call.respondRedirect("/dashboard")
             }
         }
         get("/profile") {
