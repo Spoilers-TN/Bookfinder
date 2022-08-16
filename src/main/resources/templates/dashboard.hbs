@@ -1,0 +1,285 @@
+{{> head}}
+
+<body>
+
+{{> in-navbar}}
+
+<div id="ph-navbar"></div> <!-- PLACEHOLDER DEL NAVBAR -->
+
+<!-- BENVENUTO NOME -->
+<div class="container" style="margin-top: 25px; margin-bottom: 20px">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>Sei su Bookfinder {{user.name}}!</h2>
+                    <div class="container">
+                        <div class="row  justify-items-center align-items-center justify-content-center">
+                            <div class="col-auto col-xs-1 col-centered">
+                                <img src="assets/img/general/c-right.webp" style="height: 70px">
+                            </div>
+                            <div class="col-auto col-xs-4 col-centered">
+                                <img src="assets/img/avatar/berti.webp" class="rounded-circle" style="height: 150px">
+                            </div>
+                            <div class="col-auto col-xs-1 col-centered">
+                                <img src="assets/img/general/c-left.webp" style="height: 70px">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p>Questa è la tua dashboard personale, da qui puoi cercare nel sito libri, categorie ed altro. <br> Una volta effettuata la disconnessione verrai rediretto alla pagina home del sito. </p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- RICERCA RAPIDA -->
+<div class="container" style="margin-bottom: 20px">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center"><img src="assets/img/emoji/magnifier.webp" style="max-height: 40px;margin-bottom: -20px;margin-top: -20px; margin-bottom: 20px; margin-top: 15px">
+                    <h2 class="text-center">Cerca un libro su Bookfinder</h2>
+                    <p class="text-center">Verrai reinderizzato alla pagina di ricerca.</p>
+                    <div class="row">
+                        <div class="col justify-self-center">
+                            <div class="input-group">
+                                <div class="input-group-prepend"></div><input class="form-control" type="text" style="background: #F6f6f6;border-top-left-radius: 8px;border-bottom-left-radius: 8px;" placeholder="Cerca in tutte le categorie...">
+                                <div class="input-group-append"><button class="btn btn-warning" type="button" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;"><i class="fas fa-search"></i>&nbsp;Cerca</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CAROUSEL FUNZIONANTE-->
+<div class="container h-20" style="margin-bottom: 20px;">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body" style="">
+                    <div class="carousel slide" data-ride="carousel" id="carousel-1">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active"><a href="show-result.html?cat=categorie"><img class="w-100 d-block" src="assets/img/carousel/categoria.webp" alt="Categoria Categorie"></a></div>
+                            <div class="carousel-item"><a href="show-result.html?cat=classi"><img class="w-100 d-block" src="assets/img/carousel/classe.webp" alt="Categoria Classi"></a></div>
+                            <div class="carousel-item"><a href="show-result.html?cat=stato"><img class="w-100 d-block" src="assets/img/carousel/stato.webp" alt="Categoria Stato"></a></div>
+                            <div class="carousel-item"><a href="show-result.html?cat=menodi25"><img class="w-100 d-block" src="assets/img/carousel/menodi25.webp" alt="Categoria MenoDi25"></a></div>
+                            <div class="carousel-item"><a href="show-result.html?cat=indirizzo"><img class="w-100 d-block" src="assets/img/carousel/indirizzo.webp" alt="Categoria Indirizzo"></a></div>
+                        </div>
+                        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-1" data-slide-to="1"></li>
+                            <li data-target="#carousel-1" data-slide-to="2"></li>
+                            <li data-target="#carousel-1" data-slide-to="3"></li>
+                            <li data-target="#carousel-1" data-slide-to="4"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- CARICA UN ANNUNCIO-->
+<div class="container" style="margin-bottom: 20px">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <br>
+                <div class="card.body">
+                    <div class="row">
+                        <div class="col-auto">
+                            <img src="assets/img/general/download.png" style="width:100px">
+                        </div>
+                        <div class="col">
+                            <h1>Carica un annuncio</h1>
+                            <br>
+
+                            <button class="btn btn-warning" margin="auto">
+                                <font size="2"> Carica</font>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- CATEGORIE -->
+<div class="container" style="margin-bottom: 20px">
+    <div class="row justify-content-center">
+        <div class="col">
+            <h1>Cerca per categorie</h1>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Antologia" src="assets/img/categorie/antologia.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Architettura" src="assets/img/categorie/architettura.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Arte" src="assets/img/categorie/arte.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Chimica" src="assets/img/categorie/chimica.webp"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-duration="300" id="tohide" style="display: none">
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Diritto_economia" src="assets/img/categorie/diritto_economia.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Dizionari" src="assets/img/categorie/dizionari.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Elettronica" src="assets/img/categorie/elettronica.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Filosofia" src="assets/img/categorie/filosofia.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Geografia" src="assets/img/categorie/geografia.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Ginnastica" src="assets/img/categorie/ginnastica.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Grammatica" src="assets/img/categorie/grammatica.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Informatica" src="assets/img/categorie/informatica.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Ingegneria" src="assets/img/categorie/ingegneria.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Inglese" src="assets/img/categorie/inglese.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Lingue Storiche" src="assets/img/categorie/lingue_storiche.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Matematica" src="assets/img/categorie/matematica.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Musica" src="assets/img/categorie/musica.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Poesia" src="assets/img/categorie/poesia.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Religione" src="assets/img/categorie/religione.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Storia" src="assets/img/categorie/storia.webp"></div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-3 col-sm-6 col-6">
+            <div class="card" style="margin: 5px;">
+                <div class="card-body" style="padding: 10px;"><img alt="Altro" src="assets/img/categorie/altro.webp"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="margin-bottom: 25px">
+        <div class="col text-center"><button class="btn" id="go" type="button" onclick="go();" style="margin-top: 10px;"><i class="fas fa-angle-down"></i>&nbsp;Mostra di più&nbsp;<i class="fas fa-angle-down"></i></button></div>
+    </div>
+</div>
+
+
+<!-- PLACEHOLDER DEL FOOTER -->
+{{> footer}}
+
+<script>
+    function show() {
+        var progress = document.getElementById('tohide');
+        progress.setAttribute('style', '');
+    }
+
+    function hide() {
+        var progress = document.getElementById('tohide');
+        progress.setAttribute('style', 'display: none');
+    }
+
+    function go() {
+        var progress = document.getElementById('tohide');
+        if (progress.getAttribute('style') === 'display: none') {
+            show();
+            var butt = document.getElementById('go');
+            butt.outerHTML = '<button id="go" class="btn" type="button" style="margin-top: 10px;" onclick = "go();"><i class="fas fa-angle-up"></i> Mostra di meno <i class="fas fa-angle-up"></i></button>';
+        } else {
+            hide();
+            var butt = document.getElementById('go');
+            butt.outerHTML = '<button id="go" class="btn" type="button" style="margin-top: 10px;" onclick = "go();"><i class="fas fa-angle-down"></i> Mostra di più <i class="fas fa-angle-down"></i></button>';
+        }
+    }
+
+</script>
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+
+</script>
+</body>
+
+</html>

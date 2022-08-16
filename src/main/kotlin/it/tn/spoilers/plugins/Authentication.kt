@@ -35,7 +35,7 @@ fun Application.configureAuthentication() {
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
         cookie<UserData>("user_data") {
-            cookie.path = "/profile"
+            cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
     }
@@ -105,6 +105,26 @@ fun Application.configureAuthentication() {
             }
         }
         get("/settings") {
+            val UserData = call.sessions.get<UserData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    MustacheContent(
+                        "settings.hbs", mapOf(
+                            "user" to user(
+                                name = UserData.givenName,
+                                surname = UserData.familyName,
+                                photo = UserData.picture,
+                                id = UserData.id
+                            )
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/dashboard") {
             val UserData = call.sessions.get<UserData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
