@@ -1,30 +1,34 @@
 package it.tn.spoilers.plugins
 
-import io.ktor.server.auth.*
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.server.sessions.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.*
+import io.ktor.server.sessions.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.time.Duration
-import kotlinx.serialization.json.*
 
 fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - Authentication.kt")
 
     data class UserSession(val token: String)
-    data class UserData(val id: String,
-                        val name: String,
-                        @SerialName("given_name") val givenName: String,
-                        @SerialName("family_name") val familyName: String,
-                        val picture: String,
-                        val locale: String)
+    data class UserData(
+        val id: String,
+        val name: String,
+        @SerialName("given_name") val givenName: String,
+        @SerialName("family_name") val familyName: String,
+        val picture: String,
+        val locale: String
+    )
     install(Sessions) {
         cookie<UserSession>("user_session") {
             cookie.path = "/"
@@ -67,24 +71,40 @@ fun Application.configureAuthentication() {
                 }.bodyAsText()
                 val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
                 call.sessions.set(UserSession(principal.accessToken))
-                println(UserDataFromJson.toString())
-                call.sessions.set(UserData(
-                    UserDataFromJson.id,
-                    UserDataFromJson.name,
-                    UserDataFromJson.givenName,
-                    UserDataFromJson.familyName,
-                    UserDataFromJson.picture,
-                    UserDataFromJson.locale
-                ))
+                call.sessions.set(
+                    UserData(
+                        UserDataFromJson.id,
+                        UserDataFromJson.name,
+                        UserDataFromJson.givenName,
+                        UserDataFromJson.familyName,
+                        UserDataFromJson.picture,
+                        UserDataFromJson.locale
+                    )
+                )
                 call.respondRedirect("/profile")
             }
+        }
+        get("/logout") {
+            call.sessions.clear<UserSession>()
+            call.sessions.clear<UserData>()
+            call.respondRedirect("/")
         }
         get("/profile") {
             val UserSession = call.sessions.get<UserSession>()
             val UserData = call.sessions.get<UserData>()
-            if(UserSession != null) {
-                println(UserData?.familyName)
-                call.respondText("Benvenuto ${UserData?.name}, il tuo ID è ${UserData?.id} ")
+            if (UserSession != null) {
+                call.respond(
+                    MustacheContent(
+                        "profile.hbs", mapOf(
+                            "user" to user(
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.id
+                            )
+                        )
+                    )
+                )
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
@@ -94,6 +114,12 @@ fun Application.configureAuthentication() {
     log.info("[✓] Started Plugin - Authentication.kt")
 
 }
+
+@Serializable
+data class user(
+    val name: String?, val surname: String?, val photo: String?, val id: String?
+)
+
 @Serializable
 data class UserInfo(
     val id: String,
