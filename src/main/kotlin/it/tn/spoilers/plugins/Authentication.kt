@@ -25,7 +25,7 @@ fun Application.configureAuthentication() {
         val id: String,
         val name: String,
         @SerialName("given_name") val givenName: String,
-        @SerialName("family_name") val familyName: String,
+        @SerialName("family_name") val familyName: String?,
         val picture: String,
         val locale: String
     )
@@ -96,6 +96,26 @@ fun Application.configureAuthentication() {
                 call.respond(
                     MustacheContent(
                         "profile.hbs", mapOf(
+                            "user" to user(
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.id
+                            )
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/settings") {
+            val UserSession = call.sessions.get<UserSession>()
+            val UserData = call.sessions.get<UserData>()
+            if (UserSession != null) {
+                call.respond(
+                    MustacheContent(
+                        "settings.hbs", mapOf(
                             "user" to user(
                                 name = UserData?.givenName,
                                 surname = UserData?.familyName,

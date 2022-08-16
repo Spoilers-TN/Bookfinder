@@ -1,0 +1,159 @@
+{{> head}}
+
+<body>
+
+{{> ph-navbar }}
+<!-- CONTENUTI -->
+<br />
+<center>
+    <h1>Impostazioni</h1>
+</center>
+
+<!-- AVVISO DI GESTIONE SCOLASTICA -->
+<div class="container" style="margin-top: 25px">
+    <div class="card" style="">
+        <div class="card-body">
+            <!--organizazione profilo-->
+            <div class="row">
+                <div class="col-md-auto">
+                    <img alt="ProfiloScuola" src="assets/img/general/school.webp" class="rounded-circle" style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+                </div>
+                <div class="col">
+                    <h2>ITT "M. BUONARROTI"</h2>
+                    <p>Il tuo profilo è stato creato partendo da un account istituzionale. La tua scuola è collegata virtualmente al tuo profilo ed è visibile agli altri. ITT "M. BUONARROTI" è un provider di account verificato. Il tuo amministratore può accedere ai contenuti del tuo account senza preavviso.</p>
+
+                    <!-- PULSANTE APRI MODAL -->
+                    <a data-toggle="modal" data-target="#adminAccount">Ulteriori informazioni...</a>
+
+                    <!-- MODAL MAGGIORI INFORMAZIONI -->
+                    <div class="modal fade" id="adminAccount" tabindex="-1" role="dialog" aria-labelledby="adminAccountLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="adminAccountLabel">Account controllato dall'amministratore</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Quando ti sei registrato per la prima volta a BookFinder hai utilizzato un account controllato da un'organizzazione. Ciò implica che l'account
+                                    è controllabile dall'amministratore di sistema e può accedere ai dati di BookFinder senza alcun preavviso. Tuttavia la tua scuola è riconosciuta
+                                    da BookFinder come attendibile e ufficiale.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nascondi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FINE DEL MODAL MAGGIORI INFORMAZIONI -->
+
+
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ANTEPRIMA DEL PROFILO -->
+<div class="container" style="margin-top: 25px">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <p>Anteprima del profilo.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-auto">
+                    <img alt="ImmagineProfilo" src="{{user.photo}}" class="rounded-circle" style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+                </div>
+                <div class="col">
+                    <h2>{{user.name}} {{user.surname}}</h2>
+                    <p>Identificativo utente: {{user.id}}</p>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" style="margin-top: 25px">
+
+
+
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Modifica profilo</h4>
+            <div>
+
+                <form>
+
+                    <div class="form-group">
+                        <label>Dati anagrafici</label>
+                        <input type="email" class="form-control" readonly placeholder="nome@cognome.com">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" readonly placeholder="{{user.name}}">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" readonly placeholder="{{user.surname}}">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <label>Imposta la tua biografia.</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" rows="3" id="bio" placeholder="Sono Giacomo, ho 22 anni e vengo da Bologna....">
+                    </div>
+
+                    <!--bottone salva-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#saveButton">
+                                        Salva modifiche
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="saveButton" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="saveChanges" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="saveChanges">Salvare modifiche</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Sei sicuro di voler salvare le modifiche?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                                    <a class="btn btn-warning" href="/dashboard.html">Sì</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{{> footer}}
+</body>
+
+</html>

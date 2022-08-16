@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-
-<head>
-
-    <!-- FORMATTAZIONE DEFAULT -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Il tuo profilo pubblico | Bookfinder</title>
-    <meta name="description"
-          content="Qui puoi gestire le impostazioni del tuo account, controllare l'anteprima, modificare il tema e controllare l'associazione dell'account con la tua organizzazione che ha fornito l'accesso.">
-    <meta name="keywords" content="Impostazioni, Sito, Profilo, Biografia, Foto">
-
-
-    <!-- FAVICONS E MANIFST -->
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-icon-180x180.png">
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    <meta property="og:type" content="website">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="/assets/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#343A40">
-
-    <!-- REFERENZE BOOSTRAP -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
-
-    <!-- STILE GENERALE -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-
-    <!-- STILE FOOTER E NAVBAR -->
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/navbar.css">
-    <link rel="stylesheet" href="assets/css/dropdown.css">
-
-    <!-- STILI PERSONALIZZATI PER OGNI PAGINA -->
-    <link rel="stylesheet" href="assets/css/stile.css">
-    <!--ESEMPIO-->
-
-</head>
+{{> head}}
 
 <body>
 
@@ -76,7 +22,6 @@
                 </div>
                 <div class="col">
                     <h2>{{user.name}} {{user.surname}}</h2>
-                    <p>ITT BUONARROTI POZZO</p>
                     <p style="color: #0066CC; font-weight: bold">24 recensioni</p>
                     <p>Identificativo utente: {{user.id}}</p>
                     <p style="color: #cc7722"></p><i class="fa fa-solid fa-star"></i><i class="fa fa-solid fa-star"></i><i

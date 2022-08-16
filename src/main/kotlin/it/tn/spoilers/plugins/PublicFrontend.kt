@@ -26,7 +26,7 @@ fun Application.configurePublicFrontend() {
         }
         get("/search") {
             call.respond(MustacheContent("search.hbs", mapOf("book" to book("/assets/img/general/notfound.webp",
-                "Nicola Leoni","The Lord of the Rings","Quasi Decente"))))
+                "Mario Rossi","The Lord of the Rings","Come il governo italiano (distrutto)"))))
         }
         get("/terms") {
             call.respond(MustacheContent("terms.hbs", mapOf("user" to MustacheUser(1, "user1"))))
