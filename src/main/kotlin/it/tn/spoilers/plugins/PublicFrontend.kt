@@ -6,9 +6,10 @@ import io.ktor.server.mustache.MustacheContent
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.*
 
-fun Application.configureFrontend() {
-    log.info("[!] Starting Plugin - Frontend.kt")
+fun Application.configurePublicFrontend() {
+    log.info("[!] Starting Plugin - PublicFrontend.kt")
     install(Mustache) {
         mustacheFactory = DefaultMustacheFactory("templates")
     }
@@ -31,8 +32,11 @@ fun Application.configureFrontend() {
             call.respond(MustacheContent("terms.hbs", mapOf("user" to MustacheUser(1, "user1"))))
         }
     }
-    log.info("[✓] Started Plugin - Frontend.kt")
+    log.info("[✓] Started Plugin - PublicFrontend.kt")
 }
 
+
+@Serializable
 data class MustacheUser(val id: Int, val name: String)
+@Serializable
 data class book(val image: String, val seller: String, val title: String, val status: String )
