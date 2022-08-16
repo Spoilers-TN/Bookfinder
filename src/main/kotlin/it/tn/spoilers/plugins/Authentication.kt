@@ -84,11 +84,6 @@ fun Application.configureAuthentication() {
                 call.respondRedirect("/profile")
             }
         }
-        get("/logout") {
-            call.sessions.clear<UserSession>()
-            call.sessions.clear<UserData>()
-            call.respondRedirect("/")
-        }
         get("/profile") {
             val UserSession = call.sessions.get<UserSession>()
             val UserData = call.sessions.get<UserData>()
@@ -110,17 +105,17 @@ fun Application.configureAuthentication() {
             }
         }
         get("/settings") {
-            val UserSession = call.sessions.get<UserSession>()
             val UserData = call.sessions.get<UserData>()
-            if (UserSession != null) {
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
                 call.respond(
                     MustacheContent(
                         "settings.hbs", mapOf(
                             "user" to user(
-                                name = UserData?.givenName,
-                                surname = UserData?.familyName,
-                                photo = UserData?.picture,
-                                id = UserData?.id
+                                name = UserData.givenName,
+                                surname = UserData.familyName,
+                                photo = UserData.picture,
+                                id = UserData.id
                             )
                         )
                     )
@@ -128,7 +123,11 @@ fun Application.configureAuthentication() {
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
-
+        }
+        get("/logout") {
+            call.sessions.clear<UserSession>()
+            call.sessions.clear<UserData>()
+            call.respondRedirect("/")
         }
     }
     log.info("[✓] Started Plugin - Authentication.kt")

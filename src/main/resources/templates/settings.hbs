@@ -2,7 +2,8 @@
 
 <body>
 
-{{> ph-navbar }}
+{{> in-navbar }}
+
 <!-- CONTENUTI -->
 <br />
 <center>
@@ -36,9 +37,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Quando ti sei registrato per la prima volta a BookFinder hai utilizzato un account controllato da un'organizzazione. Ciò implica che l'account
-                                    è controllabile dall'amministratore di sistema e può accedere ai dati di BookFinder senza alcun preavviso. Tuttavia la tua scuola è riconosciuta
-                                    da BookFinder come attendibile e ufficiale.
+                                    Quando ti sei registrato per la prima volta a BookFinder hai utilizzato il login con google (OAuth2). Ciò implica che l'account
+                                    è controllabile solo da te attraverso google. Tuttavia questo metodo di login è riconosciuto da BookFinder come attendibile e ufficiale.
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nascondi</button>
@@ -90,9 +90,7 @@
         <div class="card-body">
             <h4 class="card-title">Modifica profilo</h4>
             <div>
-
                 <form>
-
                     <div class="form-group">
                         <label>Dati anagrafici</label>
                         <input type="email" class="form-control" readonly placeholder="nome@cognome.com">
@@ -145,6 +143,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
         </div>
     </div>
