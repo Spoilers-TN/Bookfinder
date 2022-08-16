@@ -55,6 +55,8 @@ class ApplicationTest {
     fun testRoot() = testApplication {
         application {
             configureRouting()
+            configureStaticRoutes()
+            configurePublicFrontend()
         }
         client.get("/").apply {
             assertEquals(HttpStatusCode.OK, status)
