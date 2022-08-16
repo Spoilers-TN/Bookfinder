@@ -10,7 +10,20 @@ jobs:
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v3 
+          
         - name: Enter in repo dir
           run: cd /home/runner/work/Bookfinder-Kotlin/Bookfinder-Kotlin
+          
+        - uses: actions/setup-java@v3
+          with:
+            distribution: corretto
+            java-version: 11
+            
+        - name: Setup Gradle
+          uses: gradle/gradle-build-action@v2
+          
+        - name: Enter in repo dir
+          run: cd /home/runner/work/Bookfinder-Kotlin/Bookfinder-Kotlin
+          
         - name: Test Gradle Build
-          run: ls && chmod +x gradlew && ./gradlew :test --tests "it.tn.spoilers.ApplicationTest"
+          run: chmod +x gradlew && ./gradlew :test --tests "it.tn.spoilers.ApplicationTest"
