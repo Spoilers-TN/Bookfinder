@@ -18,9 +18,6 @@ jobs:
           with:
             distribution: corretto
             java-version: 11
-            
-        - name: Setup Gradle
-          uses: gradle/gradle-build-action@v2
           
         - name: Enter in repo dir
           run: cd /home/runner/work/Bookfinder-Kotlin/Bookfinder-Kotlin
