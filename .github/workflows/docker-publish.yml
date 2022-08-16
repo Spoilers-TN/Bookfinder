@@ -18,15 +18,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v3 
-        - name: Test Gradle Build
-          run: chmod +x ./gradlew && ./gradlew :test --tests "it.tn.spoilers.ApplicationTest"
-        
+jobs:       
   build:
     runs-on: ubuntu-latest
     permissions:
