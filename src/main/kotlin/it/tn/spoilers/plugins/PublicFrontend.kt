@@ -34,6 +34,9 @@ fun Application.configurePublicFrontend() {
         get("/who") {
             call.respond(MustacheContent("who.hbs", mapOf("user" to MustacheUser(1, "user1"))))
         }
+        get("/policy"){
+            call.respond(MustacheContent("policy.hbs", mapOf("user" to MustacheUser(1, "user1"))))
+        }
     }
     log.info("[✓] Started Plugin - PublicFrontend.kt")
 }
