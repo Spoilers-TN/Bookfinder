@@ -45,3 +45,12 @@ data class UserInfoGSuite(
     val locale: String,
     val hd: String
 )
+
+@Serializable
+data class MustacheUser(val id: Int, val name: String)
+
+@Serializable
+data class book(val image: String, val seller: String, val title: String, val status: String)
+
+@Serializable
+data class Error(val code: String, val descr: String, val meme: String)

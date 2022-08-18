@@ -2,7 +2,12 @@
 
 <body>
 
-{{> in-navbar }}
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
 
 <!-- CONTENUTI -->
 <br/>

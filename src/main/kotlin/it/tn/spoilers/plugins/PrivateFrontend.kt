@@ -6,8 +6,6 @@ import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import kotlinx.serialization.SerialName
-import java.time.Duration
 
 
 fun Application.configurePrivateFrontend() {
@@ -27,7 +25,7 @@ fun Application.configurePrivateFrontend() {
                                 id = UserData?.sub,
                                 email = UserData?.email,
                                 realm = UserData?.hd
-                            )
+                            ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
                 )
@@ -49,7 +47,7 @@ fun Application.configurePrivateFrontend() {
                                 id = UserData.sub,
                                 email = UserData.email,
                                 realm = UserData.hd
-                            )
+                            ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
                 )
@@ -71,7 +69,51 @@ fun Application.configurePrivateFrontend() {
                                 id = UserData.sub,
                                 email = UserData.email,
                                 realm = UserData.hd
-                            )
+                            ), "logged" to (call.sessions.get<UserData>() != null)
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/NewInsertion") {
+            val UserData = call.sessions.get<UserData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    MustacheContent(
+                        "newInsertion.hbs", mapOf(
+                            "user" to user(
+                                name = UserData.givenName,
+                                surname = UserData.familyName,
+                                photo = UserData.picture,
+                                id = UserData.sub,
+                                email = UserData.email,
+                                realm = UserData.hd
+                            ), "logged" to (call.sessions.get<UserData>() != null)
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/messaggi") {
+            val UserData = call.sessions.get<UserData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    MustacheContent(
+                        "messages.hbs", mapOf(
+                            "user" to user(
+                                name = UserData.givenName,
+                                surname = UserData.familyName,
+                                photo = UserData.picture,
+                                id = UserData.sub,
+                                email = UserData.email,
+                                realm = UserData.hd
+                            ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
                 )
@@ -80,5 +122,4 @@ fun Application.configurePrivateFrontend() {
             }
         }
     }
-
 }

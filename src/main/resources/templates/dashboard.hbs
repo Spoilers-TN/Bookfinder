@@ -2,9 +2,12 @@
 
 <body>
 
-{{> in-navbar}}
-
-<div id="ph-navbar"></div> <!-- PLACEHOLDER DEL NAVBAR -->
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
 
 <!-- BENVENUTO NOME -->
 <div class="container" style="margin-top: 25px; margin-bottom: 20px">

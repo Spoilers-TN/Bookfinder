@@ -1,0 +1,51 @@
+{{> head}}
+
+<body>
+
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
+
+<!-- CONTENUTI -->
+<center>
+    <div class="container" style="margin-top: 50px; margin-bottom: 100px">
+        <div class="card">
+            <div class="card-body">
+                <img id="randImg" alt="Emoji di errore!" style="margin-bottom: 15px;"></img>
+                <h4 class="card-title" style="font-size: 50px;">Grazie!</h4>
+                <h4 class="subtitle">Logout completato.</h4>
+                <p class="card-text">Ora puoi tornare a leggere un libro oppure bere un the caldo, la scelta sta a "the"
+                    &#x1F609</p>
+                <a class="card-link" href="/">Vai alla home page</a>
+            </div>
+        </div>
+    </div>
+</center>
+
+{{> footer}}
+<script type="text/javascript">
+    const images = ["/assets/img/emoji/Happy1.webp",
+        "/assets/img/emoji/Happy2.webp",
+        "/assets/img/emoji/Happy3.webp",
+        "/assets/img/emoji/Happy4.webp",
+        "/assets/img/emoji/Angel.webp",
+        "/assets/img/emoji/Hug.webp",
+        "/assets/img/emoji/ReverseHappy.webp",
+        "/assets/img/emoji/Smiling.webp",
+        "/assets/img/emoji/SmilingHeart.webp",
+        "/assets/img/emoji/Winking.webp",
+        "/assets/img/emoji/SmilingHeart2.webp"
+    ];
+
+    document.addEventListener('DOMContentLoaded', _ => {
+        const randImageIndex = ~~(Math.random() * images.length);
+        document.getElementById('randImg').src = images[randImageIndex];
+    });
+
+</script>
+</body>
+
+</html>

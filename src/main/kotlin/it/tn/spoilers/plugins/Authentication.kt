@@ -11,8 +11,6 @@ import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.time.Duration
@@ -24,14 +22,12 @@ fun Application.configureAuthentication() {
         cookie<UserSession>("user_session") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
-            cookie.encoding = CookieEncoding.BASE64_ENCODING
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
         cookie<UserData>("user_data") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
-            cookie.encoding = CookieEncoding.BASE64_ENCODING
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
@@ -48,7 +44,10 @@ fun Application.configureAuthentication() {
                     requestMethod = HttpMethod.Post,
                     clientId = "750408780393-hn4fhicn68f04o3f7d8o2ng097q2pgo6.apps.googleusercontent.com",
                     clientSecret = "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",
-                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email")
+                    defaultScopes = listOf(
+                        "https://www.googleapis.com/auth/userinfo.profile",
+                        "https://www.googleapis.com/auth/userinfo.email"
+                    )
                 )
             }
 
@@ -66,10 +65,11 @@ fun Application.configureAuthentication() {
                 val json = HttpClient(Apache).get("https://www.googleapis.com/oauth2/v3/userinfo") {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
-                if (json.contains("hd")){
-                        val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
-                        call.sessions.set(UserSession(principal.accessToken))
-                        call.sessions.set(UserData(
+                if (json.contains("hd")) {
+                    val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
+                    call.sessions.set(UserSession(principal.accessToken))
+                    call.sessions.set(
+                        UserData(
                             UserDataFromJson.sub,
                             UserDataFromJson.name,
                             UserDataFromJson.givenName,
@@ -79,24 +79,25 @@ fun Application.configureAuthentication() {
                             UserDataFromJson.email_verified,
                             UserDataFromJson.locale,
                             UserDataFromJson.hd
-                        ))
+                        )
+                    )
 
                 } else {
-                        val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
-                        call.sessions.set(UserSession(principal.accessToken))
-                        call.sessions.set(
-                            UserData(
-                                UserDataFromJson.sub,
-                                UserDataFromJson.name,
-                                UserDataFromJson.givenName,
-                                UserDataFromJson.familyName,
-                                UserDataFromJson.picture,
-                                UserDataFromJson.email,
-                                UserDataFromJson.email_verified,
-                                UserDataFromJson.locale,
-                                "gmail.com"
-                            )
+                    val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
+                    call.sessions.set(UserSession(principal.accessToken))
+                    call.sessions.set(
+                        UserData(
+                            UserDataFromJson.sub,
+                            UserDataFromJson.name,
+                            UserDataFromJson.givenName,
+                            UserDataFromJson.familyName,
+                            UserDataFromJson.picture,
+                            UserDataFromJson.email,
+                            UserDataFromJson.email_verified,
+                            UserDataFromJson.locale,
+                            "gmail.com"
                         )
+                    )
                 }
                 call.respondRedirect("/dashboard")
             }
@@ -104,7 +105,22 @@ fun Application.configureAuthentication() {
         get("/logout") {
             call.sessions.clear<UserSession>()
             call.sessions.clear<UserData>()
-            call.respondRedirect("/")
+            call.respond(
+                MustacheContent(
+                    "logout.hbs",
+                    mapOf("logged" to (call.sessions.get<UserData>() != null))
+                )
+            )
+        }
+        get("/logoff") {
+            call.sessions.clear<UserSession>()
+            call.sessions.clear<UserData>()
+            call.respond(
+                MustacheContent(
+                    "logout.hbs",
+                    mapOf("logged" to (call.sessions.get<UserData>() != null))
+                )
+            )
         }
     }
     log.info("[✓] Started Plugin - Authentication.kt")

@@ -2,7 +2,12 @@
 
 <body>
 
-{{> ph-navbar}}
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
 
 <!-- CONTENUTI -->
 <div class="container" style="margin-top: 50px; margin-bottom: 100px">
@@ -13,7 +18,7 @@
             <center>
                 <h1>Informativa sulla privacy</h1>
                 <p>Data di entrata in vigore: 2022-03-21<br>
-                    Ultimo aggiornamento: 2022-03-21</p>
+                    Ultimo aggiornamento: 2022-08-7</p>
             </center>
             <p>
                 La presente Informativa sulla privacy spiega le politiche di Cooperativa formativa scolastica Spoilers
@@ -47,18 +52,15 @@
                 utilizzate per contattarti o identificarti. spoilers.tn.it raccoglie le seguenti informazioni:
             </p>
             <ul>
-                <li>Dati di utilizzo</li>
-                <li>Nome</li>
-                <li>E-mail</li>
-                <li>Data di nascita</li>
                 <li>ID OAuth Google</li>
+                <li>Nome</li>
+                <li>Stato</li>
+                <li>E-mail</li>
+                <li>Dati di utilizzo</li>
             </ul>
             <p>I dati di utilizzo includono quanto segue:</p>
             <ul>
-                <li>Indirizzo Protocollo Internet (IP) dei computer che accedono al sito</li>
                 <li>Richieste di pagine web</li>
-                <li>Pagine web di riferimento</li>
-                <li>Browser utilizzato per accedere al sito</li>
                 <li>Ora e data di accesso</li>
             </ul>
             <center>
@@ -73,9 +75,8 @@
                 <li>Da fonti pubbliche esterne.</li>
             </ul>
             <p>
-                Le tue informazioni saranno conservate per un massimo di 1827 giorni
-                dopo la chiusura del tuo account. Le tue informazioni possono essere conservate per periodi più lunghi
-                per il
+                Le tue informazioni saranno conservate per un massimo di 10 giorni dopo la chiusura del tuo account. Le
+                tue informazioni possono essere conservate per periodi più lunghi per il
                 reporting o per scopi di registrazione in conformità con le leggi applicabili. Le informazioni che non
                 ti identificano
                 personalmente possono essere conservate a tempo indeterminato.
@@ -174,16 +175,6 @@
                     principali del sito web come l'accesso dell'utente e la gestione dell'account. Il sito web non può
                     essere utilizzato correttamente senza i cookie strettamente necessari.
                 </li>
-                <li><b>Cookie di performance.</b> I cookie di performance vengono utilizzati per vedere come i
-                    visitatori utilizzano il sito web, ad esempio con i cookie analitici. Questi cookie non possono
-                    essere utilizzati per identificare direttamente un determinato visitatore.
-                </li>
-                <li><b>Cookie di funzionalità.</b> I cookie di funzionalità vengono utilizzati per ricordare le
-                    informazioni del visitatore sul sito web, ad esempio lingua, fuso orario e contenuto avanzato.
-                </li>
-                <li><b>Cookie non classificati.</b> I cookie non classificati sono cookie che non appartengono a
-                    nessun'altra categoria o che sono in fase di categorizzazione.
-                </li>
             </ul>
             <center>
                 <h4>Sicurezza</h4>
@@ -207,7 +198,7 @@
                 <b>Nome</b>: Cooperativa formativa scolastica Spoilers<br>
                 <b>Indirizzo</b>: Via Brigata Acqui, 15, 38122 Trento TN<br>
                 <b>E-mail:</b> mail@spoilers.tn.it<br>
-                <b>Sito web:</b> spoilers.tn.it</p>
+                <b>Sito web:</b> https://spoilers.tn.it</p>
             <center>
                 <a class="card-link" href="/">Torna alla home page</a>
             </center>

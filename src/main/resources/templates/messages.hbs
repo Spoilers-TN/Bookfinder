@@ -1,0 +1,29 @@
+{{> head}}
+
+<body>
+
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
+
+<!-- CONTENUTI -->
+<br>
+<div class="container" style="margin-top: 25px">
+    <div class="row">
+        <div class="col-auto">
+            <!--<font size="5">Messaggi inviati</font>-->
+            <h2>Messaggi inviati</h2>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 25px; margin-bottom: 25px">
+    {{> incomingMessage}}
+</div>
+{{> outgoingMessage}}
+
+{{> footer}}
+</body>
+</html>

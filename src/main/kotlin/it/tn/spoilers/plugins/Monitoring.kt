@@ -26,7 +26,7 @@ fun Application.configureMonitoring() {
 
     routing {
         get("/health") {
-            call.respondText(text= "All fine here", status= HttpStatusCode.OK)
+            call.respondText(text = "All fine here", status = HttpStatusCode.OK)
         }
         get("/metrics-micrometer") {
             call.respond(appMicrometerRegistry.scrape())

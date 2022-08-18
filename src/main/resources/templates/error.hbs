@@ -1,7 +1,14 @@
 {{> head}}
 
 <body>
-{{> ph-navbar}}
+
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
+
 <center>
     <div class="container" style="margin-top: 50px; margin-bottom: 100px">
         <div class="card">
@@ -17,7 +24,7 @@
     </div>
 </center>
 <script>
-    $(function() {
+    $(function () {
         $("#ph-navbar").load("assets/snippets/navbar-in.html");
     });
 

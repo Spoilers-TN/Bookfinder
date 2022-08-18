@@ -2,7 +2,12 @@
 
 <body>
 
-{{> ph-navbar }}
+{{#logged}}
+    {{> logged-navbar }}
+{{/logged}}
+{{^logged}}
+    {{> unlogged-navbar }}
+{{/logged}}
 
 <!-- CONTENUTI -->
 <div class="container">
