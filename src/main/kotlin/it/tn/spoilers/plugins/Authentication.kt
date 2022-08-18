@@ -20,19 +20,6 @@ import java.time.Duration
 fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - Authentication.kt")
 
-
-    data class UserSession(val token: String)
-    data class UserData(
-        val sub: String,
-        val name: String,
-        @SerialName("given_name") val givenName: String,
-        @SerialName("family_name") val familyName: String?,
-        val picture: String,
-        val email: String,
-        val email_verified: Boolean,
-        val locale: String,
-        val hd: String
-    )
     install(Sessions) {
         cookie<UserSession>("user_session") {
             cookie.secure = true
@@ -114,72 +101,6 @@ fun Application.configureAuthentication() {
                 call.respondRedirect("/dashboard")
             }
         }
-        get("/profile") {
-            val UserSession = call.sessions.get<UserSession>()
-            val UserData = call.sessions.get<UserData>()
-            if (UserSession != null) {
-                call.respond(
-                    MustacheContent(
-                        "profile.hbs", mapOf(
-                            "user" to user(
-                                name = UserData?.givenName,
-                                surname = UserData?.familyName,
-                                photo = UserData?.picture,
-                                id = UserData?.sub,
-                                email = UserData?.email,
-                                realm = UserData?.hd
-                            )
-                        )
-                    )
-                )
-            } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
-            }
-        }
-        get("/settings") {
-            val UserData = call.sessions.get<UserData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
-                call.respond(
-                    MustacheContent(
-                        "settings.hbs", mapOf(
-                            "user" to user(
-                                name = UserData.givenName,
-                                surname = UserData.familyName,
-                                photo = UserData.picture,
-                                id = UserData.sub,
-                                email = UserData.email,
-                                realm = UserData.hd
-                            )
-                        )
-                    )
-                )
-            } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
-            }
-        }
-        get("/dashboard") {
-            val UserData = call.sessions.get<UserData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
-                call.respond(
-                    MustacheContent(
-                        "dashboard.hbs", mapOf(
-                            "user" to user(
-                                name = UserData.givenName,
-                                surname = UserData.familyName,
-                                photo = UserData.picture,
-                                id = UserData.sub,
-                                email = UserData.email,
-                                realm = UserData.hd
-                            )
-                        )
-                    )
-                )
-            } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
-            }
-        }
         get("/logout") {
             call.sessions.clear<UserSession>()
             call.sessions.clear<UserData>()
@@ -189,33 +110,3 @@ fun Application.configureAuthentication() {
     log.info("[✓] Started Plugin - Authentication.kt")
 
 }
-
-@Serializable
-data class user(
-    val name: String?, val surname: String?, val photo: String?, val id: String?, val email: String?, val realm: String?
-)
-
-@Serializable
-data class UserInfo(
-    val sub: String,
-    val name: String,
-    @SerialName("given_name") val givenName: String,
-    @SerialName("family_name") val familyName: String?,
-    val picture: String,
-    val email: String,
-    val email_verified: Boolean,
-    val locale: String
-)
-
-@Serializable
-data class UserInfoGSuite(
-    val sub: String,
-    val name: String,
-    @SerialName("given_name") val givenName: String,
-    @SerialName("family_name") val familyName: String?,
-    val picture: String,
-    val email: String,
-    val email_verified: Boolean,
-    val locale: String,
-    val hd: String
-)

@@ -22,6 +22,7 @@ fun main() {
         configureCORS()
         configureAuthentication()
         configurePublicFrontend()
+        configurePrivateFrontend()
         log.info("[✓] Started Server - BookFinder")
     }.start(wait = true)
 }
