@@ -30,18 +30,21 @@ fun Application.configureAuthentication() {
         val picture: String,
         val email: String,
         val email_verified: Boolean,
-        val locale: String
+        val locale: String,
+        val hd: String
     )
     install(Sessions) {
         cookie<UserSession>("user_session") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
+            cookie.encoding = CookieEncoding.BASE64_ENCODING
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
         cookie<UserData>("user_data") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
+            cookie.encoding = CookieEncoding.BASE64_ENCODING
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
@@ -76,28 +79,39 @@ fun Application.configureAuthentication() {
                 val json = HttpClient(Apache).get("https://www.googleapis.com/oauth2/v3/userinfo") {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
-                try {
-                    val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
-                    call.sessions.set(UserSession(principal.accessToken))
-                    call.sessions.set(
-                        UserData(
-                            UserDataFromJson.id,
+                if (json.contains("hd")){
+                        val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
+                        call.sessions.set(UserSession(principal.accessToken))
+                        call.sessions.set(UserData(
+                            UserDataFromJson.sub,
                             UserDataFromJson.name,
                             UserDataFromJson.givenName,
-                            UserDataFromJson?.familyName,
+                            UserDataFromJson.familyName,
                             UserDataFromJson.picture,
                             UserDataFromJson.email,
                             UserDataFromJson.email_verified,
-                            UserDataFromJson.locale
+                            UserDataFromJson.locale,
+                            UserDataFromJson.hd
+                        ))
 
+                } else {
+                        val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
+                        call.sessions.set(UserSession(principal.accessToken))
+                        call.sessions.set(
+                            UserData(
+                                UserDataFromJson.sub,
+                                UserDataFromJson.name,
+                                UserDataFromJson.givenName,
+                                UserDataFromJson.familyName,
+                                UserDataFromJson.picture,
+                                UserDataFromJson.email,
+                                UserDataFromJson.email_verified,
+                                UserDataFromJson.locale,
+                                "gmail.com"
+                            )
                         )
-                    )
-                    call.respondRedirect("/dashboard")
-                } catch (e: Exception) {
-                    call.respondText(text = "501: Error handling not implemented | Try logging in with a different account ", status = HttpStatusCode.NotImplemented)
                 }
-
-
+                call.respondRedirect("/dashboard")
             }
         }
         get("/profile") {
@@ -112,7 +126,8 @@ fun Application.configureAuthentication() {
                                 surname = UserData?.familyName,
                                 photo = UserData?.picture,
                                 id = UserData?.sub,
-                                email = UserData?.email
+                                email = UserData?.email,
+                                realm = UserData?.hd
                             )
                         )
                     )
@@ -130,10 +145,11 @@ fun Application.configureAuthentication() {
                         "settings.hbs", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
-                                surname = UserData?.familyName,
+                                surname = UserData.familyName,
                                 photo = UserData.picture,
                                 id = UserData.sub,
-                                email = UserData.email
+                                email = UserData.email,
+                                realm = UserData.hd
                             )
                         )
                     )
@@ -151,10 +167,11 @@ fun Application.configureAuthentication() {
                         "dashboard.hbs", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
-                                surname = UserData?.familyName,
+                                surname = UserData.familyName,
                                 photo = UserData.picture,
                                 id = UserData.sub,
-                                email = UserData.email
+                                email = UserData.email,
+                                realm = UserData.hd
                             )
                         )
                     )
@@ -175,12 +192,12 @@ fun Application.configureAuthentication() {
 
 @Serializable
 data class user(
-    val name: String?, val surname: String?, val photo: String?, val id: String?, val email: String?
+    val name: String?, val surname: String?, val photo: String?, val id: String?, val email: String?, val realm: String?
 )
 
 @Serializable
 data class UserInfo(
-    val id: String,
+    val sub: String,
     val name: String,
     @SerialName("given_name") val givenName: String,
     @SerialName("family_name") val familyName: String?,
@@ -188,4 +205,17 @@ data class UserInfo(
     val email: String,
     val email_verified: Boolean,
     val locale: String
+)
+
+@Serializable
+data class UserInfoGSuite(
+    val sub: String,
+    val name: String,
+    @SerialName("given_name") val givenName: String,
+    @SerialName("family_name") val familyName: String?,
+    val picture: String,
+    val email: String,
+    val email_verified: Boolean,
+    val locale: String,
+    val hd: String
 )
