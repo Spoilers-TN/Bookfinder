@@ -39,7 +39,7 @@ fun Application.configureAuthentication() {
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
     }
-    install (Authentication) {
+    install(Authentication) {
         oauth("auth-oauth-google") {
             client = HttpClient(Apache)
             urlProvider = { "https://bookfinder.spoilers.tn.it/google-callback" }
