@@ -5,7 +5,7 @@
 {{> in-navbar }}
 
 <!-- CONTENUTI -->
-<br />
+<br/>
 <center>
     <h1>Impostazioni</h1>
 </center>
@@ -17,22 +17,27 @@
             <!--organizazione profilo-->
             <div class="row">
                 <div class="col-md-auto">
-                    <img alt="ProfiloScuola" src="assets/img/general/school.webp" class="rounded-circle" style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+                    <img alt="ProfiloScuola" src="assets/img/general/school.webp" class="rounded-circle"
+                         style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
                 </div>
                 <div class="col">
                     <h2>Account "verificato"</h2>
-                    <p>Quando ti sei registrato per la prima volta a BookFinder hai utilizzato il login con google (OAuth2). Ciò implica che l'account
-                        è controllabile solo da te attraverso google. Tuttavia questo metodo di login è riconosciuto da BookFinder come attendibile e ufficiale.</p>
+                    <p>Quando ti sei registrato per la prima volta a BookFinder hai utilizzato il login con google
+                        (OAuth2). Ciò implica che l'account
+                        è controllabile solo da te attraverso google. Tuttavia questo metodo di login è riconosciuto da
+                        BookFinder come attendibile e ufficiale.</p>
 
                     <!-- PULSANTE APRI MODAL -->
                     <a data-toggle="modal" data-target="#adminAccount">Ulteriori informazioni...</a>
 
                     <!-- MODAL MAGGIORI INFORMAZIONI -->
-                    <div class="modal fade" id="adminAccount" tabindex="-1" role="dialog" aria-labelledby="adminAccountLabel" aria-hidden="true">
+                    <div class="modal fade" id="adminAccount" tabindex="-1" role="dialog"
+                         aria-labelledby="adminAccountLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="adminAccountLabel">Account controllato dall'amministratore</h5>
+                                    <h5 class="modal-title" id="adminAccountLabel">Account controllato
+                                        dall'amministratore</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -41,7 +46,8 @@
                                     Si lo so devo scrivere di meglio
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nascondi</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nascondi
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -67,12 +73,13 @@
             </div>
             <div class="row">
                 <div class="col-md-auto">
-                    <img alt="ImmagineProfilo" src="{{user.photo}}" class="rounded-circle" style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+                    <img alt="ImmagineProfilo" src="{{user.photo}}" class="rounded-circle"
+                         style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
                 </div>
                 <div class="col">
                     <h2>{{user.name}} {{user.surname}}</h2>
                     <p>Identificativo utente: {{user.id}}</p>
-                    <br />
+                    <br/>
                 </div>
             </div>
         </div>
@@ -80,10 +87,7 @@
 </div>
 
 
-
 <div class="container" style="margin-top: 25px">
-
-
 
 
     <div class="card">
@@ -108,7 +112,8 @@
 
                     <label>Imposta la tua biografia.</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" rows="3" id="bio" placeholder="Sono Giacomo, ho 22 anni e vengo da Bologna....">
+                        <input type="text" class="form-control" rows="3" id="bio"
+                               placeholder="Sono Giacomo, ho 22 anni e vengo da Bologna....">
                     </div>
 
                     <!--bottone salva-->
@@ -116,7 +121,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#saveButton">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#saveButton">
                                         Salva modifiche
                                     </button>
                                 </div>
@@ -124,7 +130,8 @@
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="saveButton" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="saveChanges" aria-hidden="true">
+                    <div class="modal fade" id="saveButton" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                         aria-labelledby="saveChanges" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -137,7 +144,8 @@
                                     Sei sicuro di voler salvare le modifiche?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla
+                                    </button>
                                     <a class="btn btn-warning" href="/dashboard">Sì</a>
                                 </div>
                             </div>
