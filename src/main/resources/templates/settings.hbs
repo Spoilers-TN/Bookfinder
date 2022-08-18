@@ -78,6 +78,7 @@
                 </div>
                 <div class="col">
                     <h2>{{user.name}} {{user.surname}}</h2>
+                    <p>Email utente: {{user.email}}</p>
                     <p>Identificativo utente: {{user.id}}</p>
                     <br/>
                 </div>
@@ -97,7 +98,7 @@
                 <form>
                     <div class="form-group">
                         <label>Dati anagrafici</label>
-                        <input type="email" class="form-control" readonly placeholder="nome@cognome.com">
+                        <input type="email" class="form-control" readonly placeholder="{{user.email}}">
                     </div>
                     <div class="row">
                         <div class="col">

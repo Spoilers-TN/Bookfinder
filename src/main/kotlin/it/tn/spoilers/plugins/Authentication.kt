@@ -23,11 +23,13 @@ fun Application.configureAuthentication() {
 
     data class UserSession(val token: String)
     data class UserData(
-        val id: String,
+        val sub: String,
         val name: String,
         @SerialName("given_name") val givenName: String,
         @SerialName("family_name") val familyName: String?,
         val picture: String,
+        val email: String,
+        val email_verified: Boolean,
         val locale: String
     )
     install(Sessions) {
@@ -56,7 +58,7 @@ fun Application.configureAuthentication() {
                     requestMethod = HttpMethod.Post,
                     clientId = "750408780393-hn4fhicn68f04o3f7d8o2ng097q2pgo6.apps.googleusercontent.com",
                     clientSecret = "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",
-                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
+                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email")
                 )
             }
 
@@ -71,7 +73,7 @@ fun Application.configureAuthentication() {
             get("/callback") {
                 val principal = call.authentication.principal<OAuthAccessTokenResponse.OAuth2>()
                     ?: error("No principal")
-                val json = HttpClient(Apache).get("https://www.googleapis.com/userinfo/v2/me") {
+                val json = HttpClient(Apache).get("https://www.googleapis.com/oauth2/v3/userinfo") {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
                 try {
@@ -84,7 +86,10 @@ fun Application.configureAuthentication() {
                             UserDataFromJson.givenName,
                             UserDataFromJson?.familyName,
                             UserDataFromJson.picture,
+                            UserDataFromJson.email,
+                            UserDataFromJson.email_verified,
                             UserDataFromJson.locale
+
                         )
                     )
                     call.respondRedirect("/dashboard")
@@ -106,7 +111,8 @@ fun Application.configureAuthentication() {
                                 name = UserData?.givenName,
                                 surname = UserData?.familyName,
                                 photo = UserData?.picture,
-                                id = UserData?.id
+                                id = UserData?.sub,
+                                email = UserData?.email
                             )
                         )
                     )
@@ -126,7 +132,8 @@ fun Application.configureAuthentication() {
                                 name = UserData.givenName,
                                 surname = UserData?.familyName,
                                 photo = UserData.picture,
-                                id = UserData.id
+                                id = UserData.sub,
+                                email = UserData.email
                             )
                         )
                     )
@@ -146,7 +153,8 @@ fun Application.configureAuthentication() {
                                 name = UserData.givenName,
                                 surname = UserData?.familyName,
                                 photo = UserData.picture,
-                                id = UserData.id
+                                id = UserData.sub,
+                                email = UserData.email
                             )
                         )
                     )
@@ -167,7 +175,7 @@ fun Application.configureAuthentication() {
 
 @Serializable
 data class user(
-    val name: String?, val surname: String?, val photo: String?, val id: String?
+    val name: String?, val surname: String?, val photo: String?, val id: String?, val email: String?
 )
 
 @Serializable
@@ -177,5 +185,7 @@ data class UserInfo(
     @SerialName("given_name") val givenName: String,
     @SerialName("family_name") val familyName: String?,
     val picture: String,
+    val email: String,
+    val email_verified: Boolean,
     val locale: String
 )
