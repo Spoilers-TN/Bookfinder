@@ -11,11 +11,6 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import kotlinx.serialization.Serializable
 
-suspend fun ReturnError(): String {
-    return HttpClient(Apache).get("http://whatthecommit.com/index.txt") {
-    }.bodyAsText()
-}
-
 fun Application.configureErrors() {
     log.info("[!] Starting Plugin - Errors.kt")
     install(StatusPages) {
@@ -23,7 +18,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient().get("http://whatthecommit.com/index.txt").bodyAsText()
             )
             )))
         }
@@ -31,7 +26,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -39,7 +34,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -47,7 +42,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -55,7 +50,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -63,7 +58,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -71,7 +66,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -79,7 +74,7 @@ fun Application.configureErrors() {
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
                 status.description,
-                ReturnError()
+                HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
             )
             )))
         }
@@ -88,14 +83,14 @@ fun Application.configureErrors() {
                 call.respond(status= HttpStatusCode.Forbidden, MustacheContent("error.hbs", mapOf("error" to Error(
                     HttpStatusCode.Forbidden.value.toString(),
                     cause.toString(),
-                    ReturnError()
+                    HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
                 )
                 )))
             } else {
                 call.respond(status= HttpStatusCode.InternalServerError, MustacheContent("error.hbs", mapOf("error" to Error(
                     HttpStatusCode.InternalServerError.value.toString(),
                     cause.toString(),
-                    ReturnError()
+                    HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
                 )
                 )))
             }
