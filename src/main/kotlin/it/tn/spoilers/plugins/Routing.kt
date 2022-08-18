@@ -17,10 +17,6 @@ fun Application.configureRouting() {
     }
 
     routing {
-        // Static plugin. Try to access `/static/index.html`
-        static("/assets") {
-            resources("assets")
-        }
         get("/webjars") {
             call.respondText("<script src='/webjars/jquery/jquery.js'></script>", ContentType.Text.Html)
         }

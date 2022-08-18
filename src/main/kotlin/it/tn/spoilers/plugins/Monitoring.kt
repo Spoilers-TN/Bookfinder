@@ -22,7 +22,6 @@ fun Application.configureMonitoring() {
 
     install(MicrometerMetrics) {
         registry = appMicrometerRegistry
-        // ...
     }
 
     routing {
