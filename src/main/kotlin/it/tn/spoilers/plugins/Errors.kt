@@ -24,6 +24,13 @@ fun Application.configureErrors() {
             )
             )))
         }
+        status(HttpStatusCode.Unauthorized) { call, status ->
+            call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
+                status.value.toString(),
+                status.description
+            )
+            )))
+        }
         status(HttpStatusCode.InternalServerError) { call, status ->
             call.respond(status= status, MustacheContent("error.hbs", mapOf("error" to Error(
                 status.value.toString(),
