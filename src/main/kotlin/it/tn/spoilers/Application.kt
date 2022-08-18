@@ -1,10 +1,8 @@
 package it.tn.spoilers
 
-import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import io.ktor.server.tomcat.*
 import it.tn.spoilers.plugins.*
 
 fun main() {

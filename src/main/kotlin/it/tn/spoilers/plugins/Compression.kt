@@ -1,7 +1,7 @@
 package it.tn.spoilers.plugins
 
-import io.ktor.server.plugins.compression.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.compression.*
 
 fun Application.configureCompression() {
     log.info("[!] Starting Plugin - Compression.kt")

@@ -1,12 +1,11 @@
 package it.tn.spoilers.plugins
 
 import com.github.mustachejava.DefaultMustacheFactory
-import io.ktor.server.mustache.Mustache
-import io.ktor.server.mustache.MustacheContent
 import io.ktor.server.application.*
+import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.*
+import kotlinx.serialization.Serializable
 
 fun Application.configurePublicFrontend() {
     log.info("[!] Starting Plugin - PublicFrontend.kt")
@@ -25,8 +24,16 @@ fun Application.configurePublicFrontend() {
             call.respond(MustacheContent("about.hbs", mapOf("user" to MustacheUser(1, "user1"))))
         }
         get("/search") {
-            call.respond(MustacheContent("search.hbs", mapOf("book" to book("/assets/img/general/notfound.webp",
-                "Mario Rossi","The Lord of the Rings","Come il governo italiano (distrutto)"))))
+            call.respond(
+                MustacheContent(
+                    "search.hbs", mapOf(
+                        "book" to book(
+                            "/assets/img/general/notfound.webp",
+                            "Mario Rossi", "The Lord of the Rings", "Come il governo italiano (distrutto)"
+                        )
+                    )
+                )
+            )
         }
         get("/terms") {
             call.respond(MustacheContent("terms.hbs", mapOf("user" to MustacheUser(1, "user1"))))
@@ -44,5 +51,6 @@ fun Application.configurePublicFrontend() {
 
 @Serializable
 data class MustacheUser(val id: Int, val name: String)
+
 @Serializable
-data class book(val image: String, val seller: String, val title: String, val status: String )
+data class book(val image: String, val seller: String, val title: String, val status: String)
