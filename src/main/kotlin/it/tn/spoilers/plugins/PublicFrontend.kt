@@ -18,7 +18,7 @@ fun Application.configurePublicFrontend() {
             call.respond(MustacheContent("index.hbs", mapOf("user" to MustacheUser(1, "user1"))))
         }
         get("/index") {
-            call.respond(MustacheContent("index.hbs", mapOf("user" to MustacheUser(1, "user1"))))
+            call.respondRedirect("/")
         }
         get("/about") {
             call.respond(MustacheContent("about.hbs", mapOf("user" to MustacheUser(1, "user1"))))

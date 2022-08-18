@@ -1,5 +1,6 @@
 package it.tn.spoilers.plugins
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.metrics.micrometer.*
 import io.ktor.server.plugins.callloging.*
@@ -25,6 +26,9 @@ fun Application.configureMonitoring() {
     }
 
     routing {
+        get("/health") {
+            call.respondText(text= "All fine here", status= HttpStatusCode.OK)
+        }
         get("/metrics-micrometer") {
             call.respond(appMicrometerRegistry.scrape())
         }

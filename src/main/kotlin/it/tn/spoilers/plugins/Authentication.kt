@@ -20,6 +20,7 @@ import java.time.Duration
 fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - Authentication.kt")
 
+
     data class UserSession(val token: String)
     data class UserData(
         val id: String,
@@ -31,10 +32,14 @@ fun Application.configureAuthentication() {
     )
     install(Sessions) {
         cookie<UserSession>("user_session") {
+            cookie.secure = true
+            cookie.domain = "bookfinder.spoilers.tn.it"
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
         cookie<UserData>("user_data") {
+            cookie.secure = true
+            cookie.domain = "bookfinder.spoilers.tn.it"
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
@@ -42,7 +47,7 @@ fun Application.configureAuthentication() {
     install(Authentication) {
         oauth("auth-oauth-google") {
             client = HttpClient(Apache)
-            urlProvider = { "https://bookfinder.spoilers.tn.it/google-callback" }
+            urlProvider = { "https://bookfinder.spoilers.tn.it/callback" }
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
                     name = "google",
@@ -59,29 +64,35 @@ fun Application.configureAuthentication() {
     }
     routing {
         authenticate("auth-oauth-google") {
-            get("google-login") {
+            get("/login") {
                 // Redirects to 'authorizeUrl' automatically
             }
 
-            get("/google-callback") {
+            get("/callback") {
                 val principal = call.authentication.principal<OAuthAccessTokenResponse.OAuth2>()
                     ?: error("No principal")
                 val json = HttpClient(Apache).get("https://www.googleapis.com/userinfo/v2/me") {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
-                val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
-                call.sessions.set(UserSession(principal.accessToken))
-                call.sessions.set(
-                    UserData(
-                        UserDataFromJson.id,
-                        UserDataFromJson.name,
-                        UserDataFromJson.givenName,
-                        UserDataFromJson.familyName,
-                        UserDataFromJson.picture,
-                        UserDataFromJson.locale
+                try {
+                    val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
+                    call.sessions.set(UserSession(principal.accessToken))
+                    call.sessions.set(
+                        UserData(
+                            UserDataFromJson.id,
+                            UserDataFromJson.name,
+                            UserDataFromJson.givenName,
+                            UserDataFromJson?.familyName,
+                            UserDataFromJson.picture,
+                            UserDataFromJson.locale
+                        )
                     )
-                )
-                call.respondRedirect("/dashboard")
+                    call.respondRedirect("/dashboard")
+                } catch (e: Exception) {
+                    call.respondText(text = "501: Error handling not implemented | Try logging in with a different account ", status = HttpStatusCode.NotImplemented)
+                }
+
+
             }
         }
         get("/profile") {
@@ -113,7 +124,7 @@ fun Application.configureAuthentication() {
                         "settings.hbs", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
-                                surname = UserData.familyName,
+                                surname = UserData?.familyName,
                                 photo = UserData.picture,
                                 id = UserData.id
                             )
@@ -133,7 +144,7 @@ fun Application.configureAuthentication() {
                         "dashboard.hbs", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
-                                surname = UserData.familyName,
+                                surname = UserData?.familyName,
                                 photo = UserData.picture,
                                 id = UserData.id
                             )
@@ -164,7 +175,7 @@ data class UserInfo(
     val id: String,
     val name: String,
     @SerialName("given_name") val givenName: String,
-    @SerialName("family_name") val familyName: String,
+    @SerialName("family_name") val familyName: String?,
     val picture: String,
     val locale: String
 )

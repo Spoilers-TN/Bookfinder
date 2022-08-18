@@ -8,7 +8,6 @@
 }
 
 .card-columns {
-
 @include media-breakpoint-only(xl) {
     column-count: 10;
 }

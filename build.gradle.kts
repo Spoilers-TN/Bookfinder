@@ -3,6 +3,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 val prometeus_version: String by project
 val version: String by project
+val isDevelopment: String by project
 
 plugins {
     application
@@ -15,7 +16,6 @@ group = "it.tn.spoilers"
 
 application {
     mainClass.set("it.tn.spoilers.ApplicationKt")
-    val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
@@ -50,8 +50,8 @@ dependencies {
     implementation("io.ktor:ktor-server-websockets-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-tomcat-jvm:2.1.0")
-    implementation("io.ktor:ktor-client-core-jvm:2.1.0")
+    implementation("io.ktor:ktor-server-tomcat-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

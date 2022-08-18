@@ -11,7 +11,7 @@ fun main() {
         workerGroupSize = 5
         callGroupSize = 10
     }) {
-        log.info("[!] Starting Server - BookFinder - v2022.8.4-Alpha")
+        log.info("[!] Starting Server - BookFinder - v2022.8.18-Alpha")
         configureErrors()
         configureStaticRoutes()
         configureRouting()
