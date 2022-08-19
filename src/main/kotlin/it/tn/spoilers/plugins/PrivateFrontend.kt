@@ -24,7 +24,8 @@ fun Application.configurePrivateFrontend() {
                                 photo = UserData?.picture,
                                 id = UserData?.sub,
                                 email = UserData?.email,
-                                realm = UserData?.hd
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
@@ -46,7 +47,8 @@ fun Application.configurePrivateFrontend() {
                                 photo = UserData.picture,
                                 id = UserData.sub,
                                 email = UserData.email,
-                                realm = UserData.hd
+                                realm = UserData.hd,
+                                gsuite = UserData.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
@@ -68,7 +70,8 @@ fun Application.configurePrivateFrontend() {
                                 photo = UserData.picture,
                                 id = UserData.sub,
                                 email = UserData.email,
-                                realm = UserData.hd
+                                realm = UserData.hd,
+                                gsuite = UserData?.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
@@ -90,7 +93,8 @@ fun Application.configurePrivateFrontend() {
                                 photo = UserData.picture,
                                 id = UserData.sub,
                                 email = UserData.email,
-                                realm = UserData.hd
+                                realm = UserData.hd,
+                                gsuite = UserData?.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
@@ -112,7 +116,8 @@ fun Application.configurePrivateFrontend() {
                                 photo = UserData.picture,
                                 id = UserData.sub,
                                 email = UserData.email,
-                                realm = UserData.hd
+                                realm = UserData.hd,
+                                gsuite = UserData?.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )

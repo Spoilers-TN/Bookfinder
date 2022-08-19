@@ -25,7 +25,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -46,7 +47,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -67,7 +69,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -88,7 +91,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -109,7 +113,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -130,7 +135,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -151,7 +157,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -172,7 +179,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -193,7 +201,8 @@ fun Application.configureErrors() {
                             photo = UserData?.picture,
                             id = UserData?.sub,
                             email = UserData?.email,
-                            realm = UserData?.hd
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -215,7 +224,8 @@ fun Application.configureErrors() {
                                 photo = UserData?.picture,
                                 id = UserData?.sub,
                                 email = UserData?.email,
-                                realm = UserData?.hd
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
                             ), "error" to Error(
                                 HttpStatusCode.Forbidden.value.toString(),
                                 cause.toString(),
@@ -234,7 +244,8 @@ fun Application.configureErrors() {
                                 photo = UserData?.picture,
                                 id = UserData?.sub,
                                 email = UserData?.email,
-                                realm = UserData?.hd
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
                             ), "error" to Error(
                                 HttpStatusCode.InternalServerError.value.toString(),
                                 cause.toString(),

@@ -1,0 +1,49 @@
+<!--organizazione profilo-->
+<div class="row">
+    <div class="col-md-auto">
+        <img alt="ProfiloScuola" src="assets/img/general/school.webp" class="rounded-circle"
+             style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+    </div>
+    <div class="col">
+        <h2>Account collegato a - {{user.realm}}</h2>
+        <p>Quando ti sei registrato per la prima volta a BookFinder hai utilizzato il login con google
+            (OAuth2) ed è stato verificato che il tuo account appartiene a {{user.realm}}. Ciò implica che l'account è controllabile solo da te attraverso google.
+            Tuttavia questo metodo di login è riconosciuto da BookFinder come attendibile e ufficiale e ti permetterà d'individuare annunci creati da utenti della tua scuola.
+        </p>
+        </p>
+
+        <!-- PULSANTE APRI MODAL -->
+        <a data-toggle="modal" data-target="#adminAccount">Informazioni di debug</a>
+
+        <!-- MODAL MAGGIORI INFORMAZIONI -->
+        <div class="modal fade" id="adminAccount" tabindex="-1" role="dialog"
+             aria-labelledby="adminAccountLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="adminAccountLabel">Informazioni di debug</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        User ID: {{user.id}}<br>
+                        User Name: {{user.name}}<br>
+                        User Email: {{user.email}}<br>
+                        User Realm: {{user.realm}}<br>
+                        User Domain: {{user.domain}}<br>
+                        GSuite User: {{user.gsuite}}<br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nascondi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FINE DEL MODAL MAGGIORI INFORMAZIONI -->
+
+
+        <br>
+    </div>
+</div>

@@ -13,12 +13,19 @@ data class UserData(
     val email: String,
     val email_verified: Boolean,
     val locale: String,
-    val hd: String
+    val hd: String,
+    val GSuiteUser: Boolean
 )
 
 @Serializable
 data class user(
-    val name: String?, val surname: String?, val photo: String?, val id: String?, val email: String?, val realm: String?
+    val name: String?,
+    val surname: String?,
+    val photo: String?,
+    val id: String?,
+    val email: String?,
+    val realm: String?,
+    val gsuite: Boolean?
 )
 
 @Serializable

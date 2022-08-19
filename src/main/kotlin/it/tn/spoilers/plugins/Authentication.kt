@@ -65,7 +65,9 @@ fun Application.configureAuthentication() {
                 val json = HttpClient(Apache).get("https://www.googleapis.com/oauth2/v3/userinfo") {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
-                if (json.contains("hd")) {
+                if (json.contains("hd"))
+                {
+                    val GSuiteUser:Boolean = true
                     val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
@@ -78,11 +80,13 @@ fun Application.configureAuthentication() {
                             UserDataFromJson.email,
                             UserDataFromJson.email_verified,
                             UserDataFromJson.locale,
-                            UserDataFromJson.hd
+                            UserDataFromJson.hd,
+                            GSuiteUser
                         )
                     )
 
                 } else {
+                    val GSuiteUser:Boolean = false
                     val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
@@ -95,7 +99,8 @@ fun Application.configureAuthentication() {
                             UserDataFromJson.email,
                             UserDataFromJson.email_verified,
                             UserDataFromJson.locale,
-                            "gmail.com"
+                            "gmail.com",
+                            GSuiteUser
                         )
                     )
                 }
