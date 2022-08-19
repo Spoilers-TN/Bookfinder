@@ -11,14 +11,7 @@ fun Application.configureRouting() {
     log.info("[!] Starting Plugin - Routing.kt")
     install(AutoHeadResponse)
 
-    install(Webjars) {
-        path = "/webjars" //defaults to /webjars
-    }
-
     routing {
-        get("/webjars") {
-            call.respondText("<script src='/webjars/jquery/jquery.js'></script>", ContentType.Text.Html)
-        }
         get("/teapot") {
             call.respondText(text = "418: I'm a teapot \uD83E\uDED6", status = HttpStatusCode.fromValue(418))
         }
