@@ -12,15 +12,15 @@ fun main() {
         callGroupSize = 10
     }) {
         log.info("[!] Starting Server - BookFinder - v2022.8.18-Alpha")
+        configureRouting()
+        configureAuthentication()
         configureErrors()
         configureStaticRoutes()
-        configureRouting()
         configureMonitoring()
         configureSockets()
         configureHeaders()
         configureCompression()
         configureCORS()
-        configureAuthentication()
         configurePublicFrontend()
         configurePrivateFrontend()
         log.info("[✓] Started Server - BookFinder")
