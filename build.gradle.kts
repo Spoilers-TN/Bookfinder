@@ -24,6 +24,15 @@ repositories {
 }
 
 dependencies {
+    // PostgreSQL Stuff
+    implementation("org.postgresql:postgresql:42.4.2")
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    // Jetbrains Exposed
+    implementation("org.jetbrains.exposed:exposed-core:0.38.2")
+    implementation("org.jetbrains.exposed:exposed-dao:0.38.2")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.38.2")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.38.2")
+    // KTOR Stuff
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-locations-jvm:$ktor_version")
@@ -51,6 +60,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-tomcat-jvm:$ktor_version")
     implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
+    // Ktor tests
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
