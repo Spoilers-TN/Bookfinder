@@ -4,6 +4,7 @@ val logback_version: String by project
 val prometeus_version: String by project
 val version: String by project
 val isDevelopment: String by project
+val kmongo_version: String by project
 
 plugins {
     application
@@ -24,14 +25,9 @@ repositories {
 }
 
 dependencies {
-    // PostgreSQL Stuff
-    implementation("org.postgresql:postgresql:42.4.2")
-    implementation("com.zaxxer:HikariCP:5.0.1")
-    // Jetbrains Exposed
-    implementation("org.jetbrains.exposed:exposed-core:0.38.2")
-    implementation("org.jetbrains.exposed:exposed-dao:0.38.2")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.38.2")
-    implementation("org.jetbrains.exposed:exposed-java-time:0.38.2")
+    // MongoDB Stuff
+    implementation("org.litote.kmongo:kmongo:$kmongo_version")
+    implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongo_version")
     // KTOR Stuff
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
