@@ -8,6 +8,8 @@ import io.ktor.server.routing.*
 import it.tn.spoilers.database.models.Books
 import it.tn.spoilers.database.services.BooksService
 import it.tn.spoilers.plugins.database.toBooksData
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 fun Application.configureBooksApi() {
     log.info("[!] Starting Plugin - api - books.kt")
@@ -18,7 +20,7 @@ fun Application.configureBooksApi() {
                 val BookList =
                     service.findAll()
                         .map(Books::toBooksData)
-                call.respond(BookList)
+                call.respond(Json.encodeToString(BookList))
         }
     }
     log.info("[✓] Started Plugin - api - books.kt")
