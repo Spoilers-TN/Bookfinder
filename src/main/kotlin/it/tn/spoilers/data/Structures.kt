@@ -1,5 +1,8 @@
 package it.tn.spoilers.data
 
+import it.tn.spoilers.database.models.Users
+import it.tn.spoilers.database.models.UsersData
+import it.tn.spoilers.plugins.database.toUsers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,6 +19,8 @@ data class UserData(
     val hd: String,
     val GSuiteUser: Boolean
 )
+
+
 
 @Serializable
 data class user(
@@ -38,7 +43,19 @@ data class UserInfo(
     val email: String,
     val email_verified: Boolean,
     val locale: String
-)
+) {
+    fun toData(): Users =
+        Users(
+            User_ID = this.sub,
+            User_School_Domain = "gmail.com",
+            User_Name = this.givenName,
+            User_Surname = this.familyName.toString(),
+            User_Biog = "",
+            User_Email = this.email,
+            User_FullName = this.name,
+            User_GSuite = false
+        )
+}
 
 @Serializable
 data class UserInfoGSuite(
@@ -61,3 +78,16 @@ data class book(val image: String, val seller: String, val title: String, val st
 
 @Serializable
 data class Error(val code: String, val descr: String, val meme: String)
+
+
+fun UserInfo.toUsers(): Users =
+    Users(
+        User_ID = this.sub,
+        User_School_Domain = "gmail.com",
+        User_Name = this.givenName,
+        User_Surname = this.familyName.toString(),
+        User_Biog = "",
+        User_Email = this.email,
+        User_FullName = this.name,
+        User_GSuite = false
+    )

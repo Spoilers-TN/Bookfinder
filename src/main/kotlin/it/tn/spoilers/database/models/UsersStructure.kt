@@ -1,8 +1,10 @@
 package it.tn.spoilers.database.models
 
+import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+@Serializable
 data class Users(
     @BsonId
     val id: Id<Users>? = null,
@@ -16,6 +18,7 @@ data class Users(
     val User_GSuite: Boolean
 )
 
+@Serializable
 data class UsersData(
     val id: String? = null,
     val User_ID: String,

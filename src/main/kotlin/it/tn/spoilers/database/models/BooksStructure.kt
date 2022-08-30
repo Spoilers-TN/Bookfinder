@@ -1,8 +1,10 @@
 package it.tn.spoilers.database.models
 
+import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+@Serializable
 data class Books(
     @BsonId
     val id: Id<Books>? = null,
@@ -16,7 +18,7 @@ data class Books(
     val Book_Study_Year: Int,
     val Book_Price: Double
 )
-
+ @Serializable
 data class BooksData(
     val id: String? = null,
     val Book_ISBN: Long,

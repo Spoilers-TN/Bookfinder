@@ -17,6 +17,28 @@ import it.tn.spoilers.data.user
 fun Application.configureErrors() {
     log.info("[!] Starting Plugin - HTTPErrors.kt")
     install(StatusPages) {
+        status(HttpStatusCode.fromValue(406)) { call, status ->
+            val UserData = call.sessions.get<UserData>()
+            call.respond(
+                status = status, MustacheContent(
+                    "error.hbs", mapOf(
+                        "user" to user(
+                            name = UserData?.givenName,
+                            surname = UserData?.familyName,
+                            photo = UserData?.picture,
+                            id = UserData?.sub,
+                            email = UserData?.email,
+                            realm = UserData?.hd,
+                            gsuite = UserData?.GSuiteUser
+                        ), "error" to Error(
+                            status.value.toString(),
+                            status.description,
+                            HttpClient().get("http://whatthecommit.com/index.txt").bodyAsText()
+                        ), "logged" to (call.sessions.get<UserData>() != null)
+                    )
+                )
+            )
+        }
         status(HttpStatusCode.NotFound) { call, status ->
             val UserData = call.sessions.get<UserData>()
             call.respond(

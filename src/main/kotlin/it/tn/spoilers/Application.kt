@@ -3,6 +3,7 @@ package it.tn.spoilers
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import it.tn.spoilers.plugins.api.configureBooksApi
 import it.tn.spoilers.plugins.frontend.*
 import it.tn.spoilers.plugins.extras.*
 import it.tn.spoilers.plugins.http.*
@@ -15,12 +16,14 @@ fun main() {
         configureRouting()
         configureAuthentication()
         configureErrors()
+        //configureSerialization()
         configureStaticRoutes()
         configureMonitoring()
         configureSockets()
         configureHeaders()
         configureCompression()
         //configureCORS()
+        configureBooksApi()
         configurePublicFrontend()
         configurePrivateFrontend()
         log.info("[✓] Started Server - BookFinder")

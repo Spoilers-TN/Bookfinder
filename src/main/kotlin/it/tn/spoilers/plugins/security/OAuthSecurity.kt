@@ -11,16 +11,16 @@ import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import it.tn.spoilers.data.UserData
-import it.tn.spoilers.data.UserInfo
-import it.tn.spoilers.data.UserInfoGSuite
-import it.tn.spoilers.data.UserSession
+import it.tn.spoilers.data.*
+import it.tn.spoilers.database.models.Users
+import it.tn.spoilers.database.services.UsersService
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.time.Duration
 
 fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - OAuthSecurity.kt")
+    var service = UsersService()
 
     install(Sessions) {
         cookie<UserSession>("user_session") {
@@ -71,6 +71,7 @@ fun Application.configureAuthentication() {
                 }.bodyAsText()
                 if (json.contains("hd")) {
                     val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
+                    service.create(CastGsuiteUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
                         UserData(
@@ -89,6 +90,7 @@ fun Application.configureAuthentication() {
 
                 } else {
                     val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
+                    service.create(CastNormalUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
                         UserData(
@@ -105,6 +107,7 @@ fun Application.configureAuthentication() {
                         )
                     )
                 }
+
                 call.respondRedirect("/dashboard")
             }
         }
