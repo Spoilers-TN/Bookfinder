@@ -16,7 +16,7 @@ import it.tn.spoilers.plugins.serving.*
 fun main() {
     DisableMongoLogging()
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        log.info("[!] Starting Server - BookFinder - v2022.8.18-Alpha")
+        log.info("[!] Starting Server - BookFinder - v2022.8.30-Alpha")
         configureRouting()
         configureAuthentication()
         configureErrors()
