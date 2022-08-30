@@ -3,9 +3,8 @@ package it.tn.spoilers
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import it.tn.spoilers.plugins.configurePublicFrontend
-import it.tn.spoilers.plugins.configureRouting
-import it.tn.spoilers.plugins.configureStaticRoutes
+import it.tn.spoilers.plugins.frontend.*
+import it.tn.spoilers.plugins.serving.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

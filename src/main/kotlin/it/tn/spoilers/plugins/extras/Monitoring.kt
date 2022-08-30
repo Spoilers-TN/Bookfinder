@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.extras
 
 import io.ktor.http.*
 import io.ktor.server.application.*

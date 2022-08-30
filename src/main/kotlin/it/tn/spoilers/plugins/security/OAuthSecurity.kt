@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.security
 
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
@@ -11,12 +11,16 @@ import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import it.tn.spoilers.data.UserData
+import it.tn.spoilers.data.UserInfo
+import it.tn.spoilers.data.UserInfoGSuite
+import it.tn.spoilers.data.UserSession
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.time.Duration
 
 fun Application.configureAuthentication() {
-    log.info("[!] Starting Plugin - Authentication.kt")
+    log.info("[!] Starting Plugin - OAuthSecurity.kt")
 
     install(Sessions) {
         cookie<UserSession>("user_session") {
@@ -65,9 +69,7 @@ fun Application.configureAuthentication() {
                 val json = HttpClient(Apache).get("https://www.googleapis.com/oauth2/v3/userinfo") {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
-                if (json.contains("hd"))
-                {
-                    val GSuiteUser:Boolean = true
+                if (json.contains("hd")) {
                     val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
@@ -81,12 +83,11 @@ fun Application.configureAuthentication() {
                             UserDataFromJson.email_verified,
                             UserDataFromJson.locale,
                             UserDataFromJson.hd,
-                            GSuiteUser
+                            GSuiteUser = true
                         )
                     )
 
                 } else {
-                    val GSuiteUser:Boolean = false
                     val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
@@ -100,7 +101,7 @@ fun Application.configureAuthentication() {
                             UserDataFromJson.email_verified,
                             UserDataFromJson.locale,
                             "gmail.com",
-                            GSuiteUser
+                            GSuiteUser = false
                         )
                     )
                 }
@@ -128,6 +129,6 @@ fun Application.configureAuthentication() {
             )
         }
     }
-    log.info("[✓] Started Plugin - Authentication.kt")
+    log.info("[✓] Started Plugin - OAuthSecurity.kt")
 
 }

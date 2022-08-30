@@ -1,11 +1,11 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.security
 
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.cors.routing.*
 
 fun Application.configureCORS() {
-    log.info("[!] Starting Plugin - CORS.kt")
+    log.info("[!] Starting Plugin - CORSSecurity.kt")
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Put)
@@ -13,5 +13,5 @@ fun Application.configureCORS() {
         allowMethod(HttpMethod.Patch)
         allowHeader(HttpHeaders.Authorization)
     }
-    log.info("[✓] Started Plugin - CORS.kt")
+    log.info("[✓] Started Plugin - CORSSecurity.kt")
 }

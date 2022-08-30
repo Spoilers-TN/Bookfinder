@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.http
 
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
@@ -10,9 +10,12 @@ import io.ktor.server.mustache.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.sessions.*
+import it.tn.spoilers.data.Error
+import it.tn.spoilers.data.UserData
+import it.tn.spoilers.data.user
 
 fun Application.configureErrors() {
-    log.info("[!] Starting Plugin - Errors.kt")
+    log.info("[!] Starting Plugin - HTTPErrors.kt")
     install(StatusPages) {
         status(HttpStatusCode.NotFound) { call, status ->
             val UserData = call.sessions.get<UserData>()
@@ -257,7 +260,7 @@ fun Application.configureErrors() {
             }
         }
     }
-    log.info("[✓] Started Plugin - Errors.kt")
+    log.info("[✓] Started Plugin - HTTPErrors.kt")
 }
 
 class AuthenticationException : RuntimeException()

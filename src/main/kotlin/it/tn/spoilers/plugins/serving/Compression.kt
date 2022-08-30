@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.serving
 
 import io.ktor.server.application.*
 import io.ktor.server.plugins.compression.*

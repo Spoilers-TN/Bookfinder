@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.http
 
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -9,7 +9,7 @@ import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
 
 fun Application.configureHeaders() {
-    log.info("[!] Starting Plugin - Headers.kt")
+    log.info("[!] Starting Plugin - HTTPHeaders.kt")
     install(CachingHeaders) {
         options { call, outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
@@ -24,7 +24,7 @@ fun Application.configureHeaders() {
     }
     install(ForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
     install(XForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
-    log.info("[✓] Started Plugin - Headers.kt")
+    log.info("[✓] Started Plugin - HTTPHeaders.kt")
 }
 
 

@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.frontend
 
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -6,6 +6,9 @@ import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import it.tn.spoilers.data.UserData
+import it.tn.spoilers.data.UserSession
+import it.tn.spoilers.data.user
 
 
 fun Application.configurePrivateFrontend() {
@@ -71,7 +74,7 @@ fun Application.configurePrivateFrontend() {
                                 id = UserData.sub,
                                 email = UserData.email,
                                 realm = UserData.hd,
-                                gsuite = UserData?.GSuiteUser
+                                gsuite = UserData.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
@@ -94,7 +97,7 @@ fun Application.configurePrivateFrontend() {
                                 id = UserData.sub,
                                 email = UserData.email,
                                 realm = UserData.hd,
-                                gsuite = UserData?.GSuiteUser
+                                gsuite = UserData.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )
@@ -117,7 +120,7 @@ fun Application.configurePrivateFrontend() {
                                 id = UserData.sub,
                                 email = UserData.email,
                                 realm = UserData.hd,
-                                gsuite = UserData?.GSuiteUser
+                                gsuite = UserData.GSuiteUser
                             ), "logged" to (call.sessions.get<UserData>() != null)
                         )
                     )

@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.plugins.frontend
 
 import com.github.mustachejava.DefaultMustacheFactory
 import io.ktor.server.application.*
@@ -6,6 +6,9 @@ import io.ktor.server.mustache.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import it.tn.spoilers.data.UserData
+import it.tn.spoilers.data.book
+import it.tn.spoilers.data.user
 
 fun Application.configurePublicFrontend() {
     log.info("[!] Starting Plugin - PublicFrontend.kt")

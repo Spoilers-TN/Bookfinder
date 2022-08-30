@@ -1,4 +1,4 @@
-package it.tn.spoilers.plugins
+package it.tn.spoilers.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
