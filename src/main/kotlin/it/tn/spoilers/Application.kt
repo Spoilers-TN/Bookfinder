@@ -5,6 +5,8 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import it.tn.spoilers.extras.DisableMongoLogging
 import it.tn.spoilers.plugins.api.configureBooksApi
+import it.tn.spoilers.plugins.api.configureSchoolsApi
+import it.tn.spoilers.plugins.api.configureUsersApi
 import it.tn.spoilers.plugins.frontend.*
 import it.tn.spoilers.plugins.extras.*
 import it.tn.spoilers.plugins.http.*
@@ -24,8 +26,10 @@ fun main() {
         configureSockets()
         configureHeaders()
         configureCompression()
-        //configureCORS()
+        configureCORS()
         configureBooksApi()
+        configureSchoolsApi()
+        //configureUsersApi()
         configurePublicFrontend()
         configurePrivateFrontend()
         log.info("[✓] Started Server - BookFinder")

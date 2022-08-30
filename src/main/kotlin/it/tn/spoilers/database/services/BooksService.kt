@@ -1,9 +1,7 @@
 package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Books
-import org.bson.types.ObjectId
 import org.litote.kmongo.*
-import org.litote.kmongo.id.toId
 
 class BooksService {
     private val client = KMongo.createClient("")
@@ -18,9 +16,9 @@ class BooksService {
     fun findAll(): List<Books> =
         booksCollection.find().toList()
 
-    fun findById(id: String): Books? {
-        val bsonId: Id<Books> = ObjectId(id).toId()
-        return booksCollection
-            .findOne(Books::id eq bsonId)
+    fun findByISBN(isbn: Long): List<Books> {
+        val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
+        return booksCollection.find(caseSensitiveTypeSafeFilter)
+            .toList()
     }
 }

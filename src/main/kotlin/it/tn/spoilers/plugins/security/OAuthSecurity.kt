@@ -71,7 +71,7 @@ fun Application.configureAuthentication() {
                 }.bodyAsText()
                 if (json.contains("hd")) {
                     val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
-                    service.create(CastGsuiteUserToUserDb(UserDataFromJson))
+                    service.createIfNotPresent(CastGsuiteUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
                         UserData(
@@ -90,7 +90,7 @@ fun Application.configureAuthentication() {
 
                 } else {
                     val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
-                    service.create(CastNormalUserToUserDb(UserDataFromJson))
+                    service.createIfNotPresent(CastNormalUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
                         UserData(

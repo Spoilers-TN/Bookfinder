@@ -2,7 +2,6 @@ package it.tn.spoilers.plugins.api
 
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.autohead.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import it.tn.spoilers.database.models.Books
@@ -20,7 +19,11 @@ fun Application.configureBooksApi() {
                 val BookList =
                     service.findAll()
                         .map(Books::toBooksData)
-                call.respond(Json.encodeToString(BookList))
+                call.respondText(Json.encodeToString(BookList), contentType = ContentType.Application.Json)
+        }
+        get("/api/books/isbn/{isbn}") {
+            val id = call.parameters["isbn"]!!.toLong()
+            call.respondText(Json.encodeToString(service.findByISBN(id)), contentType = ContentType.Application.Json)
         }
     }
     log.info("[✓] Started Plugin - api - books.kt")
