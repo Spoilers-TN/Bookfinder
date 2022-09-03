@@ -10,7 +10,7 @@ fun School.toSchoolData(): SchoolData =
         School_Name = this.School_Name,
         School_City = this.School_City,
         School_Region = this.School_Region,
-        School_Type = this.School_Region,
+        School_Type = this.School_Type,
         School_Code = this.School_Code
     )
 
@@ -20,6 +20,6 @@ fun SchoolData.toSchool(): School =
         School_Name = this.School_Name,
         School_City = this.School_City,
         School_Region = this.School_Region,
-        School_Type = this.School_Region,
+        School_Type = this.School_Type,
         School_Code = this.School_Code
     )
