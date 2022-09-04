@@ -25,6 +25,8 @@ repositories {
 }
 
 dependencies {
+    // Sentry Stuff
+    implementation ("io.sentry:sentry:6.4.1")
     // MongoDB Stuff
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
     implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongo_version")

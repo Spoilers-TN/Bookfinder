@@ -8,8 +8,11 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.mustache.*
 import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.sessions.*
+import io.sentry.Sentry
+import io.sentry.SentryLevel
 import it.tn.spoilers.data.Error
 import it.tn.spoilers.data.UserData
 import it.tn.spoilers.data.user
@@ -19,6 +22,7 @@ fun Application.configureErrors() {
     install(StatusPages) {
         status(HttpStatusCode.fromValue(406)) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 406 - ${call.request.uri}")
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -41,6 +45,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.NotFound) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 404 - ${call.request.uri}")
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -63,6 +68,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.fromValue(104)) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 104 - ${call.request.uri}")
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -85,6 +91,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.Forbidden) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 403 - ${call.request.uri}")
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -107,6 +114,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.Unauthorized) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 401 - ${call.request.uri}")
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -129,6 +137,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.InternalServerError) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 500 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -151,6 +160,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.BadGateway) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 502 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -173,6 +183,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.ServiceUnavailable) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 503 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -195,6 +206,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.GatewayTimeout) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 504 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -217,6 +229,7 @@ fun Application.configureErrors() {
         }
         status(HttpStatusCode.NotImplemented) { call, status ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureMessage("HTTP Error 501 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
                 status = status, MustacheContent(
                     "error.hbs", mapOf(
@@ -239,6 +252,7 @@ fun Application.configureErrors() {
         }
         exception<Throwable> { call, cause ->
             val UserData = call.sessions.get<UserData>()
+            Sentry.captureException(cause)
             if (cause is AuthorizationException) {
                 call.respond(
                     status = HttpStatusCode.Forbidden, MustacheContent(
@@ -285,5 +299,4 @@ fun Application.configureErrors() {
     log.info("[✓] Started Plugin - HTTPErrors.kt")
 }
 
-class AuthenticationException : RuntimeException()
 class AuthorizationException : RuntimeException()
