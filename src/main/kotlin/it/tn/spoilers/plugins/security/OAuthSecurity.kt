@@ -22,6 +22,8 @@ fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - OAuthSecurity.kt")
     var service = UsersService()
 
+
+
     install(Sessions) {
         cookie<UserSession>("user_session") {
             cookie.secure = true
@@ -70,7 +72,7 @@ fun Application.configureAuthentication() {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
                 if (json.contains("hd")) {
-                    val UserDataFromJson = Json.decodeFromString<UserInfoGSuite>(json)
+                    val UserDataFromJson = Json{ignoreUnknownKeys = true}.decodeFromString<UserInfoGSuite>(json)
                     service.createIfNotPresent(CastGsuiteUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
@@ -89,7 +91,7 @@ fun Application.configureAuthentication() {
                     )
 
                 } else {
-                    val UserDataFromJson = Json.decodeFromString<UserInfo>(json)
+                    val UserDataFromJson = Json{ignoreUnknownKeys = true}.decodeFromString<UserInfo>(json)
                     service.createIfNotPresent(CastNormalUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
