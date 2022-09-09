@@ -4,7 +4,7 @@ import io.sentry.Sentry
 
 fun EnableSentry() {
     Sentry.init { options ->
-        options.dsn = ""
+        options.dsn = "https://8768e2b722964bd5a545446d5505c9fb@o1358021.ingest.sentry.io/6644839"
         options.tracesSampleRate = 1.0
         options.isDebug = false
     }

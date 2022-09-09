@@ -6,7 +6,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.mustache.*
+import io.ktor.server.pebble.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -24,8 +24,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 406 - ${call.request.uri}")
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -47,8 +47,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 404 - ${call.request.uri}")
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -70,8 +70,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 104 - ${call.request.uri}")
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -93,8 +93,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 403 - ${call.request.uri}")
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -116,8 +116,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 401 - ${call.request.uri}")
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -139,8 +139,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 500 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -162,8 +162,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 502 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -185,8 +185,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 503 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -208,8 +208,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 504 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -231,8 +231,8 @@ fun Application.configureErrors() {
             val UserData = call.sessions.get<UserData>()
             Sentry.captureMessage("HTTP Error 501 - ${call.request.uri}", SentryLevel.ERROR)
             call.respond(
-                status = status, MustacheContent(
-                    "error.hbs", mapOf(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
                         "user" to user(
                             name = UserData?.givenName,
                             surname = UserData?.familyName,
@@ -255,8 +255,8 @@ fun Application.configureErrors() {
             Sentry.captureException(cause)
             if (cause is AuthorizationException) {
                 call.respond(
-                    status = HttpStatusCode.Forbidden, MustacheContent(
-                        "error.hbs", mapOf(
+                    status = HttpStatusCode.Forbidden, PebbleContent(
+                        "error.html", mapOf(
                             "user" to user(
                                 name = UserData?.givenName,
                                 surname = UserData?.familyName,
@@ -275,8 +275,8 @@ fun Application.configureErrors() {
                 )
             } else {
                 call.respond(
-                    status = HttpStatusCode.InternalServerError, MustacheContent(
-                        "error.hbs", mapOf(
+                    status = HttpStatusCode.InternalServerError, PebbleContent(
+                        "error.html", mapOf(
                             "user" to user(
                                 name = UserData?.givenName,
                                 surname = UserData?.familyName,

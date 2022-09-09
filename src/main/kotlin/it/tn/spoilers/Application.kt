@@ -31,7 +31,7 @@ fun main() {
         configureCORS()
         configureBooksApi()
         configureSchoolsApi()
-        //configureUsersApi()
+        configureUsersApi()
         configurePublicFrontend()
         configurePrivateFrontend()
         log.info("[✓] Started Server - BookFinder")

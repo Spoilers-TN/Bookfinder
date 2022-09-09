@@ -3,6 +3,7 @@ package it.tn.spoilers.plugins.api
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.mustache.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
@@ -29,11 +30,14 @@ fun Application.configureUsersApi() {
 
         }
 
-        post("/api/user/set/bio/{biography}") {
+        post("/api/user/set/bio") {
             val UserData = call.sessions.get<UserData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
-                val biography = call.parameters["biography"].toString()
+                val param = call.receive<Parameters>()
+                val biography = param["biography"]!!
+                println(biography)
+                println(param.toString())
                 service.updateUserBio(UserData.sub, biography)
                 call.respond(HttpStatusCode(200, "OK"))
             } else {

@@ -1,13 +1,12 @@
-{{> head}}
+{% include "head.html" %}
 
 <body>
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <div class="container" style="margin-top: 30px; margin-bottom: 30px">
     <div class="row">
@@ -328,11 +327,9 @@
 
     <div class="row gy-3">
 
-        {{> Snippet-Book}}
-
-        {{> Snippet-Book}}
-
-        {{> Snippet-Book}}
+        {% include "Snippet-Book.html" %}
+        {% include "Snippet-Book.html" %}
+        {% include "Snippet-Book.html" %}
 
 
     </div>
@@ -341,11 +338,9 @@
 
     <div class="row gy-3">
 
-        {{> Snippet-Book}}
-
-        {{> Snippet-Book}}
-
-        {{> Snippet-Book}}
+        {% include "Snippet-Book.html" %}
+        {% include "Snippet-Book.html" %}
+        {% include "Snippet-Book.html" %}
 
 
     </div>
@@ -353,7 +348,7 @@
 </div>
 
 <!-- PLACEHOLDER DEL FOOTER -->
-{{> footer}}
+{% include "footer.html" %}
 
 </script>
 </body>

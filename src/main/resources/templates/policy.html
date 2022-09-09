@@ -1,13 +1,12 @@
-{{> head}}
+{% include "head.html" %}
 
 <body>
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <!-- CONTENUTI -->
 <div class="container" style="margin-top: 50px; margin-bottom: 100px">
@@ -206,7 +205,7 @@
     </div>
 </div>
 
-{{> footer}}
+{% include "footer.html" %}
 </body>
 
 </html>

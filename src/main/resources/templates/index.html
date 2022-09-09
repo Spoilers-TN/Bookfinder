@@ -1,16 +1,15 @@
-{{> head}}
+{% include "head.html" %}
 
 <body data-aos-easing="ease" data-aos-duration="750" data-aos-delay="200" cz-shortcut-listen="true"
       style="overflow-x: hidden;">
 
 <!-- PLACEHOLDER DELLA NAVBAR -->
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <!-- HEADER PRINCIPALE -->
 <div class="sfondo">
@@ -107,8 +106,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 
@@ -199,7 +196,7 @@
 <p style="color: #405060; text-align: center">Icone fornite da Flaticon.com</p>
 <br>
 <!-- PLACEHOLDER DEL FOOTER -->
-{{> footer}}
+{% include "footer.html" %}
 
 <!-- SCRIPT PER INIZIALIZZARE AOS -->
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

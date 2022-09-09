@@ -1,13 +1,12 @@
-{{> head}}
+{% include "head.html" %}
 
 <body>
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <!-- CONTENUTI -->
 <center>
@@ -25,7 +24,7 @@
     </div>
 </center>
 
-{{> footer}}
+{% include "footer.html" %}
 <script type="text/javascript">
     const images = ["/assets/img/emoji/Happy1.webp",
         "/assets/img/emoji/Happy2.webp",

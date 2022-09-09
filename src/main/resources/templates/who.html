@@ -1,13 +1,14 @@
-{{> head}}
+{% include "head.html" %}
 
 <body>
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+<!-- PLACEHOLDER DELLA NAVBAR -->
+
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <!-- CONTENUTI -->
 <div class="container">
@@ -158,8 +159,9 @@
         </div>
     </div>
 </div>
+
 <!-- PLACEHOLDER DEL FOOTER -->
-{{> footer}}
+{% include "footer.html" %}
 
 </script>
 </body>

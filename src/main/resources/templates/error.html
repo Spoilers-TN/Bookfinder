@@ -1,13 +1,12 @@
-{{> head}}
+{% include "head.html" %}
 
 <body>
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <center>
     <div class="container" style="margin-top: 50px; margin-bottom: 100px">
@@ -24,12 +23,6 @@
         </div>
     </div>
 </center>
-<script>
-    $(function () {
-        $("#ph-navbar").load("assets/snippets/navbar-in.html");
-    });
-
-</script>
 <!-- Carica un'emoji casuale ad ogni load -->
 <script type="text/javascript">
     const images = ["/assets/img/emoji/sad.webp",
@@ -60,6 +53,6 @@
     });
 
 </script>
-{{> footer}}
+{% include "footer.html" %}
 </body>
 </html>

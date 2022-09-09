@@ -2,7 +2,7 @@ package it.tn.spoilers.plugins.frontend
 
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.mustache.*
+import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
@@ -19,8 +19,8 @@ fun Application.configurePrivateFrontend() {
             val UserData = call.sessions.get<UserData>()
             if (UserSession != null) {
                 call.respond(
-                    MustacheContent(
-                        "profile.hbs", mapOf(
+                    PebbleContent(
+                        "profile.html", mapOf(
                             "user" to user(
                                 name = UserData?.givenName,
                                 surname = UserData?.familyName,
@@ -42,8 +42,8 @@ fun Application.configurePrivateFrontend() {
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
-                    MustacheContent(
-                        "settings.hbs", mapOf(
+                    PebbleContent(
+                        "settings.html", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
                                 surname = UserData.familyName,
@@ -65,8 +65,8 @@ fun Application.configurePrivateFrontend() {
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
-                    MustacheContent(
-                        "dashboard.hbs", mapOf(
+                    PebbleContent(
+                        "dashboard.html", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
                                 surname = UserData.familyName,
@@ -88,8 +88,8 @@ fun Application.configurePrivateFrontend() {
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
-                    MustacheContent(
-                        "newInsertion.hbs", mapOf(
+                    PebbleContent(
+                        "newInsertion.html", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
                                 surname = UserData.familyName,
@@ -111,8 +111,8 @@ fun Application.configurePrivateFrontend() {
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
-                    MustacheContent(
-                        "messages.hbs", mapOf(
+                    PebbleContent(
+                        "messages.html", mapOf(
                             "user" to user(
                                 name = UserData.givenName,
                                 surname = UserData.familyName,

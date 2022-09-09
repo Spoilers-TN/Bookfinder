@@ -1,13 +1,12 @@
-{{> head}}
+{% include "head.html" %}
 
 <body>
 
-{{#logged}}
-    {{> logged-navbar }}
-{{/logged}}
-{{^logged}}
-    {{> unlogged-navbar }}
-{{/logged}}
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
 
 <!-- CONTENUTI -->
 <!-- ANTEPRIMA DEL PROFILO -->
@@ -41,16 +40,15 @@
     <br>
 </section>
 <section id="recensioni">
-    {{> Snippet-Profile-Review }}
-
-    {{> Snippet-Profile-Review }}
+    {% include "Snippet-Profile-Review" %}
+    {% include "Snippet-Profile-Review" %}
 </section>
 <br>
 <br>
 
 
 <!-- PLACEHOLDER DEL FOOTER -->
-{{> footer}}
+{% include "footer.html" %}
 </body>
 
 </html>

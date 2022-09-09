@@ -8,6 +8,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.mustache.*
+import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
@@ -115,8 +116,8 @@ fun Application.configureAuthentication() {
             call.sessions.clear<UserSession>()
             call.sessions.clear<UserData>()
             call.respond(
-                MustacheContent(
-                    "logout.hbs",
+                PebbleContent(
+                    "logout.html",
                     mapOf("logged" to (call.sessions.get<UserData>() != null))
                 )
             )
@@ -125,8 +126,8 @@ fun Application.configureAuthentication() {
             call.sessions.clear<UserSession>()
             call.sessions.clear<UserData>()
             call.respond(
-                MustacheContent(
-                    "logout.hbs",
+                PebbleContent(
+                    "logout.html",
                     mapOf("logged" to (call.sessions.get<UserData>() != null))
                 )
             )
