@@ -3,11 +3,13 @@ package it.tn.spoilers
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import it.tn.spoilers.database.services.ReviewsService
 import it.tn.spoilers.extras.DisableLogging
 import it.tn.spoilers.extras.DisableMongoLogging
 import it.tn.spoilers.extras.DisableLogging
 import it.tn.spoilers.extras.EnableSentry
 import it.tn.spoilers.plugins.api.configureBooksApi
+import it.tn.spoilers.plugins.api.configureReviewsApi
 import it.tn.spoilers.plugins.api.configureSchoolsApi
 import it.tn.spoilers.plugins.api.configureUsersApi
 import it.tn.spoilers.plugins.frontend.*
@@ -35,6 +37,7 @@ fun main() {
         configureBooksApi()
         configureSchoolsApi()
         configureUsersApi()
+        configureReviewsApi()
         configurePublicFrontend()
         configurePrivateFrontend()
         log.info("[✓] Started Server - BookFinder")

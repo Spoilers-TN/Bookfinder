@@ -9,6 +9,7 @@ import io.ktor.server.sessions.*
 import it.tn.spoilers.data.UserData
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
+import it.tn.spoilers.database.services.ReviewsService
 
 
 fun Application.configurePrivateFrontend() {
@@ -29,7 +30,10 @@ fun Application.configurePrivateFrontend() {
                                 email = UserData?.email,
                                 realm = UserData?.hd,
                                 gsuite = UserData?.GSuiteUser
-                            ), "logged" to (call.sessions.get<UserData>() != null)
+                            ),
+                            "logged" to (call.sessions.get<UserData>() != null),
+                            "numReviews" to ReviewsService().findByRecipient(UserData?.sub.toString()).size,
+                            "reviews" to ReviewsService().findByRecipient(UserData?.sub.toString())
                         )
                     )
                 )

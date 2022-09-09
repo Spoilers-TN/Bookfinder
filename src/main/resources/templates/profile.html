@@ -18,12 +18,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-auto">
-                        <img alt="ImmagineProfilo" src="{{user.photo}}" class="rounded-circle"
+                        <img alt="ImmagineProfilo" src="{{user.photo}}?s=1024" class="rounded-circle"
                              style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
                     </div>
                     <div class="col">
                         <h2>{{user.name}} {{user.surname}}</h2>
-                        <p style="color: #0066CC; font-weight: bold">24 recensioni</p>
+                        <p style="color: #0066CC; font-weight: bold">{{numReviews}} recensioni</p>
                         <p>Email utente: {{user.email}}</p>
                         <p>Identificativo utente: {{user.id}}</p>
                         <p style="color: #cc7722"></p><i class="fa fa-solid fa-star"></i><i
@@ -40,8 +40,15 @@
     <br>
 </section>
 <section id="recensioni">
-    {% include "Snippet-Profile-Review.html" %}
-    {% include "Snippet-Profile-Review.html" %}
+    {% if numReviews > 0 %}
+        {% for review in reviews %}
+            {% include "Snippet-Profile-Review.html" %},
+        {% endfor %}
+    {% else %}
+    <center>
+        <p>L'Utente non dispone di recensioni</p>
+    </center>
+    {% endif %}
 </section>
 <br>
 <br>
