@@ -1,6 +1,5 @@
 package it.tn.spoilers.plugins.frontend
 
-import com.github.mustachejava.DefaultMustacheFactory
 import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import io.ktor.server.application.*
 import io.ktor.server.pebble.*
@@ -10,6 +9,7 @@ import io.ktor.server.sessions.*
 import it.tn.spoilers.data.UserData
 import it.tn.spoilers.data.book
 import it.tn.spoilers.data.user
+import it.tn.spoilers.database.services.BooksService
 
 fun Application.configurePublicFrontend() {
     log.info("[!] Starting Plugin - PublicFrontend.kt")
@@ -64,10 +64,8 @@ fun Application.configurePublicFrontend() {
                 respond(
                     PebbleContent(
                             "search.html", mapOf(
-                                "book" to book(
-                                    "/assets/img/general/notfound.webp",
-                                    "Mario Rossi", "The Lord of the Rings", "Come il governo italiano (distrutto)"
-                                ), "user" to user(
+                            "books" to BooksService().findAll(),
+                            "user" to user(
                                     name = UserData?.givenName,
                                     surname = UserData?.familyName,
                                     photo = UserData?.picture,
@@ -75,7 +73,8 @@ fun Application.configurePublicFrontend() {
                                     email = UserData?.email,
                                     realm = UserData?.hd,
                                     gsuite = UserData?.GSuiteUser
-                                ), "logged" to (sessions.get<UserData>() != null)
+                                ),
+                            "logged" to (sessions.get<UserData>() != null)
                             )
                         )
                     )

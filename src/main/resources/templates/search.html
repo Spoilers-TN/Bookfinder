@@ -327,9 +327,9 @@
 
     <div class="row gy-3">
 
-        {% include "Snippet-Book.html" %}
-        {% include "Snippet-Book.html" %}
-        {% include "Snippet-Book.html" %}
+        {% for book in books %}
+            {% include "Snippet-Book.html" %}
+        {% endfor %}
 
 
     </div>
@@ -338,9 +338,9 @@
 
     <div class="row gy-3">
 
-        {% include "Snippet-Book.html" %}
-        {% include "Snippet-Book.html" %}
-        {% include "Snippet-Book.html" %}
+        {% for book in books %}
+            {% include "Snippet-Book.html" %}
+        {% endfor %}
 
 
     </div>
