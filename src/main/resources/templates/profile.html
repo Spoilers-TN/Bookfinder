@@ -23,7 +23,14 @@
                     </div>
                     <div class="col">
                         <h2>{{user.name}} {{user.surname}}</h2>
-                        <p style="color: #0066CC; font-weight: bold">{{numReviews}} recensioni</p>
+                        <p style="color: #0066CC; font-weight: bold">
+                            {{numReviews}}
+                            {% if numReviews == 1 %}
+                                recensione
+                            {% else %}
+                                recensioni
+                            {% endif %}
+                            </p>
                         <p>Email utente: {{user.email}}</p>
                         <p>Identificativo utente: {{user.id}}</p>
                         <p style="color: #cc7722"></p><i class="fa fa-solid fa-star"></i><i

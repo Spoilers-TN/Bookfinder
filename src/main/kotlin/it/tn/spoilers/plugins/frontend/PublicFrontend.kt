@@ -63,77 +63,99 @@ fun Application.configurePublicFrontend() {
             with(call) {
                 respond(
                     PebbleContent(
-                            "search.html", mapOf(
+                        "search.html", mapOf(
                             "books" to BooksService().findAll(),
                             "user" to user(
-                                    name = UserData?.givenName,
-                                    surname = UserData?.familyName,
-                                    photo = UserData?.picture,
-                                    id = UserData?.sub,
-                                    email = UserData?.email,
-                                    realm = UserData?.hd,
-                                    gsuite = UserData?.GSuiteUser
-                                ),
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.sub,
+                                email = UserData?.email,
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
+                            ),
                             "logged" to (sessions.get<UserData>() != null)
-                            )
                         )
                     )
+                )
             }
         }
-        get("/terms") {
+        get("/search/{id}") {
             val UserData = call.sessions.get<UserData>()
-            call.respond(
-                PebbleContent(
-                    "terms.html", mapOf(
-                        "user" to user(
-                            name = UserData?.givenName,
-                            surname = UserData?.familyName,
-                            photo = UserData?.picture,
-                            id = UserData?.sub,
-                            email = UserData?.email,
-                            realm = UserData?.hd,
-                            gsuite = UserData?.GSuiteUser
-                        ), "logged" to (call.sessions.get<UserData>() != null)
+            with(call) {
+                respond(
+                    PebbleContent(
+                        "search.html", mapOf(
+                            "books" to BooksService().findByISBN(call.parameters["isbn"]!!.toLong()),
+                            "user" to user(
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.sub,
+                                email = UserData?.email,
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
+                            ),
+                            "logged" to (sessions.get<UserData>() != null)
+                        )
                     )
                 )
-            )
+            }
         }
-        get("/who") {
-            val UserData = call.sessions.get<UserData>()
-            call.respond(
-                PebbleContent(
-                    "who.html", mapOf(
-                        "user" to user(
-                            name = UserData?.givenName,
-                            surname = UserData?.familyName,
-                            photo = UserData?.picture,
-                            id = UserData?.sub,
-                            email = UserData?.email,
-                            realm = UserData?.hd,
-                            gsuite = UserData?.GSuiteUser
-                        ), "logged" to (call.sessions.get<UserData>() != null)
+            get("/terms") {
+                val UserData = call.sessions.get<UserData>()
+                call.respond(
+                    PebbleContent(
+                        "terms.html", mapOf(
+                            "user" to user(
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.sub,
+                                email = UserData?.email,
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
+                            ), "logged" to (call.sessions.get<UserData>() != null)
+                        )
                     )
                 )
-            )
-        }
-        get("/policy") {
-            val UserData = call.sessions.get<UserData>()
-            call.respond(
-                PebbleContent(
-                    "policy.html", mapOf(
-                        "user" to user(
-                            name = UserData?.givenName,
-                            surname = UserData?.familyName,
-                            photo = UserData?.picture,
-                            id = UserData?.sub,
-                            email = UserData?.email,
-                            realm = UserData?.hd,
-                            gsuite = UserData?.GSuiteUser
-                        ), "logged" to (call.sessions.get<UserData>() != null)
+            }
+            get("/who") {
+                val UserData = call.sessions.get<UserData>()
+                call.respond(
+                    PebbleContent(
+                        "who.html", mapOf(
+                            "user" to user(
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.sub,
+                                email = UserData?.email,
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
+                            ), "logged" to (call.sessions.get<UserData>() != null)
+                        )
                     )
                 )
-            )
+            }
+            get("/policy") {
+                val UserData = call.sessions.get<UserData>()
+                call.respond(
+                    PebbleContent(
+                        "policy.html", mapOf(
+                            "user" to user(
+                                name = UserData?.givenName,
+                                surname = UserData?.familyName,
+                                photo = UserData?.picture,
+                                id = UserData?.sub,
+                                email = UserData?.email,
+                                realm = UserData?.hd,
+                                gsuite = UserData?.GSuiteUser
+                            ), "logged" to (call.sessions.get<UserData>() != null)
+                        )
+                    )
+                )
+            }
         }
-    }
     log.info("[✓] Started Plugin - PublicFrontend.kt")
 }
