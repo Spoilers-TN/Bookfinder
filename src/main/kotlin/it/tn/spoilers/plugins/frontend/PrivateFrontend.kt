@@ -91,7 +91,7 @@ fun Application.configurePrivateFrontend() {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
-        get("/NewInsertion") {
+        get("/insertion/new") {
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {

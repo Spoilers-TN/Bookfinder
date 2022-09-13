@@ -11,14 +11,18 @@ class BooksService {
     fun create(user: Books): Id<Books>?  {
         booksCollection.insertOne(user)
         return user.id
+        client.close()
     }
 
-    fun findAll(): List<Books> =
-        booksCollection.find().toList()
+    fun findAll(): List<Books> {
+        return booksCollection.find().toList()
+        client.close()
+    }
 
     fun findByISBN(isbn: Long): List<Books> {
         val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
         return booksCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
+        client.close()
     }
 }

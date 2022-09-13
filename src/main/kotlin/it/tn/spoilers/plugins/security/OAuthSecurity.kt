@@ -81,14 +81,13 @@ fun Application.configureAuthentication() {
                     )
 
                 } else {
-                    val UserDataFromJson = Json{ignoreUnknownKeys = true}.decodeFromString<UserInfo>(json)
+                    val UserDataFromJson = Json{ignoreUnknownKeys = true;}.decodeFromString<UserInfo>(json)
                     service.createIfNotPresent(CastNormalUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
                         service.ReturnUserByID(UserDataFromJson.sub)
                     )
                 }
-
                 call.respondRedirect("/dashboard")
             }
         }

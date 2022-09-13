@@ -11,14 +11,18 @@ class SchoolService {
     fun create(school: School): Id<School>?  {
         schoolCollection.insertOne(school)
         return school.id
+        client.close()
     }
 
-    fun findAll(): List<School> =
-        schoolCollection.find().toList()
+    fun findAll(): List<School> {
+        return schoolCollection.find().toList()
+        client.close()
+    }
 
     fun findByCode(code: String): List<School> {
         val caseSensitiveTypeSafeFilter = School::School_Code regex code
         return schoolCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
+        client.close()
     }
 }

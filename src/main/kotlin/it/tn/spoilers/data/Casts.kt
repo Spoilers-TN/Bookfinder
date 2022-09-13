@@ -10,8 +10,8 @@ fun CastGsuiteUserToUserDb(InputFromUser: UserInfoGSuite) : Users =
         InputFromUser.sub,
         generateUUID(),
         InputFromUser.hd,
-        InputFromUser.givenName,
-        InputFromUser.familyName.toString(),
+        InputFromUser.email,
+        ifNullPutVoidString(InputFromUser.familyName.toString()),
         "",
         "https://www.gravatar.com/avatar/${ToMD5(InputFromUser.email)}",
         InputFromUser.email,
@@ -26,10 +26,14 @@ fun CastNormalUserToUserDb(InputFromUser: UserInfo) : Users =
         generateUUID(),
         "gmail.com",
         InputFromUser.givenName,
-        InputFromUser.familyName.toString(),
+        ifNullPutVoidString(InputFromUser.familyName.toString()),
         "",
         "https://www.gravatar.com/avatar/${ToMD5(InputFromUser.email)}",
         InputFromUser.email,
         InputFromUser.name,
         false
     )
+
+fun ifNullPutVoidString(input: String?) : String {
+    return if (input == null) "" else input
+}

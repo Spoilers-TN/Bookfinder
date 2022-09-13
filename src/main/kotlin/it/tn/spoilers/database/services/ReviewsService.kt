@@ -15,23 +15,27 @@ class ReviewsService {
     fun create(review: Reviews): Id<Reviews>?  {
         reviewsCollection.insertOne(review)
         return review.id
+        client.close()
     }
 
     fun assistedCreate(title: String, message: String, sender: String, recipient: String): Id<Reviews>?  {
         val review = Reviews(null, generateUUID(), title, message, sender, recipient, "","")
         this.create(review)
         return review.id
+        client.close()
     }
 
     fun findByRecipient(userID: String): List<Reviews> {
         val caseSensitiveTypeSafeFilter = Reviews::Review_Recipient eq userID
         return reviewsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
+        client.close()
     }
 
     fun findBySender(userID: String): List<Reviews> {
         val caseSensitiveTypeSafeFilter = Reviews::Review_Sender eq userID
         return reviewsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
+        client.close()
     }
 }
