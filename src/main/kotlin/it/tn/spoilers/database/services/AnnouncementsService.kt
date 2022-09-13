@@ -5,7 +5,7 @@ import it.tn.spoilers.database.models.Announcements
 import org.litote.kmongo.*
 
 class AnnouncementsService {
-    private val client = KMongo.createClient("")
+    private val client = KMongo.createClient("mongodb+srv://<username>:<password>@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
     private val database = client.getDatabase("bookfinder")
     private val announcementsCollection = database.getCollection<Announcements>("Announcements")
 

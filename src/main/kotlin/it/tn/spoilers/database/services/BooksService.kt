@@ -4,7 +4,7 @@ import it.tn.spoilers.database.models.Books
 import org.litote.kmongo.*
 
 class BooksService {
-    private val client = KMongo.createClient("")
+    private val client = KMongo.createClient("mongodb+srv://<username>:<password>@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
     private val database = client.getDatabase("bookfinder")
     private val booksCollection = database.getCollection<Books>("Books")
 
