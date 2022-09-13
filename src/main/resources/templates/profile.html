@@ -47,16 +47,21 @@
     <br>
 </section>
 <section id="recensioni">
-    {% if numReviews > 0 %}
-        {% for review in reviews %}
+    <div class="card" style="margin-top: 20px">
+        <div class="card-body">
+            {% if numReviews > 0 %}
+            {% for review in reviews %}
             {% include "Snippet-Profile-Review.html" %},
-        {% endfor %}
-    {% else %}
-    <center>
-        <p>L'Utente non dispone di recensioni</p>
-    </center>
-    {% endif %}
+            {% endfor %}
+            {% else %}
+            <center>
+                <p>L'Utente non dispone di recensioni</p>
+            </center>
+            {% endif %}
+        </div>
+    </div>
 </section>
+
 <br>
 <br>
 
