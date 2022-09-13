@@ -1,0 +1,72 @@
+{% include "head.html" %}
+
+<body>
+
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
+
+<!-- CONTENUTI -->
+<!-- ANTEPRIMA DEL PROFILO -->
+<section id="profile" style="background: #F6F6F6;">
+  <br>
+  <br>
+  <div class="container" style="margin-top: 25px">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-auto">
+            <img alt="ImmagineProfilo" src="{{publicuser.photo}}?s=1024" class="rounded-circle"
+                 style="width: 170px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+          </div>
+          <div class="col">
+            <h2>{{publicuser.name}} {{publicuser.surname}}</h2>
+            <p style="color: #0066CC; font-weight: bold">
+              {{numReviews}}
+              {% if numReviews == 1 %}
+              recensione
+              {% else %}
+              recensioni
+              {% endif %}
+            </p>
+            <p>Identificativo utente: {{publicuser.uuid}}</p>
+            <p style="color: #cc7722"></p><i class="fa fa-solid fa-star"></i><i
+                  class="fa fa-solid fa-star"></i><i
+                  class="fa fa-solid fa-star"></i><i class="fas fa-star-half-alt"></i><i
+                  class="far fa-star"></i></p>
+            <font size="3">Biografia profilo: </font>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</section>
+<section id="recensioni">
+  <div class="card" style="margin-top: 20px">
+    <div class="card-body">
+      {% if numReviews > 0 %}
+      {% for review in reviews %}
+      {% include "Snippet-Profile-Review.html" %},
+      {% endfor %}
+      {% else %}
+      <center>
+        <p>L'Utente non dispone di recensioni</p>
+      </center>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<br>
+<br>
+
+
+<!-- PLACEHOLDER DEL FOOTER -->
+{% include "footer.html" %}
+</body>
+
+</html>

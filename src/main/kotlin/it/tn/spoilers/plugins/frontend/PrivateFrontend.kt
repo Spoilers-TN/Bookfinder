@@ -9,6 +9,7 @@ import io.ktor.server.sessions.*
 import it.tn.spoilers.data.UserData
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
+import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.ReviewsService
 
 
@@ -17,23 +18,24 @@ fun Application.configurePrivateFrontend() {
     routing {
         get("/profile") {
             val UserSession = call.sessions.get<UserSession>()
-            val UserData = call.sessions.get<UserData>()
-            if (UserSession != null) {
+            val UserData = call.sessions.get<UsersData>()
+            if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
                         "profile.html", mapOf(
                             "user" to user(
-                                name = UserData?.givenName,
-                                surname = UserData?.familyName,
-                                photo = UserData?.picture,
-                                id = UserData?.sub,
-                                email = UserData?.email,
-                                realm = UserData?.hd,
-                                gsuite = UserData?.GSuiteUser
+                                name = UserData.User_Name,
+                                uuid = UserData.User_UUID,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite
                             ),
-                            "logged" to (call.sessions.get<UserData>() != null),
-                            "numReviews" to ReviewsService().findByRecipient(UserData?.sub.toString()).size,
-                            "reviews" to ReviewsService().findByRecipient(UserData?.sub.toString())
+                            "logged" to (call.sessions.get<UsersData>() != null),
+                            "numReviews" to ReviewsService().findByRecipient(UserData.User_UUID).size,
+                            "reviews" to ReviewsService().findByRecipient(UserData.User_UUID)
                         )
                     )
                 )
@@ -42,21 +44,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/settings") {
-            val UserData = call.sessions.get<UserData>()
+            val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
                         "settings.html", mapOf(
                             "user" to user(
-                                name = UserData.givenName,
-                                surname = UserData.familyName,
-                                photo = UserData.picture,
-                                id = UserData.sub,
-                                email = UserData.email,
-                                realm = UserData.hd,
-                                gsuite = UserData.GSuiteUser
-                            ), "logged" to (call.sessions.get<UserData>() != null)
+                                name = UserData.User_Name,
+                                uuid = UserData.User_UUID,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite
+                            ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
                 )
@@ -65,21 +68,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/dashboard") {
-            val UserData = call.sessions.get<UserData>()
+            val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
                         "dashboard.html", mapOf(
                             "user" to user(
-                                name = UserData.givenName,
-                                surname = UserData.familyName,
-                                photo = UserData.picture,
-                                id = UserData.sub,
-                                email = UserData.email,
-                                realm = UserData.hd,
-                                gsuite = UserData.GSuiteUser
-                            ), "logged" to (call.sessions.get<UserData>() != null)
+                                name = UserData.User_Name,
+                                uuid = UserData.User_UUID,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite
+                            ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
                 )
@@ -88,21 +92,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/NewInsertion") {
-            val UserData = call.sessions.get<UserData>()
+            val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
                         "newInsertion.html", mapOf(
                             "user" to user(
-                                name = UserData.givenName,
-                                surname = UserData.familyName,
-                                photo = UserData.picture,
-                                id = UserData.sub,
-                                email = UserData.email,
-                                realm = UserData.hd,
-                                gsuite = UserData.GSuiteUser
-                            ), "logged" to (call.sessions.get<UserData>() != null)
+                                name = UserData.User_Name,
+                                uuid = UserData.User_UUID,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite
+                            ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
                 )
@@ -111,21 +116,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/messaggi") {
-            val UserData = call.sessions.get<UserData>()
+            val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
                         "messages.html", mapOf(
                             "user" to user(
-                                name = UserData.givenName,
-                                surname = UserData.familyName,
-                                photo = UserData.picture,
-                                id = UserData.sub,
-                                email = UserData.email,
-                                realm = UserData.hd,
-                                gsuite = UserData.GSuiteUser
-                            ), "logged" to (call.sessions.get<UserData>() != null)
+                                name = UserData.User_Name,
+                                uuid = UserData.User_UUID,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite
+                            ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
                 )

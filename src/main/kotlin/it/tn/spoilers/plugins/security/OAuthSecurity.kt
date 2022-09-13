@@ -13,6 +13,7 @@ import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import it.tn.spoilers.data.*
 import it.tn.spoilers.database.models.Users
+import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.UsersService
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -31,7 +32,7 @@ fun Application.configureAuthentication() {
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
         }
-        cookie<UserData>("user_data") {
+        cookie<UsersData>("user_data") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
             cookie.path = "/"
@@ -76,18 +77,7 @@ fun Application.configureAuthentication() {
                     service.createIfNotPresent(CastGsuiteUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
-                        UserData(
-                            UserDataFromJson.sub,
-                            UserDataFromJson.name,
-                            UserDataFromJson.givenName,
-                            UserDataFromJson.familyName,
-                            "https://www.gravatar.com/avatar/"+ ToMD5(UserDataFromJson.email),
-                            UserDataFromJson.email,
-                            UserDataFromJson.email_verified,
-                            UserDataFromJson.locale,
-                            UserDataFromJson.hd,
-                            GSuiteUser = true
-                        )
+                        service.ReturnUserByID(UserDataFromJson.sub)
                     )
 
                 } else {
@@ -95,18 +85,7 @@ fun Application.configureAuthentication() {
                     service.createIfNotPresent(CastNormalUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
-                        UserData(
-                            UserDataFromJson.sub,
-                            UserDataFromJson.name,
-                            UserDataFromJson.givenName,
-                            UserDataFromJson.familyName,
-                            "https://www.gravatar.com/avatar/"+ ToMD5(UserDataFromJson.email),
-                            UserDataFromJson.email,
-                            UserDataFromJson.email_verified,
-                            UserDataFromJson.locale,
-                            "gmail.com",
-                            GSuiteUser = false
-                        )
+                        service.ReturnUserByID(UserDataFromJson.sub)
                     )
                 }
 
@@ -115,21 +94,21 @@ fun Application.configureAuthentication() {
         }
         get("/logout") {
             call.sessions.clear<UserSession>()
-            call.sessions.clear<UserData>()
+            call.sessions.clear<UsersData>()
             call.respond(
                 PebbleContent(
                     "logout.html",
-                    mapOf("logged" to (call.sessions.get<UserData>() != null))
+                    mapOf("logged" to (call.sessions.get<UsersData>() != null))
                 )
             )
         }
         get("/logoff") {
             call.sessions.clear<UserSession>()
-            call.sessions.clear<UserData>()
+            call.sessions.clear<UsersData>()
             call.respond(
                 PebbleContent(
                     "logout.html",
-                    mapOf("logged" to (call.sessions.get<UserData>() != null))
+                    mapOf("logged" to (call.sessions.get<UsersData>() != null))
                 )
             )
         }

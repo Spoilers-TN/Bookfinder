@@ -2,6 +2,8 @@ package it.tn.spoilers.database.services
 
 import com.mongodb.client.FindIterable
 import it.tn.spoilers.database.models.Users
+import it.tn.spoilers.database.models.UsersData
+import it.tn.spoilers.plugins.database.toUsersData
 import org.litote.kmongo.*
 
 class UsersService {
@@ -47,6 +49,16 @@ class UsersService {
         val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
         return usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
+    }
+
+    fun ReturnUserByID(googleID: String): UsersData {
+        val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
+        return usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
+    }
+
+    fun ReturnUserByUUID(uuid: String): UsersData {
+        val caseSensitiveTypeSafeFilter = Users::User_UUID regex uuid
+        return usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
     }
 
     fun checkPresenceByGoogleID(googleID: String): Boolean {

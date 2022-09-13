@@ -2,6 +2,7 @@ package it.tn.spoilers.data
 
 import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.database.models.UsersData
+import it.tn.spoilers.extras.generateUUID
 import it.tn.spoilers.plugins.database.toUsers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -28,9 +29,17 @@ data class user(
     val surname: String?,
     val photo: String?,
     val id: String?,
+    val uuid: String?,
     val email: String?,
     val realm: String?,
     val gsuite: Boolean?
+)
+
+data class guestuser(
+    val name: String?,
+    val surname: String?,
+    val photo: String?,
+    val uuid: String?,
 )
 
 @Serializable
@@ -47,10 +56,12 @@ data class UserInfo(
     fun toData(): Users =
         Users(
             User_ID = this.sub,
+            User_UUID = generateUUID(),
             User_School_Domain = "gmail.com",
             User_Name = this.givenName,
             User_Surname = this.familyName.toString(),
             User_Biog = "",
+            User_Photo = "https://www.gravatar.com/avatar/${ToMD5(this.email)}",
             User_Email = this.email,
             User_FullName = this.name,
             User_GSuite = false
@@ -83,10 +94,12 @@ data class Error(val code: String, val descr: String, val meme: String)
 fun UserInfo.toUsers(): Users =
     Users(
         User_ID = this.sub,
+        User_UUID = generateUUID(),
         User_School_Domain = "gmail.com",
         User_Name = this.givenName,
         User_Surname = this.familyName.toString(),
         User_Biog = "",
+        User_Photo = "https://www.gravatar.com/avatar/${ToMD5(this.email)}",
         User_Email = this.email,
         User_FullName = this.name,
         User_GSuite = false

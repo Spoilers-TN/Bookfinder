@@ -9,6 +9,8 @@ fun Reviews.toReviewsData(): ReviewsData =
         Review_Title = this.Review_Title,
         Review_Message = this.Review_Message,
         Review_Sender = this.Review_Sender,
+        Review_Sender_Name = this.Review_Sender_Name,
+        Review_Sender_Photo = this.Review_Sender_Photo,
         Review_Recipient = this.Review_Recipient
     )
 
@@ -18,5 +20,7 @@ fun ReviewsData.toReviews(): Reviews =
         Review_Title = this.Review_Title,
         Review_Message = this.Review_Message,
         Review_Sender = this.Review_Sender,
+        Review_Sender_Name = this.Review_Sender_Name,
+        Review_Sender_Photo = this.Review_Sender_Photo,
         Review_Recipient = this.Review_Recipient
     )

@@ -2,6 +2,6 @@ package it.tn.spoilers.extras
 
 import java.util.*
 
-fun GenerateUUID(): String {
+fun generateUUID(): String {
     return UUID.randomUUID().toString()
 }

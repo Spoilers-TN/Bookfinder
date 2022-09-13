@@ -1,7 +1,7 @@
 package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Reviews
-import it.tn.spoilers.extras.GenerateUUID
+import it.tn.spoilers.extras.generateUUID
 import org.litote.kmongo.Id
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
@@ -18,7 +18,7 @@ class ReviewsService {
     }
 
     fun assistedCreate(title: String, message: String, sender: String, recipient: String): Id<Reviews>?  {
-        val review = Reviews(null, GenerateUUID(), title, message, sender, recipient)
+        val review = Reviews(null, generateUUID(), title, message, sender, recipient, "","")
         this.create(review)
         return review.id
     }
@@ -34,5 +34,4 @@ class ReviewsService {
         return reviewsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
     }
-
 }

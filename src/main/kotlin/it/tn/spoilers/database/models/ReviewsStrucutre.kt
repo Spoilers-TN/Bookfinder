@@ -12,7 +12,9 @@ data class Reviews(
     val Review_Title: String,
     val Review_Message: String,
     val Review_Sender: String,
-    val Review_Recipient: String
+    val Review_Recipient: String,
+    val Review_Sender_Name: String,
+    val Review_Sender_Photo: String
 )
 @Serializable
 data class ReviewsData(
@@ -21,5 +23,7 @@ data class ReviewsData(
     val Review_Title: String,
     val Review_Message: String,
     val Review_Sender: String,
-    val Review_Recipient: String
+    val Review_Recipient: String,
+    val Review_Sender_Name: String,
+    val Review_Sender_Photo: String
 )

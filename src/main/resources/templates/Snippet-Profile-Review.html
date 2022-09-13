@@ -4,11 +4,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-auto">
-                    <img alt="ImmagineProfilo" src="" class="rounded-circle"
+                    <img alt="ImmagineProfilo" src="{{review.Review_Sender_Photo}}" class="rounded-circle"
                          style="width: 80px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
                 </div>
                 <div class="col-auto">
-                    <h3>{{review.Review_Sender}}</h3>
+                    <h3>
+                        <a href="/user/{{review.Review_Sender}}">
+                            {{review.Review_Sender_Name}}
+                        </a>
+                    </h3>
                     <p style="color: #cc7722"></p><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
                         class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></p>
                 </div>
