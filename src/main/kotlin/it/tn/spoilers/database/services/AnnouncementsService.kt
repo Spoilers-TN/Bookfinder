@@ -14,13 +14,13 @@ class AnnouncementsService {
 
     fun create(user: Announcements): Id<Announcements>? {
         announcementsCollection.insertOne(user)
-        client.close()
+        //client.close()
         return user.id
     }
 
     fun findAll(): List<Announcements> {
         val result = announcementsCollection.find().toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -28,7 +28,7 @@ class AnnouncementsService {
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_ID eq id
         val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -36,7 +36,7 @@ class AnnouncementsService {
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_Book eq isbn
         val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -44,7 +44,7 @@ class AnnouncementsService {
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_User eq UserID
         val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 }

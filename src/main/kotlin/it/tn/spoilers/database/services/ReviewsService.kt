@@ -14,7 +14,7 @@ class ReviewsService {
 
     fun create(review: Reviews): Id<Reviews>? {
         reviewsCollection.insertOne(review)
-        client.close()
+        //client.close()
         return review.id
 
     }
@@ -22,7 +22,7 @@ class ReviewsService {
     fun assistedCreate(title: String, message: String, sender: String, recipient: String): Id<Reviews>? {
         val review = Reviews(null, generateUUID(), title, message, sender, recipient, "", "")
         this.create(review)
-        client.close()
+        //client.close()
         return review.id
 
     }
@@ -31,7 +31,7 @@ class ReviewsService {
         val caseSensitiveTypeSafeFilter = Reviews::Review_Recipient eq userID
         val result = reviewsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -39,7 +39,7 @@ class ReviewsService {
         val caseSensitiveTypeSafeFilter = Reviews::Review_Sender eq userID
         val result = reviewsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 }

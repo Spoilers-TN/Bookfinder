@@ -25,6 +25,8 @@ repositories {
 }
 
 dependencies {
+    // SendGrid Stuff
+    implementation("com.sendgrid:sendgrid-java:4.9.3")
     // Sentry Stuff
     implementation ("io.sentry:sentry:6.4.1")
     // MongoDB Stuff

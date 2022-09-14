@@ -13,13 +13,13 @@ class SchoolService {
 
     fun create(school: School): Id<School>? {
         schoolCollection.insertOne(school)
-        client.close()
+        //client.close()
         return school.id
     }
 
     fun findAll(): List<School> {
         val result = schoolCollection.find().toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -27,7 +27,7 @@ class SchoolService {
         val caseSensitiveTypeSafeFilter = School::School_Code regex code
         val result = schoolCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 }

@@ -2,6 +2,7 @@ package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.database.models.UsersData
+import it.tn.spoilers.notifications.email.EmailSender
 import it.tn.spoilers.plugins.database.toUsersData
 import org.litote.kmongo.*
 
@@ -12,18 +13,21 @@ class UsersService {
 
     fun createIfNotPresent(user: Users): Id<Users>? {
         if (checkPresenceByGoogleID(user.User_ID)) {
-            client.close()
+            //client.close()
             return null
         } else {
             usersCollection.insertOne(user)
-            client.close()
+            EmailSender().sendEmail(user.User_Email, "Benvenuto su BookFinder!",
+                "Si, effettivamente dovrei cercare un testo migliore ma shh, Benvenuto su bookfinder!\n" +
+                        "Ps: Puoi vedere il tuo bellissimo profilo su https://bookfinder.spoilers.tn.it/user/${this.ReturnUserByID(user.User_ID).User_UUID}")
+            //client.close()
             return user.id
         }
     }
 
     fun create(user: Users): Id<Users>? {
         usersCollection.insertOne(user)
-        client.close()
+        //client.close()
         return user.id
     }
 
@@ -32,12 +36,12 @@ class UsersService {
             Users::User_ID eq userID,
             setValue(Users::User_Biog, userBio)
         )
-        client.close()
+        //client.close()
     }
 
     fun findAll(): List<Users> {
         val result = usersCollection.find().toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -46,7 +50,7 @@ class UsersService {
         val caseSensitiveTypeSafeFilter = Users::User_Email regex email
         val result = usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -54,7 +58,7 @@ class UsersService {
         val caseSensitiveTypeSafeFilter = Users::User_School_Domain regex domain
         val result = usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -62,21 +66,21 @@ class UsersService {
         val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
         val result = usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        client.close()
+        //client.close()
         return result
     }
 
     fun ReturnUserByID(googleID: String): UsersData {
         val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
         val result = usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
-        client.close()
+        //client.close()
         return result
     }
 
     fun ReturnUserByUUID(uuid: String): UsersData {
         val caseSensitiveTypeSafeFilter = Users::User_UUID regex uuid
         val result = usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
-        client.close()
+        //client.close()
         return result
     }
 
@@ -84,14 +88,14 @@ class UsersService {
         try {
             val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
             if (usersCollection.find(caseSensitiveTypeSafeFilter).toList().isNotEmpty()) {
-                client.close()
+                //client.close()
                 return true
             }
         } catch (e: Exception) {
-            client.close()
+            //client.close()
             return false
         }
-        client.close()
+        //client.close()
         return false
     }
 }
