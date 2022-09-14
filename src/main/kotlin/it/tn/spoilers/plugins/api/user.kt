@@ -23,7 +23,10 @@ fun Application.configureUsersApi() {
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
-                call.respondText(Json.encodeToString(service.findByGoogleID(UserData.User_ID)), contentType = ContentType.Application.Json)
+                call.respondText(
+                    Json.encodeToString(service.findByGoogleID(UserData.User_ID)),
+                    contentType = ContentType.Application.Json
+                )
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }

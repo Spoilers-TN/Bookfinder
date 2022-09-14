@@ -1,6 +1,7 @@
 package it.tn.spoilers.plugins.security
 
 import io.ktor.client.*
+import io.ktor.client.call.body
 import io.ktor.client.engine.apache.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -73,7 +74,7 @@ fun Application.configureAuthentication() {
                     header("Authorization", "Bearer ${principal.accessToken}")
                 }.bodyAsText()
                 if (json.contains("hd")) {
-                    val UserDataFromJson = Json{ignoreUnknownKeys = true}.decodeFromString<UserInfoGSuite>(json)
+                    val UserDataFromJson = Json { ignoreUnknownKeys = true }.decodeFromString<UserInfoGSuite>(json)
                     service.createIfNotPresent(CastGsuiteUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(
@@ -81,7 +82,7 @@ fun Application.configureAuthentication() {
                     )
 
                 } else {
-                    val UserDataFromJson = Json{ignoreUnknownKeys = true;}.decodeFromString<UserInfo>(json)
+                    val UserDataFromJson = Json { ignoreUnknownKeys = true; }.decodeFromString<UserInfo>(json)
                     service.createIfNotPresent(CastNormalUserToUserDb(UserDataFromJson))
                     call.sessions.set(UserSession(principal.accessToken))
                     call.sessions.set(

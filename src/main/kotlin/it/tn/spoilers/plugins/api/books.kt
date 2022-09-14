@@ -16,10 +16,10 @@ fun Application.configureBooksApi() {
 
     routing {
         get("/api/books/list") {
-                val BookList =
-                    service.findAll()
-                        .map(Books::toBooksData)
-                call.respondText(Json.encodeToString(BookList), contentType = ContentType.Application.Json)
+            val BookList =
+                service.findAll()
+                    .map(Books::toBooksData)
+            call.respondText(Json.encodeToString(BookList), contentType = ContentType.Application.Json)
         }
         get("/api/books/isbn/{isbn}") {
             val id = call.parameters["isbn"]!!.toLong()

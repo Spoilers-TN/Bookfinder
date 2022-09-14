@@ -15,11 +15,17 @@ fun Application.configureReviewsApi() {
     routing {
         get("/api/reviews/{UserID}/recived") {
             val UserID = call.parameters["UserID"].toString()
-            call.respondText(Json.encodeToString(service.findByRecipient(UserID)), contentType = ContentType.Application.Json)
+            call.respondText(
+                Json.encodeToString(service.findByRecipient(UserID)),
+                contentType = ContentType.Application.Json
+            )
         }
         get("/api/reviews/{UserID}/sended") {
             val UserID = call.parameters["UserID"].toString()
-            call.respondText(Json.encodeToString(service.findBySender(UserID)), contentType = ContentType.Application.Json)
+            call.respondText(
+                Json.encodeToString(service.findBySender(UserID)),
+                contentType = ContentType.Application.Json
+            )
         }
 
     }
