@@ -1,6 +1,5 @@
 package it.tn.spoilers.database.services
 
-import com.mongodb.client.FindIterable
 import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.plugins.database.toUsersData
@@ -11,24 +10,24 @@ class UsersService {
     private val database = client.getDatabase("bookfinder")
     private val usersCollection = database.getCollection<Users>("Users")
 
-    fun createIfNotPresent(user: Users): Id<Users>?  {
+    fun createIfNotPresent(user: Users): Id<Users>? {
         if (checkPresenceByGoogleID(user.User_ID)) {
-            return null
             client.close()
+            return null
         } else {
             usersCollection.insertOne(user)
-            return user.id
             client.close()
+            return user.id
         }
     }
 
-    fun create(user: Users): Id<Users>?  {
+    fun create(user: Users): Id<Users>? {
         usersCollection.insertOne(user)
-        return user.id
         client.close()
+        return user.id
     }
 
-    fun updateUserBio(userID: String, userBio: String){
+    fun updateUserBio(userID: String, userBio: String) {
         usersCollection.updateOne(
             Users::User_ID eq userID,
             setValue(Users::User_Biog, userBio)
@@ -37,54 +36,62 @@ class UsersService {
     }
 
     fun findAll(): List<Users> {
-        return usersCollection.find().toList()
+        val result = usersCollection.find().toList()
         client.close()
+        return result
     }
 
 
     fun findByEmail(email: String): List<Users> {
         val caseSensitiveTypeSafeFilter = Users::User_Email regex email
-        return usersCollection.find(caseSensitiveTypeSafeFilter)
+        val result = usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
         client.close()
+        return result
     }
+
     fun findByDomain(domain: String): List<Users> {
         val caseSensitiveTypeSafeFilter = Users::User_School_Domain regex domain
-        return usersCollection.find(caseSensitiveTypeSafeFilter)
+        val result = usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
         client.close()
+        return result
     }
+
     fun findByGoogleID(googleID: String): List<Users> {
         val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
-        return usersCollection.find(caseSensitiveTypeSafeFilter)
+        val result = usersCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
         client.close()
+        return result
     }
 
     fun ReturnUserByID(googleID: String): UsersData {
         val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
-        return usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
+        val result = usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
         client.close()
+        return result
     }
 
     fun ReturnUserByUUID(uuid: String): UsersData {
         val caseSensitiveTypeSafeFilter = Users::User_UUID regex uuid
-        return usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
+        val result = usersCollection.findOne(caseSensitiveTypeSafeFilter)!!.toUsersData()
         client.close()
+        return result
     }
 
     fun checkPresenceByGoogleID(googleID: String): Boolean {
         try {
             val caseSensitiveTypeSafeFilter = Users::User_ID regex googleID
-            if(usersCollection.find(caseSensitiveTypeSafeFilter).toList().isNotEmpty()) {
-                return true
+            if (usersCollection.find(caseSensitiveTypeSafeFilter).toList().isNotEmpty()) {
                 client.close()
+                return true
             }
         } catch (e: Exception) {
-            return false
             client.close()
+            return false
         }
-        return false
         client.close()
+        return false
     }
 }
