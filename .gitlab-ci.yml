@@ -18,7 +18,7 @@
 
 stages:          # List of stages for jobs, and their order of execution
   - build
-  - test
+#  - test
 
 
 image: gradle:alpine
@@ -45,14 +45,14 @@ build:
       - build
       - .gradle
 
-test:
-  stage: test
-  script: gradle test
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - build
-      - .gradle
+# test:
+#  stage: test
+#  script: gradle test
+#  cache:
+#    key: "$CI_COMMIT_REF_NAME"
+#    policy: pull
+#    paths:
+#      - build
+#      - .gradle
 
 
