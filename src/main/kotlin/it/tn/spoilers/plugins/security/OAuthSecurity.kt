@@ -12,6 +12,7 @@ import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import io.ktor.util.*
 import it.tn.spoilers.data.*
 import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.database.models.UsersData
@@ -27,17 +28,21 @@ fun Application.configureAuthentication() {
 
 
     install(Sessions) {
+        val secretSignKey = hex("")
+        val secretEncryptKey = hex("")
         cookie<UserSession>("user_session") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
+            transform(SessionTransportTransformerEncrypt(secretEncryptKey, secretSignKey))
         }
         cookie<UsersData>("user_data") {
             cookie.secure = true
             cookie.domain = "bookfinder.spoilers.tn.it"
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
+            transform(SessionTransportTransformerEncrypt(secretEncryptKey, secretSignKey))
         }
     }
     install(Authentication) {

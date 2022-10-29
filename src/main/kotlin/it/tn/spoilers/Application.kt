@@ -21,7 +21,7 @@ fun main() {
     DisableMongoLogging()
     EnableSentry()
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        log.info("[!] Starting Server - BookFinder - v2022.9.03-Alpha")
+        log.info("[!] Starting Server - BookFinder - v2022.9.19-Alpha")
         configureRouting()
         configureAuthentication()
         configureErrors()

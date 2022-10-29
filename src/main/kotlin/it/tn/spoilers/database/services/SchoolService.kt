@@ -7,7 +7,8 @@ import org.litote.kmongo.getCollection
 import org.litote.kmongo.regex
 
 class SchoolService {
-    private val client = KMongo.createClient("mongodb+srv://bookfinder:BeJbK4clinNm8J41@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
+    private val client =
+        KMongo.createClient("mongodb+srv://bookfinder:BeJbK4clinNm8J41@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
     private val database = client.getDatabase("bookfinder")
     private val schoolCollection = database.getCollection<School>("School")
 
