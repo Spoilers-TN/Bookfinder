@@ -7,7 +7,7 @@ import org.litote.kmongo.eq
 import org.litote.kmongo.getCollection
 
 class BooksService {
-    private val client = KMongo.createClient("mongodb+srv://<username>:<password>@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
+    private val client = KMongo.createClient("")
     private val database = client.getDatabase("bookfinder")
     private val booksCollection = database.getCollection<Books>("Books")
 

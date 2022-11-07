@@ -1,5 +1,6 @@
 package it.tn.spoilers
 
+import io.ktor.client.call.body
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
