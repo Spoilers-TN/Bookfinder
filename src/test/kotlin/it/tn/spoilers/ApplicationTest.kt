@@ -9,8 +9,17 @@ import it.tn.spoilers.plugins.serving.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+/**
+ * Class for testing the application
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 class ApplicationTest {
     @Test
+    /**
+     * Test the application endpoints
+     */
     fun testRoot() = testApplication {
         application {
             configureRouting()
