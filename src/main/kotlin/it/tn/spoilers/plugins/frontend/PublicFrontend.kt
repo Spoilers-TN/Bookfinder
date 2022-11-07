@@ -1,18 +1,14 @@
 package it.tn.spoilers.plugins.frontend
 
 import com.mitchellbosecke.pebble.loader.ClasspathLoader
-import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import it.tn.spoilers.data.*
-import it.tn.spoilers.database.models.Users
+import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
-import it.tn.spoilers.database.services.ReviewsService
-import it.tn.spoilers.database.services.UsersService
 
 fun Application.configurePublicFrontend() {
     log.info("[!] Starting Plugin - PublicFrontend.kt")

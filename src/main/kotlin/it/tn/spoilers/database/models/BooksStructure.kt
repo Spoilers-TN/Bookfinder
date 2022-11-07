@@ -18,7 +18,8 @@ data class Books(
     val Book_Study_Year: Int,
     val Book_Price: Double
 )
- @Serializable
+
+@Serializable
 data class BooksData(
     val id: String? = null,
     val Book_ISBN: Long,

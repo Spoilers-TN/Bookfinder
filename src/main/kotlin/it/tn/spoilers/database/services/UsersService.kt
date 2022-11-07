@@ -17,9 +17,15 @@ class UsersService {
             return null
         } else {
             usersCollection.insertOne(user)
-            EmailSender().sendEmail(user.User_Email, "Benvenuto su BookFinder!",
+            EmailSender().sendEmail(
+                user.User_Email, "Benvenuto su BookFinder!",
                 "Si, effettivamente dovrei cercare un testo migliore ma shh, Benvenuto su bookfinder!\n" +
-                        "Ps: Puoi vedere il tuo bellissimo profilo su https://bookfinder.spoilers.tn.it/user/${this.ReturnUserByID(user.User_ID).User_UUID}")
+                        "Ps: Puoi vedere il tuo bellissimo profilo su https://bookfinder.spoilers.tn.it/user/${
+                            this.ReturnUserByID(
+                                user.User_ID
+                            ).User_UUID
+                        }"
+            )
             //client.close()
             return user.id
         }

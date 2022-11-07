@@ -1,15 +1,12 @@
 package it.tn.spoilers.plugins.http
 
 import io.ktor.http.*
-import io.ktor.server.http.content.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import io.ktor.server.http.content.*
 import io.ktor.server.plugins.cachingheaders.*
 import io.ktor.server.plugins.conditionalheaders.*
-import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
-import kotlinx.serialization.json.Json
 import java.time.ZonedDateTime
 
 fun Application.configureHeaders() {

@@ -1,9 +1,7 @@
 package it.tn.spoilers.data
 
 import it.tn.spoilers.database.models.Users
-import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.extras.generateUUID
-import it.tn.spoilers.plugins.database.toUsers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,7 +18,6 @@ data class UserData(
     val hd: String,
     val GSuiteUser: Boolean
 )
-
 
 
 @Serializable

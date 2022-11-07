@@ -10,11 +10,18 @@ import it.tn.spoilers.plugins.api.configureBooksApi
 import it.tn.spoilers.plugins.api.configureReviewsApi
 import it.tn.spoilers.plugins.api.configureSchoolsApi
 import it.tn.spoilers.plugins.api.configureUsersApi
-import it.tn.spoilers.plugins.frontend.*
-import it.tn.spoilers.plugins.extras.*
-import it.tn.spoilers.plugins.http.*
-import it.tn.spoilers.plugins.security.*
-import it.tn.spoilers.plugins.serving.*
+import it.tn.spoilers.plugins.extras.configureMonitoring
+import it.tn.spoilers.plugins.extras.configureSockets
+import it.tn.spoilers.plugins.frontend.configureHybridFrontend
+import it.tn.spoilers.plugins.frontend.configurePrivateFrontend
+import it.tn.spoilers.plugins.frontend.configurePublicFrontend
+import it.tn.spoilers.plugins.http.configureErrors
+import it.tn.spoilers.plugins.http.configureHeaders
+import it.tn.spoilers.plugins.security.configureAuthentication
+import it.tn.spoilers.plugins.security.configureCORS
+import it.tn.spoilers.plugins.serving.configureCompression
+import it.tn.spoilers.plugins.serving.configureRouting
+import it.tn.spoilers.plugins.serving.configureStaticRoutes
 
 fun main() {
     DisableLogging()

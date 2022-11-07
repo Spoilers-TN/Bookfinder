@@ -1,7 +1,6 @@
 package it.tn.spoilers.plugins.security
 
 import io.ktor.client.*
-import io.ktor.client.call.body
 import io.ktor.client.engine.apache.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -14,7 +13,6 @@ import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.ktor.util.*
 import it.tn.spoilers.data.*
-import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.UsersService
 import kotlinx.serialization.decodeFromString

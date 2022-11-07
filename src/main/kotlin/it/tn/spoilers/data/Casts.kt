@@ -2,9 +2,8 @@ package it.tn.spoilers.data
 
 import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.extras.generateUUID
-import it.tn.spoilers.plugins.database.toUsersData
 
-fun CastGsuiteUserToUserDb(InputFromUser: UserInfoGSuite) : Users =
+fun CastGsuiteUserToUserDb(InputFromUser: UserInfoGSuite): Users =
     Users(
         null,
         InputFromUser.sub,
@@ -19,7 +18,7 @@ fun CastGsuiteUserToUserDb(InputFromUser: UserInfoGSuite) : Users =
         true
     )
 
-fun CastNormalUserToUserDb(InputFromUser: UserInfo) : Users =
+fun CastNormalUserToUserDb(InputFromUser: UserInfo): Users =
     Users(
         null,
         InputFromUser.sub,
@@ -34,6 +33,6 @@ fun CastNormalUserToUserDb(InputFromUser: UserInfo) : Users =
         false
     )
 
-fun ifNullPutVoidString(input: String?) : String {
+fun ifNullPutVoidString(input: String?): String {
     return if (input == null) "" else input
 }

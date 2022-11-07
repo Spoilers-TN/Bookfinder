@@ -6,7 +6,6 @@ import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import it.tn.spoilers.data.UserData
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData

@@ -6,9 +6,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import it.tn.spoilers.data.UserData
 import it.tn.spoilers.data.UserSession
-import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.UsersService
 import kotlinx.serialization.encodeToString
