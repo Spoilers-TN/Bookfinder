@@ -9,6 +9,7 @@ val kmongo_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.7.10"
+    id("org.jetbrains.dokka") version "1.7.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.10"
 }
@@ -25,6 +26,8 @@ repositories {
 }
 
 dependencies {
+    // Dokka Stuff
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.7.20")
     // SendGrid Stuff
     implementation("com.sendgrid:sendgrid-java:4.9.3")
     // Sentry Stuff

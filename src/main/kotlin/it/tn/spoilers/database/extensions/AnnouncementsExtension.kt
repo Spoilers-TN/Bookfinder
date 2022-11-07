@@ -3,6 +3,7 @@ package it.tn.spoilers.plugins.database
 import it.tn.spoilers.database.models.Announcements
 import it.tn.spoilers.database.models.AnnouncementsData
 
+
 fun Announcements.toAnnouncementsData(): AnnouncementsData =
     AnnouncementsData(
         id = this.id.toString(),

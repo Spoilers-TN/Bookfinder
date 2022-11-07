@@ -11,6 +11,12 @@ import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.ReviewsService
 import it.tn.spoilers.database.services.UsersService
 
+/**
+ * Function containing the routing for the guests frontend
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureHybridFrontend() {
     log.info("[!] Starting Plugin - HybridFrontend.kt")
     routing {

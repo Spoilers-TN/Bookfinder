@@ -12,6 +12,12 @@ import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.ReviewsService
 
 
+/**
+ * Function containing the routing for the private (logged users) frontend
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configurePrivateFrontend() {
     log.info("[!] Starting Plugin - PrivateFrontend.kt")
     routing {

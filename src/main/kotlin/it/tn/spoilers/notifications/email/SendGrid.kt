@@ -10,7 +10,19 @@ import com.sendgrid.helpers.mail.objects.Email
 import java.io.IOException
 
 
+/**
+ * Class for sending emails using SendGrid
+ *
+ * @author Francesco Masala
+ */
 class EmailSender {
+    /**
+     * Function for sending an email
+     *
+     * @param email[String] the email address of the recipient
+     * @param subject[String] the subject of the email
+     * @param EmailText[String] the content of the email
+     */
     fun sendEmail(email: String, subject: String, EmailText: String) {
         val from = Email("noreply@bookfinder.spoilers.tn.it")
         val to = Email(email)

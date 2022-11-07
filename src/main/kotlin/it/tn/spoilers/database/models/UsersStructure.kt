@@ -4,6 +4,11 @@ import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+/**
+ * Data class for the users table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class Users(
     @BsonId
@@ -20,6 +25,11 @@ data class Users(
     val User_GSuite: Boolean
 )
 
+/**
+ * Data class for the users table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class UsersData(
     val id: String? = null,

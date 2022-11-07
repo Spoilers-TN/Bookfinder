@@ -4,6 +4,11 @@ import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+/**
+ * Data class for the books table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class Books(
     @BsonId
@@ -19,6 +24,11 @@ data class Books(
     val Book_Price: Double
 )
 
+/**
+ * Data class for the books table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class BooksData(
     val id: String? = null,

@@ -9,6 +9,12 @@ import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
 import java.time.ZonedDateTime
 
+/**
+ * Class for configuring the HTTP headers
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureHeaders() {
     log.info("[!] Starting Plugin - HTTPHeaders.kt")
     install(CachingHeaders) {

@@ -8,6 +8,14 @@ import it.tn.spoilers.database.services.ReviewsService
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+
+/**
+ * Function containing the Reviews API -
+ * **In development**
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureReviewsApi() {
     log.info("[!] Starting Plugin - api - schools.kt")
     val service = ReviewsService()

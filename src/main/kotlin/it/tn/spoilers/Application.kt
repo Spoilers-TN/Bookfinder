@@ -23,15 +23,27 @@ import it.tn.spoilers.plugins.serving.configureCompression
 import it.tn.spoilers.plugins.serving.configureRouting
 import it.tn.spoilers.plugins.serving.configureStaticRoutes
 
+/**
+ * Function containing EVERYTHING
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - Initial Commit
+ */
 fun main() {
     DisableLogging()
     DisableMongoLogging()
     EnableSentry()
-    println("[!] Starting Server - BookFinder - v2022.9.19-Alpha")
+    println("[!] Starting Server - BookFinder - v2022.11.07-Alpha")
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module).start(wait = true)
     println("[✓] Started Server - BookFinder")
 }
 
+/**
+ * Function containing all the developed modules
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.11.07
+ */
 fun Application.module() {
     configureRouting()
     configureAuthentication()

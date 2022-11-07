@@ -4,6 +4,11 @@ import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+/**
+ * Data class for the school table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class School(
     @BsonId
@@ -16,6 +21,11 @@ data class School(
     val School_Code: String
 )
 
+/**
+ * Data class for the school table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class SchoolData(
     val id: String? = null,

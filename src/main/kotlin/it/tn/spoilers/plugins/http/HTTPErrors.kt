@@ -17,6 +17,12 @@ import it.tn.spoilers.data.Error
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 
+/**
+ * Function containing the routing for catching and managing errors
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureErrors() {
     log.info("[!] Starting Plugin - HTTPErrors.kt")
     install(StatusPages) {

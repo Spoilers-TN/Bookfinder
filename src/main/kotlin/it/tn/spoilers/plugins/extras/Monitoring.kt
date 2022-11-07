@@ -11,6 +11,12 @@ import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
 import org.slf4j.event.Level
 
+/**
+ * Class for configuring the monitoring with sentry and other stuff
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureMonitoring() {
     log.info("[!] Starting Plugin - Monitoring.kt")
     install(CallLogging) {

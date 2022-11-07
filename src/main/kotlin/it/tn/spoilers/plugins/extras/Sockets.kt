@@ -14,6 +14,12 @@ import java.io.InputStream
 import java.time.Duration
 import java.util.*
 
+/**
+ * Function containing the Websockets routing / configuration
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureSockets() {
     log.info("[!] Starting Plugin - Sockets.kt")
 

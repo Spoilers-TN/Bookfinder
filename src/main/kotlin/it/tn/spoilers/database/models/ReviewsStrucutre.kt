@@ -4,6 +4,11 @@ import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+/**
+ * Data class for the reviews table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class Reviews(
     @BsonId
@@ -17,6 +22,11 @@ data class Reviews(
     val Review_Sender_Photo: String
 )
 
+/**
+ * Data class for the reviews table
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class ReviewsData(
     val id: String? = null,

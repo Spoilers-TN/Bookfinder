@@ -6,6 +6,12 @@ import io.ktor.server.plugins.autohead.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
+/**
+ * Class for configuring the ktor routing
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureRouting() {
     log.info("[!] Starting Plugin - Routing.kt")
     install(AutoHeadResponse)

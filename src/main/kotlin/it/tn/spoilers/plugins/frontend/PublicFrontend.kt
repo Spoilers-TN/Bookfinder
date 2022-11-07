@@ -10,6 +10,12 @@ import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
 
+/**
+ * Function containing the routing for the public frontend
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configurePublicFrontend() {
     log.info("[!] Starting Plugin - PublicFrontend.kt")
     install(Pebble) {

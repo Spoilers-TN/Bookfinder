@@ -10,6 +10,13 @@ import it.tn.spoilers.plugins.database.toBooksData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+/**
+ * Function containing the Books API -
+ * **In development**
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureBooksApi() {
     log.info("[!] Starting Plugin - api - books.kt")
     val service = BooksService()

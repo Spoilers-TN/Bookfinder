@@ -10,6 +10,13 @@ import it.tn.spoilers.plugins.database.toSchoolData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+/**
+ * Function containing the School API -
+ * **In development**
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureSchoolsApi() {
     log.info("[!] Starting Plugin - api - schools.kt")
     val service = SchoolService()

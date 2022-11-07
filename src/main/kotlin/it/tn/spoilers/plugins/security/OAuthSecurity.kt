@@ -19,6 +19,12 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.time.Duration
 
+/**
+ * Function containing the OAuth2 Security - Cookies Security and Login/Logout
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - OAuthSecurity.kt")
     var service = UsersService()

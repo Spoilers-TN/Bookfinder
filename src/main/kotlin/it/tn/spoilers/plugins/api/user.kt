@@ -12,6 +12,13 @@ import it.tn.spoilers.database.services.UsersService
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+/**
+ * Function containing the Users API -
+ * **In development**
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.8.18
+ */
 fun Application.configureUsersApi() {
     log.info("[!] Starting Plugin - api - users.kt")
     val service = UsersService()

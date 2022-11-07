@@ -5,7 +5,18 @@ import it.tn.spoilers.extras.generateUUID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Data class for the user session
+ *
+ * @author Francesco Masala
+ */
 data class UserSession(val token: String)
+
+/**
+ * Data class for the user data to be received and polished by the google auth api
+ *
+ * @author Francesco Masala
+ */
 data class UserData(
     val sub: String,
     val name: String,
@@ -19,7 +30,11 @@ data class UserData(
     val GSuiteUser: Boolean
 )
 
-
+/**
+ * Data class for the user data to be stored in the HTML peeble template
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class user(
     val name: String?,
@@ -32,6 +47,11 @@ data class user(
     val gsuite: Boolean?
 )
 
+/**
+ * Data class for the user data to be stored in the HTML peeble template
+ *
+ * @author Francesco Masala
+ */
 data class guestuser(
     val name: String?,
     val surname: String?,
@@ -39,6 +59,11 @@ data class guestuser(
     val uuid: String?,
 )
 
+/**
+ * Data class for the user data to be stored in the HTML peeble template
+ *
+ * @author Francesco Masala
+ */
 @Serializable
 data class UserInfo(
     val sub: String,
@@ -50,6 +75,11 @@ data class UserInfo(
     val email_verified: Boolean,
     val locale: String
 ) {
+    /**
+     * Data cast to the user data class
+     *
+     * @author Francesco Masala
+     */
     fun toData(): Users =
         Users(
             User_ID = this.sub,
