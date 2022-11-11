@@ -31,13 +31,14 @@ fun Application.configurePublicFrontend() {
                     "index.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "logged" to (call.sessions.get<UsersData>() != null)
                     )
                 )
@@ -53,13 +54,14 @@ fun Application.configurePublicFrontend() {
                     "about.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "logged" to (call.sessions.get<UsersData>() != null)
                     )
                 )
@@ -74,13 +76,14 @@ fun Application.configurePublicFrontend() {
                             "books" to BooksService().findAll(),
                             "user" to user(
                                 name = UserData?.User_Name,
-                                uuid = UserData?.User_UUID,
                                 surname = UserData?.User_Surname,
                                 photo = UserData?.User_Photo,
                                 id = UserData?.User_ID,
+                                uuid = UserData?.User_UUID,
                                 email = UserData?.User_Email,
                                 realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite
+                                gsuite = UserData?.User_GSuite,
+                                bio = UserData?.User_Biog
                             ),
                             "logged" to (sessions.get<UsersData>() != null)
                         )
@@ -97,13 +100,14 @@ fun Application.configurePublicFrontend() {
                             "books" to BooksService().findByISBN(call.parameters["isbn"]!!.toLong()),
                             "user" to user(
                                 name = UserData?.User_Name,
-                                uuid = UserData?.User_UUID,
                                 surname = UserData?.User_Surname,
                                 photo = UserData?.User_Photo,
                                 id = UserData?.User_ID,
+                                uuid = UserData?.User_UUID,
                                 email = UserData?.User_Email,
                                 realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite
+                                gsuite = UserData?.User_GSuite,
+                                bio = UserData?.User_Biog
                             ),
                             "logged" to (sessions.get<UsersData>() != null)
                         )
@@ -118,13 +122,14 @@ fun Application.configurePublicFrontend() {
                     "terms.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "logged" to (call.sessions.get<UsersData>() != null)
                     )
                 )
@@ -137,13 +142,14 @@ fun Application.configurePublicFrontend() {
                     "who.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "logged" to (call.sessions.get<UsersData>() != null)
                     )
                 )
@@ -156,13 +162,14 @@ fun Application.configurePublicFrontend() {
                     "policy.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "logged" to (call.sessions.get<UsersData>() != null)
                     )
                 )

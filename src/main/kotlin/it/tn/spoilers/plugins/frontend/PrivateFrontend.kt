@@ -30,13 +30,14 @@ fun Application.configurePrivateFrontend() {
                         "profile.html", mapOf(
                             "user" to user(
                                 name = UserData.User_Name,
-                                uuid = UserData.User_UUID,
                                 surname = UserData.User_Surname,
                                 photo = UserData.User_Photo,
                                 id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
                                 email = UserData.User_Email,
                                 realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
                             "numReviews" to ReviewsService().findByRecipient(UserData.User_UUID).size,
@@ -57,13 +58,14 @@ fun Application.configurePrivateFrontend() {
                         "settings.html", mapOf(
                             "user" to user(
                                 name = UserData.User_Name,
-                                uuid = UserData.User_UUID,
                                 surname = UserData.User_Surname,
                                 photo = UserData.User_Photo,
                                 id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
                                 email = UserData.User_Email,
                                 realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
@@ -81,13 +83,14 @@ fun Application.configurePrivateFrontend() {
                         "dashboard.html", mapOf(
                             "user" to user(
                                 name = UserData.User_Name,
-                                uuid = UserData.User_UUID,
                                 surname = UserData.User_Surname,
                                 photo = UserData.User_Photo,
                                 id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
                                 email = UserData.User_Email,
                                 realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
@@ -105,13 +108,14 @@ fun Application.configurePrivateFrontend() {
                         "newInsertion.html", mapOf(
                             "user" to user(
                                 name = UserData.User_Name,
-                                uuid = UserData.User_UUID,
                                 surname = UserData.User_Surname,
                                 photo = UserData.User_Photo,
                                 id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
                                 email = UserData.User_Email,
                                 realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
@@ -134,6 +138,7 @@ fun Application.configurePrivateFrontend() {
                                 photo = UserData.User_Photo,
                                 id = UserData.User_ID,
                                 email = UserData.User_Email,
+                                bio = UserData.User_Biog,
                                 realm = UserData.User_School_Domain,
                                 gsuite = UserData.User_GSuite
                             ), "logged" to (call.sessions.get<UsersData>() != null)

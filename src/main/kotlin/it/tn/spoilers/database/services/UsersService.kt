@@ -60,12 +60,12 @@ class UsersService {
      * Update a user biography in the database
      *
      * @author Francesco Masala
-     * @param userID[Users] the user to update
+     * @param UserUUID[String] the user to update
      * @param userBio[String] the biography to update
      */
-    fun updateUserBio(userID: String, userBio: String) {
+    fun updateUserBio(UserUUID: String, userBio: String) {
         usersCollection.updateOne(
-            Users::User_ID eq userID,
+            Users::User_UUID eq UserUUID,
             setValue(Users::User_Biog, userBio)
         )
         //client.close()

@@ -44,7 +44,8 @@ data class user(
     val uuid: String?,
     val email: String?,
     val realm: String?,
-    val gsuite: Boolean?
+    val gsuite: Boolean?,
+    val bio: String?
 )
 
 /**
@@ -57,6 +58,7 @@ data class guestuser(
     val surname: String?,
     val photo: String?,
     val uuid: String?,
+    val bio: String?,
 )
 
 /**

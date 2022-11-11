@@ -43,6 +43,7 @@
                 </div>
                 <div class="col">
                     <h2>{{user.name}} {{user.surname}}</h2>
+                    <h3><i>{{user.bio}}</i></h3>
                     <p>Email utente: {{user.email}}</p>
                     <p>Identificativo utente: {{user.uuid}}</p>
                     <br/>
@@ -60,17 +61,17 @@
         <div class="card-body">
             <h4 class="card-title">Modifica profilo</h4>
             <div>
-                <form action="/api/user/set/bio" method="post">
+                <form action="/core/v1/users/profile" enctype="application/x-www-form-urlencoded" method="POST">
                     <div class="form-group">
                         <label>Dati anagrafici</label>
-                        <input type="email" class="form-control" readonly placeholder="{{user.email}}">
+                        <input type="email" id="user-email" class="form-control" readonly placeholder="{{user.email}}">
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-control" readonly placeholder="{{user.name}}">
+                            <input type="text" id="user-name" class="form-control" readonly placeholder="{{user.name}}">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" readonly placeholder="{{user.surname}}">
+                            <input type="text" id="user-surname" class="form-control" readonly placeholder="{{user.surname}}">
                         </div>
                     </div>
 
@@ -78,8 +79,8 @@
 
                     <label>Imposta la tua biografia.</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" rows="3" id="biography"
-                               placeholder="Sono Giacomo, ho 22 anni e vengo da Bologna....">
+                        <input type="text" name="bio" id="user-bio" class="form-control" rows="3" id="biography"
+                               placeholder="{{user.bio}}">
                     </div>
 
                     <!--bottone salva-->
@@ -112,7 +113,8 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla
                                     </button>
-                                    <a class="btn btn-warning">Sì</a>
+                                    <button type="submit" class="btn btn-warning">Sì
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -34,13 +34,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -58,13 +59,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -82,13 +84,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -106,13 +109,39 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
+                        ), "error" to Error(
+                            status.value.toString(),
+                            status.description,
+                            HttpClient(Apache).get("http://whatthecommit.com/index.txt") {}.bodyAsText()
+                        ), "logged" to (call.sessions.get<UsersData>() != null)
+                    )
+                )
+            )
+        }
+        status(HttpStatusCode.MethodNotAllowed) { call, status ->
+            val UserData = call.sessions.get<UsersData>()
+            Sentry.captureMessage("HTTP Error 405 - ${call.request.uri}")
+            call.respond(
+                status = status, PebbleContent(
+                    "error.html", mapOf(
+                        "user" to user(
+                            name = UserData?.User_Name,
+                            surname = UserData?.User_Surname,
+                            photo = UserData?.User_Photo,
+                            id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
+                            email = UserData?.User_Email,
+                            realm = UserData?.User_School_Domain,
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -130,13 +159,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -154,13 +184,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -178,13 +209,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -202,13 +234,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -226,13 +259,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -250,13 +284,14 @@ fun Application.configureErrors() {
                     "error.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ), "error" to Error(
                             status.value.toString(),
                             status.description,
@@ -275,13 +310,14 @@ fun Application.configureErrors() {
                         "error.html", mapOf(
                             "user" to user(
                                 name = UserData?.User_Name,
-                                uuid = UserData?.User_UUID,
                                 surname = UserData?.User_Surname,
                                 photo = UserData?.User_Photo,
                                 id = UserData?.User_ID,
+                                uuid = UserData?.User_UUID,
                                 email = UserData?.User_Email,
                                 realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite
+                                gsuite = UserData?.User_GSuite,
+                                bio = UserData?.User_Biog
                             ), "error" to Error(
                                 HttpStatusCode.Forbidden.value.toString(),
                                 cause.toString(),
@@ -296,13 +332,14 @@ fun Application.configureErrors() {
                         "error.html", mapOf(
                             "user" to user(
                                 name = UserData?.User_Name,
-                                uuid = UserData?.User_UUID,
                                 surname = UserData?.User_Surname,
                                 photo = UserData?.User_Photo,
                                 id = UserData?.User_ID,
+                                uuid = UserData?.User_UUID,
                                 email = UserData?.User_Email,
                                 realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite
+                                gsuite = UserData?.User_GSuite,
+                                bio = UserData?.User_Biog
                             ), "error" to Error(
                                 HttpStatusCode.InternalServerError.value.toString(),
                                 cause.toString(),

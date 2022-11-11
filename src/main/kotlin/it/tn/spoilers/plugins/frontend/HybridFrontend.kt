@@ -30,19 +30,21 @@ fun Application.configureHybridFrontend() {
                     "publicprofile.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
-                            uuid = UserData?.User_UUID,
                             surname = UserData?.User_Surname,
                             photo = UserData?.User_Photo,
                             id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
                             email = UserData?.User_Email,
                             realm = UserData?.User_School_Domain,
-                            gsuite = UserData?.User_GSuite
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
                         ),
                         "publicuser" to guestuser(
                             name = GuestUser.User_Name,
                             uuid = GuestUser.User_UUID,
                             surname = GuestUser.User_Surname,
                             photo = GuestUser.User_Photo,
+                            bio = GuestUser.User_Biog
                         ),
                         "logged" to (call.sessions.get<UsersData>() != null),
                         "numReviews" to ReviewsService().findByRecipient(GuestUser.User_UUID).size,
