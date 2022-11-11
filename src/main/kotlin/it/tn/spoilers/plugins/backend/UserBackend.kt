@@ -10,8 +10,14 @@ import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.UsersService
 
+/**
+ * Function containing the pages and routing for the user backend
+ *
+ * @author Francesco Masala
+ * @since Bookfinder - 2022.11.11
+ */
 fun Application.configureUserBackend() {
-    log.info("[!] Starting Plugin - PublicFrontend.kt")
+    log.info("[!] Starting Plugin - UserBackend.kt")
     routing {
         post("/core/v1/users/profile") {
             val UserData = call.sessions.get<UsersData>()
