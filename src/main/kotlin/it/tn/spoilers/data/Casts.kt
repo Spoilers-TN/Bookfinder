@@ -16,7 +16,7 @@ fun CastGsuiteUserToUserDb(InputFromUser: UserInfoGSuite): Users =
         InputFromUser.sub,
         generateUUID(),
         InputFromUser.hd,
-        InputFromUser.email,
+        InputFromUser.givenName,
         ifNullPutVoidString(InputFromUser.familyName.toString()),
         "",
         "https://www.gravatar.com/avatar/${ToMD5(InputFromUser.email)}",
