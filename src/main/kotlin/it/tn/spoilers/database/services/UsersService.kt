@@ -17,7 +17,7 @@ class UsersService {
     private val usersCollection = database.getCollection<Users>("Users")
 
     /**
-     * Create a user in the database if it doesn't exist and send an email to the user
+     * Create a user in the database if it doesn't exist and email the user
      *
      * @author Francesco Masala
      * @param user[Users] the user to create
