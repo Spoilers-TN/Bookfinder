@@ -21,7 +21,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
         with:
-          arguments: build -x test
+          gradle-version: '7.6'
+
+      - name: Execute Gradle build
+        run: ./gradlew build -x test
