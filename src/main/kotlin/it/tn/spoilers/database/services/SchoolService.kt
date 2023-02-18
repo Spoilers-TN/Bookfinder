@@ -1,10 +1,7 @@
 package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.School
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.getCollection
-import org.litote.kmongo.regex
+import org.litote.kmongo.*
 
 /**
  * Service for the school table in the database
@@ -55,5 +52,18 @@ class SchoolService {
             .toList()
         //client.close()
         return result
+    }
+
+    /**
+     * Delete a specific school from the database
+     *
+     * @author Cristoforetti Alessio & Cassata Gabriele
+     * @param code[String] the school code
+     * @return [null] nothing
+     */
+    fun deleteByCode(code: String) {
+        val caseSensitiveTypeSafeFilter = School::School_Code regex code
+        schoolCollection.deleteOne(caseSensitiveTypeSafeFilter)
+        //client.close()
     }
 }
