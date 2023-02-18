@@ -36,7 +36,7 @@ fun main() {
     DisableMongoLogging()
     EnableSentry()
     println("[!] Starting Server - BookFinder - v2022.11.07-Alpha")
-    embeddedServer(Netty, port = 8080, host = "127.0.0.1", module = Application::module).start(wait = true)
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module).start(wait = true)
     println("[✓] Started Server - BookFinder")
 }
 

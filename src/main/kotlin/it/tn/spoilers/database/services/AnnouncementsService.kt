@@ -2,10 +2,8 @@ package it.tn.spoilers.database.services
 
 
 import it.tn.spoilers.database.models.Announcements
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
+import it.tn.spoilers.database.models.AnnouncementsData
+import org.litote.kmongo.*
 
 /**
  * Service for the announcements table in the database
@@ -86,4 +84,79 @@ class AnnouncementsService {
         //client.close()
         return result
     }
+
+
+    /**
+     * Update the expire date of a specific announcement in the database
+     *
+     * @author Mirco Sottovia, Matteo Lunelli
+     * @param Id[String] announcement id, ExpireDate[String]  announcement ExpireDate
+     * @return
+     */
+    fun updateExpireDateById(Id : String, Expire_Date : String) {
+        announcementsCollection.updateOneById(
+            AnnouncementsData::Announcement_ID eq Id,
+            setValue(AnnouncementsData::Announcement_Expire_Date, Expire_Date)
+        )
+
+    }
+
+
+    /**
+     * Update the status of a specific announcement in the database
+     *
+     * @author Mirco Sottovia, Matteo Lunelli
+     * @param Id[String] announcement id, Status[String]  announcement status
+     * @return
+     */
+    fun updateStatusById(Id : String, Status : String) {
+        announcementsCollection.updateOneById(
+            AnnouncementsData::Announcement_ID eq Id,
+            setValue(AnnouncementsData::Announcement_Status, Status)
+        )
+    }
+
+
+    /**
+     * Update the price of a specific announcement in the database
+     *
+     * @author Mirco Sottovia, Matteo Lunelli
+     * @param Id[String] announcement id, Price[Double]  announcement price
+     * @return
+     */
+    fun updatePriceById(Id : String, Price : Double) {
+        announcementsCollection.updateOneById(
+            AnnouncementsData::Announcement_ID eq Id,
+            setValue(AnnouncementsData::Announcement_Price, Price)
+        )
+    }
+
+
+    /**
+     * Update the description of a specific announcement in the database
+     *
+     * @author Mirco Sottovia, Matteo Lunelli
+     * @param Id[String] announcement id, Description[String]  announcement description
+     * @return
+     */
+    fun updateDescriptionById(Id : String, Description : String) {
+        announcementsCollection.updateOneById(
+            AnnouncementsData::Announcement_ID eq Id,
+            setValue(AnnouncementsData::Announcement_Description, Description)
+        )
+    }
+
+
+    /**
+     * Delete a specific announcement from the database
+     *
+     * @author Mirco Sottovia, Matteo Lunelli
+     * @param Id[String] the announcement id
+     * @return
+     */
+    fun deleteById(Id : String){
+        val caseSensitiveTypeSafeFilter = Announcements::Announcement_User eq Id
+        announcementsCollection.deleteOne(caseSensitiveTypeSafeFilter);
+    }
+
 }
