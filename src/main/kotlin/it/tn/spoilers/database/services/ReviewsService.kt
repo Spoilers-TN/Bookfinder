@@ -2,10 +2,7 @@ package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Reviews
 import it.tn.spoilers.extras.generateUUID
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
+import org.litote.kmongo.*
 
 /**
  * Service for the reviews table in the database
@@ -28,6 +25,19 @@ class ReviewsService {
         reviewsCollection.insertOne(review)
         //client.close()
         return review.id
+
+    }
+
+    fun update(oldReview: Reviews, newReview: Reviews) {
+        reviewsCollection.deleteOneById(oldReview.Review_ID)
+        reviewsCollection.insertOne(newReview)
+        //client.close()
+
+    }
+
+    fun delete(review: Reviews) {
+        reviewsCollection.deleteOneById(review.Review_ID)
+        //client.close()
 
     }
 

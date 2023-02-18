@@ -22,6 +22,8 @@ data class Reviews(
     val Review_Sender_Photo: String
 )
 
+
+
 /**
  * Data class for the reviews table
  *
