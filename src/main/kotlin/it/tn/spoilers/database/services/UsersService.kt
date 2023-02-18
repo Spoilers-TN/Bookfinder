@@ -12,7 +12,7 @@ import org.litote.kmongo.*
  * @author Francesco Masala
  */
 class UsersService {
-    private val client = KMongo.createClient("")
+    private val client = KMongo.createClient("mongodb+srv://bookfinder:BeJbK4clinNm8J41@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
     private val database = client.getDatabase("bookfinder")
     private val usersCollection = database.getCollection<Users>("Users")
 
@@ -177,5 +177,17 @@ class UsersService {
         }
         //client.close()
         return false
+    }
+
+    /**
+     * Check if a user is present in the database by the google id
+     *
+     * @author Dalri Tiziano, Kevin Vargas, Chen Qiang
+     * @param id[String] the user id
+     */
+    fun deleteById(id: String) {
+        val caseSensitiveTypeSafeFilter = Users::User_ID regex id
+        usersCollection.deleteOne(caseSensitiveTypeSafeFilter)
+        //client.close()
     }
 }
