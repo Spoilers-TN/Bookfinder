@@ -6,7 +6,6 @@ import it.tn.spoilers.database.models.ReviewsData
 fun Reviews.toReviewsData(): ReviewsData =
     ReviewsData(
         Review_ID = this.Review_ID,
-        Review_Title = this.Review_Title,
         Review_Message = this.Review_Message,
         Review_Sender = this.Review_Sender,
         Review_Sender_Name = this.Review_Sender_Name,
@@ -17,7 +16,6 @@ fun Reviews.toReviewsData(): ReviewsData =
 fun ReviewsData.toReviews(): Reviews =
     Reviews(
         Review_ID = this.Review_ID,
-        Review_Title = this.Review_Title,
         Review_Message = this.Review_Message,
         Review_Sender = this.Review_Sender,
         Review_Sender_Name = this.Review_Sender_Name,

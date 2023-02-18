@@ -14,7 +14,6 @@ data class Reviews(
     @BsonId
     val id: Id<Reviews>? = null,
     val Review_ID: String,
-    val Review_Title: String,
     val Review_Message: String,
     val Review_Sender: String,
     val Review_Recipient: String,
@@ -31,7 +30,6 @@ data class Reviews(
 data class ReviewsData(
     val id: String? = null,
     val Review_ID: String,
-    val Review_Title: String,
     val Review_Message: String,
     val Review_Sender: String,
     val Review_Recipient: String,
