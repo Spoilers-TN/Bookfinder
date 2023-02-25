@@ -12,7 +12,7 @@ import org.litote.kmongo.*
  * @author Francesco Masala
  */
 class UsersService {
-    private val client = KMongo.createClient("mongodb+srv://bookfinder:BeJbK4clinNm8J41@bookfinder-db.eukircn.mongodb.net/?retryWrites=true&w=majority")
+    private val client = KMongo.createClient("")
     private val database = client.getDatabase("bookfinder")
     private val usersCollection = database.getCollection<Users>("Users")
 
