@@ -2,7 +2,10 @@ package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Reviews
 import it.tn.spoilers.extras.generateUUID
-import org.litote.kmongo.*
+import org.litote.kmongo.Id
+import org.litote.kmongo.KMongo
+import org.litote.kmongo.eq
+import org.litote.kmongo.getCollection
 
 /**
  * Service for the reviews table in the database
