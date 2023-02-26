@@ -3,7 +3,10 @@ package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Announcements
 import it.tn.spoilers.database.models.AnnouncementsData
-import org.litote.kmongo.*
+import org.litote.kmongo.Id
+import org.litote.kmongo.KMongo
+import org.litote.kmongo.eq
+import org.litote.kmongo.getCollection
 
 /**
  * Service for the announcements table in the database
