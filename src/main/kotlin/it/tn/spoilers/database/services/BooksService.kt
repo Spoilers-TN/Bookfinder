@@ -48,10 +48,17 @@ class BooksService {
      * @param isbn[Long] the book isbn
      * @return [List] the book
      */
-    fun findByISBN(isbn: Long): List<Books> {
+    fun findByISBN(isbn: Long): List<Books>{
         val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
-        val result = booksCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
+        val result = booksCollection.find(caseSensitiveTypeSafeFilter).toList()
+        //client.close
+        //()
+        return result
+    }
+
+    fun findBySpecificISBN(isbn: Long): BooksData?{
+        val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
+        val result = booksCollection.findOne(caseSensitiveTypeSafeFilter)?.toBooksData()
         //client.close
         //()
         return result
