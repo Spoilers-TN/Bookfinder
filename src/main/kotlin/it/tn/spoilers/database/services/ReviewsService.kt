@@ -6,6 +6,7 @@ import org.litote.kmongo.Id
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
 import org.litote.kmongo.getCollection
+import java.util.*
 
 /**
  * Service for the reviews table in the database
@@ -13,8 +14,9 @@ import org.litote.kmongo.getCollection
  * @author Francesco Masala
  */
 class ReviewsService {
-    private val client = KMongo.createClient("")
-    private val database = client.getDatabase("bookfinder")
+
+    private val client = KMongo.createClient(obtainProperty("my.clientDb"))
+    private val database = client.getDatabase(obtainProperty("my.database"))
     private val reviewsCollection = database.getCollection<Reviews>("Reviews")
 
     /**
@@ -72,5 +74,13 @@ class ReviewsService {
             .toList()
         //client.close()
         return result
+    }
+
+    //Gestione filesecret
+    fun obtainProperty(property : String) : String {
+        val prop = Properties()
+        val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
+        prop.load(inputStream)
+        return prop.getProperty(property)
     }
 }
