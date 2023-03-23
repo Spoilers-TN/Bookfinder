@@ -167,6 +167,7 @@ class AnnouncementsService {
 
 }
 
+
     //Gestione filesecret
     fun obtainProperty(property : String) : String {
         val prop = Properties()
@@ -174,4 +175,6 @@ class AnnouncementsService {
         prop.load(inputStream)
         return prop.getProperty(property)
     }
+
+}
 }
