@@ -27,7 +27,6 @@ class BooksService {
         booksCollection.insertOne(user)
         //client.close()
         return user.id
-
     }
 
     /**
@@ -53,7 +52,22 @@ class BooksService {
         val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
         val result = booksCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
-        //client.close()
+        //client.close
+        //()
         return result
     }
+
+    /**
+     * Erase a book instance
+     *
+     * @author Roberto Pozzi
+     * @param isbn[Long] the book's isbn
+     */
+    fun deleteByISBN(isbn: Long) {
+        val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
+        booksCollection.deleteOne(caseSensitiveTypeSafeFilter)
+        //client.close()
+    }
+
+
 }
