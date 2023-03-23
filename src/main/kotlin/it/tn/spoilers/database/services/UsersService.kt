@@ -5,6 +5,7 @@ import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.notifications.email.EmailSender
 import it.tn.spoilers.plugins.database.toUsersData
 import org.litote.kmongo.*
+import java.util.*
 
 /**
  * Service for the users table
@@ -12,8 +13,9 @@ import org.litote.kmongo.*
  * @author Francesco Masala
  */
 class UsersService {
-    private val client = KMongo.createClient("")
-    private val database = client.getDatabase("bookfinder")
+
+    private val client = KMongo.createClient(obtainProperty("my.clientDb"))
+    private val database = client.getDatabase(obtainProperty("my.database"))
     private val usersCollection = database.getCollection<Users>("Users")
 
     /**
@@ -177,5 +179,13 @@ class UsersService {
         }
         //client.close()
         return false
+    }
+
+    //Gestione filesecret
+    fun obtainProperty(property : String) : String {
+        val prop = Properties()
+        val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
+        prop.load(inputStream)
+        return prop.getProperty(property)
     }
 }

@@ -5,6 +5,7 @@ import org.litote.kmongo.Id
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.getCollection
 import org.litote.kmongo.regex
+import java.util.*
 
 /**
  * Service for the school table in the database
@@ -12,9 +13,9 @@ import org.litote.kmongo.regex
  * @author Francesco Masala
  */
 class SchoolService {
-    private val client =
-        KMongo.createClient("")
-    private val database = client.getDatabase("bookfinder")
+
+    private val client = KMongo.createClient(obtainProperty("my.clientDb"))
+    private val database = client.getDatabase(obtainProperty("my.database"))
     private val schoolCollection = database.getCollection<School>("School")
 
     /**
@@ -55,5 +56,13 @@ class SchoolService {
             .toList()
         //client.close()
         return result
+    }
+
+    //Gestione filesecret
+    fun obtainProperty(property : String) : String {
+        val prop = Properties()
+        val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
+        prop.load(inputStream)
+        return prop.getProperty(property)
     }
 }
