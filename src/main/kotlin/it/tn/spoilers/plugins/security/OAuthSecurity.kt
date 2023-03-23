@@ -18,6 +18,7 @@ import it.tn.spoilers.database.services.UsersService
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.time.Duration
+import java.util.*
 
 /**
  * Function containing the OAuth2 Security - Cookies Security and Login/Logout
@@ -29,21 +30,24 @@ fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - OAuthSecurity.kt")
     var service = UsersService()
 
-
+    //Gestione filesecret
+    val prop = Properties()
+    val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
+    prop.load(inputStream)
 
     install(Sessions) {
-        val secretSignKey = hex("")
-        val secretEncryptKey = hex("")
+        val secretSignKey = hex(prop.getProperty("my.signKey"))
+        val secretEncryptKey = hex(prop.getProperty("my.encryptKey"))
         cookie<UserSession>("user_session") {
-            cookie.secure = true
-            cookie.domain = "bookfinder.spoilers.tn.it"
+            cookie.secure = prop.getProperty("my.cookieSecure").toBoolean()
+            cookie.domain = prop.getProperty("my.domain")
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
             transform(SessionTransportTransformerEncrypt(secretEncryptKey, secretSignKey))
         }
         cookie<UsersData>("user_data") {
-            cookie.secure = true
-            cookie.domain = "bookfinder.spoilers.tn.it"
+            cookie.secure = prop.getProperty("my.cookieSecure").toBoolean()
+            cookie.domain = prop.getProperty("my.domain")
             cookie.path = "/"
             cookie.maxAgeInSeconds = Duration.ofDays(1).seconds
             transform(SessionTransportTransformerEncrypt(secretEncryptKey, secretSignKey))
@@ -52,7 +56,7 @@ fun Application.configureAuthentication() {
     install(Authentication) {
         oauth("auth-oauth-google") {
             client = HttpClient(Apache)
-            urlProvider = { "https://bookfinder.spoilers.tn.it/callback" }
+            urlProvider = { prop.getProperty("my.urlProvider") }
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
                     name = "google",
@@ -125,3 +129,4 @@ fun Application.configureAuthentication() {
     log.info("[✓] Started Plugin - OAuthSecurity.kt")
 
 }
+
