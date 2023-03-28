@@ -6,12 +6,11 @@
 
 ## Requirements
 Place in /src/main/resources an application.properties file with the following informations:
-
-my.signKey = googlePublicKey
-my.encryptKey = googlePrivateKey
-my.clientDb = MongoDB Connection string
-my.database = MongoDB Database name
-my.cookieSecure = {true | false }
-my.domain = Host domain
-my.urlProvider = Callback provider
+* my.signKey = googlePublicKey
+* my.encryptKey = googlePrivateKey
+* my.clientDb = MongoDB Connection string
+* my.database = MongoDB Database name
+* my.cookieSecure = {true | false }
+* my.domain = Host domain
+* my.urlProvider = Callback provider
 
