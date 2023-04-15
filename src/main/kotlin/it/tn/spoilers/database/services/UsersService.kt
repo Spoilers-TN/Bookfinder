@@ -190,4 +190,16 @@ class UsersService {
         usersCollection.deleteOne(caseSensitiveTypeSafeFilter)
         //client.close()
     }
+    
+    /**
+     * Obtain infos from the application.properties file
+     *
+     * @author Mirko Sottovia
+     */
+    fun obtainProperty(property : String) : String {
+        val prop = Properties()
+        val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
+        prop.load(inputStream)
+        return prop.getProperty(property)
+    }
 }
