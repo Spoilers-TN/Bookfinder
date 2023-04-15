@@ -9,6 +9,7 @@ import io.ktor.server.sessions.*
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
+import it.tn.spoilers.database.services.BooksService
 import it.tn.spoilers.database.services.ReviewsService
 
 
@@ -105,7 +106,7 @@ fun Application.configurePrivateFrontend() {
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
-                        "newInsertion.html", mapOf(
+                        "Insertion.html", mapOf(
                             "user" to user(
                                 name = UserData.User_Name,
                                 surname = UserData.User_Surname,
@@ -117,6 +118,40 @@ fun Application.configurePrivateFrontend() {
                                 gsuite = UserData.User_GSuite,
                                 bio = UserData.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null)
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/insertion/new/{isbn}") {
+            val id = call.parameters["isbn"]!!.toLong()
+            val service = BooksService()
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            val book = service.findBySpecificISBN(id)
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    PebbleContent(
+                        "newInsertion.html", mapOf(
+                            "user" to user(
+                                name = UserData.User_Name,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
+                            ),
+                            "book" to insertionBook(
+                                author = book?.Book_Author,
+                                bookName = book?.Book_Title,
+                                isbn = book?.Book_ISBN
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
                 )
