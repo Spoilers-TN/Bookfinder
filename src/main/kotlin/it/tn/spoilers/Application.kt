@@ -6,6 +6,7 @@ import io.ktor.server.netty.*
 import it.tn.spoilers.extras.DisableLogging
 import it.tn.spoilers.extras.DisableMongoLogging
 import it.tn.spoilers.extras.EnableSentry
+import it.tn.spoilers.plugins.api.configureSearchApi
 import it.tn.spoilers.plugins.api.configureBooksApi
 import it.tn.spoilers.plugins.api.configureReviewsApi
 import it.tn.spoilers.plugins.api.configureSchoolsApi
@@ -58,6 +59,7 @@ fun Application.module() {
     configureCompression()
     configureCORS()
     configureBooksApi()
+    configureSearchApi()
     configureSchoolsApi()
     configureUsersApi()
     configureReviewsApi()
