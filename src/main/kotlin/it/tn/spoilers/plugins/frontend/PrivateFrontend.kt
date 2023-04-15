@@ -149,5 +149,138 @@ fun Application.configurePrivateFrontend() {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
+        get("/search/category") {
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    PebbleContent(
+                        "search.html", mapOf(
+                            "user" to user(
+                                name = UserData.User_Name,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null),
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/search/name") {
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    PebbleContent(
+                        "search.html", mapOf(
+                            "user" to user(
+                                name = UserData.User_Name,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null),
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/search/price") {
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    PebbleContent(
+                        "search.html", mapOf(
+                            "user" to user(
+                                name = UserData.User_Name,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null),
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/search/year") {
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    PebbleContent(
+                        "search.html", mapOf(
+                            "user" to user(
+                                name = UserData.User_Name,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null),
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/search/category") {
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                call.respond(
+                    PebbleContent(
+                        "search.html", mapOf(
+                            "user" to user(
+                                name = UserData.User_Name,
+                                surname = UserData.User_Surname,
+                                photo = UserData.User_Photo,
+                                id = UserData.User_ID,
+                                uuid = UserData.User_UUID,
+                                email = UserData.User_Email,
+                                realm = UserData.User_School_Domain,
+                                gsuite = UserData.User_GSuite,
+                                bio = UserData.User_Biog
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null),
+                        )
+                    )
+                )
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+
+
+
     }
 }
