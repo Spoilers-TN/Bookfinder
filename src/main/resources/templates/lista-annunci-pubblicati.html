@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+
+
+<head>
+
+    <!-- FORMATTAZIONE DEFAULT -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Annunci | Bookfinder</title>
+    <meta name="description" content="Qui puoi gestire i tui annunci, modificarli, e eliminarli.">
+    <meta name="keywords" content="Annunci, Profilo, Gestione">
+    <!-- FAVICONS E MANIFST -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-icon-180x180.png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta property="og:type" content="website">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#343A40">
+
+    <!-- REFERENZE BOOSTRAP -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- STILE GENERALE -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- STILE FOOTER E NAVBAR -->
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/dropdown.css">
+
+    <!-- STILI PERSONALIZZATI PER OGNI PAGINA -->
+    <link rel="stylesheet" href="assets/css/stile.css">
+    <!--ESEMPIO-->
+
+</head>
+
+<body>
+
+<div id="ph-navbar"></div>
+
+
+<!-- CONTENUTI -->
+<br />
+<center>
+    <h1>Annunci</h1>
+</center>
+
+<br>
+<h2 style="margin-left: 10%;">Profilo</h2>
+<div id="listaAnnunci"> <!-- ANTEPRIMA DEL PROFILO -->
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <img alt="ImmagineProfilo" src="assets/img/general/tab.webp" class="rounded-circle"
+                             style="width: 100px; box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)">
+                    </div>
+                    <div class="col">
+                        <h2>Leoni Nicola</h2>
+                        <span>ITT "BUONARROTI POZZO"</span>
+                        <p>
+                            <span style="color: #0066CC; font-weight: bold">24 recensioni</span>
+                            <span style="color: #cc7722"></span><i class="fa fa-solid fa-star"></i><i
+                                class="fa fa-solid fa fa-solid fa-star"></i><i class="fa fa-solid fa-star"></i><i
+                                class="far fa-star"></i></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <h2 style="margin-left: 10%;">I tuoi annunci</h2>
+    <div class="container" style="margin-bottom: 50px" id="annuncio">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <!-- Le info seguenti devono essere autocompilate in base all'ESBN - per programmatori -->
+                    <div class="row">
+                        <div class="col-md-3"><img alt="antologia" class="img-fluid"
+                                                   src="/assets/img/general/antologia.webp"> </div>
+                        <div class="col">
+                            <h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="subtitle">Autore: </span><br>
+                                    <span class="subtitle">Anno di pubblicazione: </span><br>
+                                    <span class="subtitle">Codice ISBN: </span><br>
+                                    <span class="subtitle">Prezzo: </span>
+                                </div>
+                            </div>
+                            <label>
+                                Descrizione dello stato del libro:
+                            </label>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-bottom: 50px" id="annuncio">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <!-- Le info seguenti devono essere autocompilate in base all'ESBN - per programmatori -->
+                    <div class="row">
+                        <div class="col-md-3"><img alt="antologia" class="img-fluid"
+                                                   src="/assets/img/general/antologia.webp"> </div>
+                        <div class="col">
+                            <h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="subtitle">Autore: </span><br>
+                                    <span class="subtitle">Anno di pubblicazione: </span><br>
+                                    <span class="subtitle">Codice ISBN: </span><br>
+                                    <span class="subtitle">Prezzo: </span>
+                                </div>
+                            </div>
+                            <label>
+                                Descrizione dello stato del libro:
+                            </label>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-bottom: 50px" id="annuncio">
+    <div class="card">
+        <div class="card-body">
+            <div class="container">
+                <!-- Le info seguenti devono essere autocompilate in base all'ESBN - per programmatori -->
+                <div class="row">
+                    <div class="col-md-3"><img alt="antologia" class="img-fluid"
+                                               src="/assets/img/general/antologia.webp"> </div>
+                    <div class="col">
+                        <h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
+                        <div class="row">
+                            <div class="col">
+                                <span class="subtitle">Autore: </span><br>
+                                <span class="subtitle">Anno di pubblicazione: </span><br>
+                                <span class="subtitle">Codice ISBN: </span><br>
+                                <span class="subtitle">Prezzo: </span>
+                            </div>
+                        </div>
+                        <label>
+                            Descrizione dello stato del libro:
+                        </label>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray; ">1</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">2</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">3</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Next</a></li>
+    </ul>
+</nav>
+<br>
+
+</body>
+
+
+</html>
