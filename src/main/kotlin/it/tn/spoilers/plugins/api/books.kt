@@ -32,6 +32,22 @@ fun Application.configureBooksApi() {
             val id = call.parameters["isbn"]!!.toLong()
             call.respondText(Json.encodeToString(service.findByISBN(id)), contentType = ContentType.Application.Json)
         }
+        get("/api/books/category/{category}") {
+            val category = call.parameters["category"]!!.toString()
+            call.respondText(Json.encodeToString(service.findByCategory(category)), contentType = ContentType.Application.Json)
+        }
+        get("/api/books/name/{name}") {
+            val name = call.parameters["name"]!!.toString()
+            call.respondText(Json.encodeToString(service.findByName(name)), contentType = ContentType.Application.Json)
+        }
+        get("/api/books/price/{price}") {
+            val price = call.parameters["price"]!!.toDouble()
+            call.respondText(Json.encodeToString(service.findByPrice(price)), contentType = ContentType.Application.Json)
+        }
+        get("/api/books/year/{year}") {
+            val year = call.parameters["year"]!!.toInt()
+            call.respondText(Json.encodeToString(service.findByYear(year)), contentType = ContentType.Application.Json)
+        }
     }
     log.info("[✓] Started Plugin - api - books.kt")
 }
