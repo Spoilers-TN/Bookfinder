@@ -15,7 +15,8 @@ fun Books.toBooksData(): BooksData =
         Book_Digital = this.Book_Digital,
         Book_Edition = this.Book_Edition,
         Book_Study_Year = this.Book_Study_Year,
-        Book_Price = this.Book_Price
+        Book_Price = this.Book_Price,
+        Book_Category = this.Book_Category
     )
 
 fun BooksData.toBooks(): Books =
@@ -28,5 +29,6 @@ fun BooksData.toBooks(): Books =
         Book_Digital = this.Book_Digital,
         Book_Edition = this.Book_Edition,
         Book_Study_Year = this.Book_Study_Year,
-        Book_Price = this.Book_Price
+        Book_Price = this.Book_Price,
+        Book_Category = this.Book_Category
     )
