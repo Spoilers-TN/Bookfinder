@@ -124,8 +124,10 @@ data class book(
 @Serializable
 data class insertionBook(
     val author: String?,
-    val bookName: String?,
-    val isbn: Long?
+    val name: String?,
+    val isbn: Long?,
+    val year : String?,
+    val publishers : String?
 )
 
 

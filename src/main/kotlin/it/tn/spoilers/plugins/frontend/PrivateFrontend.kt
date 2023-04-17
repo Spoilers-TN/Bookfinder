@@ -7,6 +7,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import it.tn.spoilers.data.UserSession
+import it.tn.spoilers.data.insertionBook
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
@@ -148,8 +149,10 @@ fun Application.configurePrivateFrontend() {
                             ),
                             "book" to insertionBook(
                                 author = book?.Book_Author,
-                                bookName = book?.Book_Title,
-                                isbn = book?.Book_ISBN
+                                name = book?.Book_Title,
+                                isbn = book?.Book_ISBN,
+                                year = book?.Book_Year,
+                                publishers = book?.Book_Publishers
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null)
                         )

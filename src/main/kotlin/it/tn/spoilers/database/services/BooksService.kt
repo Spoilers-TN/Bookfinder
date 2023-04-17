@@ -1,10 +1,9 @@
 package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Books
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
+import it.tn.spoilers.database.models.BooksData
+import it.tn.spoilers.plugins.database.toBooksData
+import org.litote.kmongo.*
 import java.util.*
 
 /**
@@ -60,7 +59,7 @@ class BooksService {
 
     fun findBySpecificISBN(isbn: Long): BooksData?{
         val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
-        val result = booksCollection.find(caseSensitiveTypeSafeFilter)?.toBooksData()
+        val result = booksCollection.findOne(caseSensitiveTypeSafeFilter)?.toBooksData()
         //client.close
         //()
         return result
