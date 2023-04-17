@@ -172,7 +172,7 @@ fun Application.configurePrivateFrontend() {
                     )
                 )
             } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+                //call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
         get("/search/name") {
@@ -198,7 +198,7 @@ fun Application.configurePrivateFrontend() {
                     )
                 )
             } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+                //call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
         get("/search/price") {
@@ -224,7 +224,7 @@ fun Application.configurePrivateFrontend() {
                     )
                 )
             } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+                //call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
         get("/search/year") {
@@ -250,7 +250,7 @@ fun Application.configurePrivateFrontend() {
                     )
                 )
             } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+                //call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
         get("/search/category") {
@@ -276,7 +276,7 @@ fun Application.configurePrivateFrontend() {
                     )
                 )
             } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+                //call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
 
