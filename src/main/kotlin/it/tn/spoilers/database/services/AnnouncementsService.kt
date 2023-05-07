@@ -2,6 +2,8 @@ package it.tn.spoilers.database.services
 
 
 import it.tn.spoilers.database.models.Announcements
+import it.tn.spoilers.database.models.Reviews
+import it.tn.spoilers.extras.generateUUID
 import org.litote.kmongo.Id
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
@@ -32,6 +34,32 @@ class AnnouncementsService {
         //client.close()
         return user.id
     }
+
+    /**
+     * Insert data into announcement
+     *
+     * @author Tiziano Dalri, Alessio Cristoforetti
+     */
+
+    fun assistedCreate(Announcement_User: String, Announcement_Book: Long, Announcement_Status: String,Announcement_Price: Double,
+                       Announcement_Book_Status: String, Announcement_Description: String, Announcement_Ebook: Boolean) {
+
+        val announcement = Announcements(
+            Announcement_ID = generateUUID(),
+            Announcement_User = Announcement_User,
+            Announcement_Book = Announcement_Book,
+            Announcement_Publish_Date = LocalDate.now().toString(),
+            Announcement_Expire_Date =  LocalDate.now().plusDays(30).toString(),
+            Announcement_Status = Announcement_Status,
+            Announcement_Price = Announcement_Price,
+            Announcement_Book_Status = Announcement_Book_Status,
+            Announcement_Description = Announcement_Description,
+            Announcement_Ebook = Announcement_Ebook
+        )
+        this.create(announcement)
+    }
+
+
 
     /**
      * Get all the announcements from the database

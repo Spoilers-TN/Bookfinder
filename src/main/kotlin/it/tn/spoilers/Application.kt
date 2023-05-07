@@ -10,6 +10,7 @@ import it.tn.spoilers.plugins.api.configureBooksApi
 import it.tn.spoilers.plugins.api.configureReviewsApi
 import it.tn.spoilers.plugins.api.configureSchoolsApi
 import it.tn.spoilers.plugins.api.configureUsersApi
+import it.tn.spoilers.plugins.backend.configureAnnouncementBackend
 import it.tn.spoilers.plugins.backend.configurePublicBackend
 import it.tn.spoilers.plugins.backend.configureUserBackend
 import it.tn.spoilers.plugins.extras.configureMonitoring
@@ -61,6 +62,7 @@ fun Application.module() {
     configureSchoolsApi()
     configureUsersApi()
     configureReviewsApi()
+    configureAnnouncementBackend()
     configurePublicBackend()
     configureUserBackend()
     configurePublicFrontend()

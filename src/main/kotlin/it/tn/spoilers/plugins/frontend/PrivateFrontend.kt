@@ -101,31 +101,6 @@ fun Application.configurePrivateFrontend() {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
-        get("/insertion/new") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
-                call.respond(
-                    PebbleContent(
-                        "Insertion.html", mapOf(
-                            "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
-                            ), "logged" to (call.sessions.get<UsersData>() != null)
-                        )
-                    )
-                )
-            } else {
-                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
-            }
-        }
         get("/insertion/new/{isbn}") {
             val id = call.parameters["isbn"]!!.toLong()
             val service = BooksService()

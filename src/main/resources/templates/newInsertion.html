@@ -12,42 +12,20 @@
 <div class="container" style="margin-top: 45px; margin-bottom: 20px">
     <div class="row">
         <div class="col col-auto">
-            <!-- Modal -->
-            <div class="modal fade" id="pubblicaAnnuncio" tabindex="-1" aria-labelledby="caricaAnnunico"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="caricaAnnunico">Carica annuncio</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Sei sicuro di voler pubblicare l'annuncio?</div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                            <a class="btn btn-warning" href="/dashboard">Sì</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
-
 <div class="container" style="margin-bottom: 50px">
     <div class="card">
         <div class="card-body">
             <div class="container justify-items-center" style="justify-items: center;">
                 <h2>Compila tramite ISBN</h2>
                 <p>Tramite l'ISBN i campi verranno automaticamente compilati. ✨</p>
-                <div class="input-group mb-3">
                     <form action="#" id="form-isbn" method="POST">
-                    <input type="text" class="form-control" placeholder="Codice ISBN"
+                    <input type="text" class="form-control" placeholder="Codice ISBN" style="length :100px"
                            aria-label="Inserire l'ISBN del Libro" aria-describedby="basic-addon2" name="input-isbn">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-warning" type="submit">Carica</button>
-                    </div>
+                    <button style="float : right" class="btn btn-outline-warning" type="submit">Carica</button>
                     </form>
                     <script type="text/javascript">
                         const template = (isbn) => `/insertion/new/${isbn}`;
@@ -55,11 +33,9 @@
                         document.getElementById('form-isbn').addEventListener('submit', function(s) {
                         s.preventDefault();
                         this.action = template(this.elements["input-isbn"].value);
-                        alert(this.action);
                         window.location.href = this.action;
                         });
                     </script>
-                </div>
             </div>
         </div>
     </div>
@@ -115,75 +91,85 @@
             </div>
             -->
             <div class="container">
+                <form action="/insert/announcement" enctype="application/x-www-form-urlencoded" method="POST">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
-                <div class="row">
-                    <div class="col">
-                        <h5 class="card-title">Compila accuratamente questi dettagli</h5>
-                        <br>
-                        <div class="row">
-                            <div class="col-5">
-                                <button type="button" class="btn btn-outline-warning dropdown-toggle"
-                                        style="width: 100%" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">Scegli Materia
-                                </button>
-                                <div class="dropdown-menu scrollable-menu" style="width: 90%" role="menu">
-                                    <a class="dropdown-item" href="#">Antologia</a>
-                                    <a class="dropdown-item" href="#">Architettura</a>
-                                    <a class="dropdown-item" href="#">Arte</a>
-                                    <a class="dropdown-item" href="#">Chimica</a>
-                                    <a class="dropdown-item" href="#">Diritto e Economia</a>
-                                    <a class="dropdown-item" href="#">Dizionari e Enciclopedie</a>
-                                    <a class="dropdown-item" href="#">Elettrotecnica</a>
-                                    <a class="dropdown-item" href="#">Filosofia</a>
-                                    <a class="dropdown-item" href="#">Geografia</a>
-                                    <a class="dropdown-item" href="#">Ginnastica</a>
-                                    <a class="dropdown-item" href="#">Grammatica</a>
-                                    <a class="dropdown-item" href="#">Informatica</a>
-                                    <a class="dropdown-item" href="#">Ingegneria</a>
-                                    <a class="dropdown-item" href="#">Inglese</a>
-                                    <a class="dropdown-item" href="#">Lingue Storiche</a>
-                                    <a class="dropdown-item" href="#">Matematica</a>
-                                    <a class="dropdown-item" href="#">Musica</a>
-                                    <a class="dropdown-item" href="#">Poesia</a>
-                                    <a class="dropdown-item" href="#">Religione</a>
-                                    <a class="dropdown-item" href="#">Storia</a>
-                                    <a class="dropdown-item" href="#">Altro</a>
-                                    <div class="dropdown-divider"></div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <input type="versioneDigitale" class="form-control" placeholder="Versione digitale">
-                            </div>
-                            <div class="col-3">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">€</span>
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">Compila accuratamente questi dettagli</h5>
+                                <input type="hidden" name="announcement-isbn" value="{{book.isbn}}">
+                                <input type="hidden" name="announcement-user" value="{{user.UUID}}">
+                                <br>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <select name="announcement-stato" style="width: 90%" role="menu">
+                                            <option selected disabled hidden>Seleziona stato libro</option>
+                                            <option>Pessimo stato</option>
+                                            <option>Cattivo stato</option>
+                                            <option>Discreto stato</option>
+                                            <option>Buono stato</option>
+                                            <option>Ottimo stato</option>
+                                            <div></div>
+                                        </select>
                                     </div>
-                                    <input type="number" class="form-control"
-                                           aria-label="Amount (to the nearest dollar)">
+                                    <div class="col-4">
+                                        <input type="checkbox" name="announcement-ebook" class="form-control" placeholder="Versione digitale">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">€</span>
+                                            </div>
+                                            <input type="number" class="form-control" name="announcement-price"
+                                                   aria-label="Amount (to the nearest dollar)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <label>Descrizioni agguntive</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" rows="3" id="stato" name="announcement-description"
+                                           placeholder="Condizioni del libro">
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <!-- Button trigger modal -->
+                        <div class="col">
+                            <button type="button" class="btn btn-warning" margin="auto"><i class="fas fa-upload"></i><font size="3">
+                                Allega immagini</font></button>
+                        </div>
+                        <div class="col col-auto">
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pubblicaAnnuncio">
+                                Pubblica annuncio
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-auto">
+                                <!-- Modal -->
+                                <div class="modal fade" id="pubblicaAnnuncio" tabindex="-1" aria-labelledby="caricaAnnunico"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="caricaAnnunico">Carica annuncio</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Sei sicuro di voler pubblicare l'annuncio?</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button class="btn btn-warning" type="submit">Si</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <label>Descrizione dello stato del libro</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" rows="3" id="stato"
-                                   placeholder="Condizioni del libro">
-                        </div>
-                        <br>
                     </div>
-                </div>
-                <div class="row">
-                    <!-- Button trigger modal -->
-                    <div class="col">
-                        <button class="btn btn-warning" margin="auto"><i class="fas fa-upload"></i><font size="3">
-                            Allega immagini</font></button>
-                    </div>
-                    <div class="col col-auto">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pubblicaAnnuncio">
-                            Pubblica annuncio
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
