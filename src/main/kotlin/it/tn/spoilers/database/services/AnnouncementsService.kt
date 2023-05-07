@@ -8,6 +8,7 @@ import org.litote.kmongo.Id
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
 import org.litote.kmongo.getCollection
+import java.time.LocalDate
 import java.util.*
 
 /**
