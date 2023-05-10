@@ -1,6 +1,7 @@
 package it.tn.spoilers.database.services
 
 
+import com.mongodb.BasicDBObject
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
 import it.tn.spoilers.database.models.*
@@ -115,14 +116,37 @@ class AnnouncementsService {
      */
     //guarda che strunzata
     fun modifyBySpecificID(id: String, price: Double, bookStatus: String, description: String, eBook: Boolean) {
+        var previous = findBySpecificID(id)
+        val query = BasicDBObject()
+        if (previous != null) {
+            query["Announcement_Price"] = previous.Announcement_Price
+            query["Announcement_Book_Status"] = previous.Announcement_Book_Status
+            query["Announcement_Description"] = previous.Announcement_Description
+            query["Announcement_EBook"] = previous.Announcement_Ebook
+        }
+        // creates the new value for the document to be updated.
+        val newValDoc = BasicDBObject()
+        newValDoc.put("Announcement_Price", price)
+        newValDoc.put("Announcement_Book_Status", bookStatus)
+        newValDoc.put("Announcement_Description", description)
+        newValDoc.put("Announcement_EBook", eBook)
+
+        val updateObject = BasicDBObject()
+        updateObject["\$set"] = newValDoc
+        // preforms the update
+        announcementsCollection.updateOne(query, updateObject)
+        // non posso provarlo perche la tabella annuncio è stata modificata :) e non ho tempo per farlo
+        // anche il libro quindi è molto brutta la situa
+    /*
         val filter =  Filters.eq("Announcement_ID", id)
         val update = Updates.combine(  Updates.set("Announcement_Price", price),
                 Updates.set("Announcement_Book_Status", bookStatus),
         Updates.set("Announcement_Description", description),
         Updates.set("Announcement_Ebook", eBook))
         announcementsCollection.updateOne(filter, update)
-    }
+        */
 
+    }
 
     /**
      * Get a specific announcement from the database
