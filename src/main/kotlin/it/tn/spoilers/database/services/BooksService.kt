@@ -98,20 +98,6 @@ class BooksService {
         return result
     }
 
-    /**
-     * Get a specific books from the database based on price
-     *
-     * @author Furlan, Berti
-     * @param
-     */
-    fun findByPrice(price : Double): List<Books> {
-        val caseSensitiveTypeSafeFilter = Books::Book_Price lt price
-        val result = booksCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
-        //client.close
-        //()
-        return result
-    }
 
     /**
      * Get a specific books from the database based on study year

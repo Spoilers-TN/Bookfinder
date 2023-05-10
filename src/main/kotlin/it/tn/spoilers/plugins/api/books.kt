@@ -40,10 +40,6 @@ fun Application.configureBooksApi() {
             val name = call.parameters["name"]!!.toString()
             call.respondText(Json.encodeToString(service.findByName(name)), contentType = ContentType.Application.Json)
         }
-        get("/api/books/price/{price}") {
-            val price = call.parameters["price"]!!.toDouble()
-            call.respondText(Json.encodeToString(service.findByPrice(price)), contentType = ContentType.Application.Json)
-        }
         get("/api/books/year/{year}") {
             val year = call.parameters["year"]!!.toInt()
             call.respondText(Json.encodeToString(service.findByYear(year)), contentType = ContentType.Application.Json)
