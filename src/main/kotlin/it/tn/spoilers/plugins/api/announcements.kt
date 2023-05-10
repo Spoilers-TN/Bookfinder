@@ -3,11 +3,15 @@ package it.tn.spoilers.plugins.api
 
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import it.tn.spoilers.database.models.Books
-import it.tn.spoilers.database.services.BooksService
-import it.tn.spoilers.plugins.database.toBooksData
+import io.ktor.server.sessions.*
+import it.tn.spoilers.data.UserSession
+import it.tn.spoilers.database.models.Announcements
+import it.tn.spoilers.database.models.UsersData
+import it.tn.spoilers.database.services.AnnouncementsService
+import it.tn.spoilers.plugins.database.toAnnouncementsData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -20,34 +24,54 @@ import kotlinx.serialization.json.Json
  */
 fun Application.configureAnnouncementsApi() {
     log.info("[!] Starting Plugin - api - announcements.kt")
-    val service = BooksService()
+    val service = AnnouncementsService()
 
     routing {
         get("/api/announcements/list") {
-            val BookList =
-                service.findAll()
-                    .map(Books::toBooksData)
-            call.respondText(Json.encodeToString(BookList), contentType = ContentType.Application.Json)
+            val AnnouncementsList = service.findAll().map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
         get("/api/announcements/isbn/{isbn}") {
             val id = call.parameters["isbn"]!!.toLong()
-            call.respondText(Json.encodeToString(service.findByISBN(id)), contentType = ContentType.Application.Json)
+            val AnnouncementsList = service.findByISBN(id).map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
+        }
+        get("/api/announcements/personal"){
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+                val param = call.receive<Parameters>()
+                val persUserID = UserData.User_ID
+                call.respondText("User not ?");
+
+            } else {
+                call.respond(HttpStatusCode.fromValue(418), "Amio, un pò difficile vedere i propri libri se non sei loggato o no ?")
+            }
+        }
+        get("/api/announcements/user/{user}"){
+            val userID = call.parameters["user"]!!.toString()
+            val AnnouncementsList = service.findByUser(userID).map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
         get("/api/announcements/category/{category}") {
             val category = call.parameters["category"]!!.toString()
-            call.respondText(Json.encodeToString(service.findByCategory(category)), contentType = ContentType.Application.Json)
+            val AnnouncementsList = service.findByCategory(category).map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
         get("/api/announcements/name/{name}") {
             val name = call.parameters["name"]!!.toString()
-            call.respondText(Json.encodeToString(service.findByName(name)), contentType = ContentType.Application.Json)
+            val AnnouncementsList = service.findByName(name).map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
         get("/api/announcements/price/{price}") {
             val price = call.parameters["price"]!!.toDouble()
-            call.respondText(Json.encodeToString(service.findByPrice(price)), contentType = ContentType.Application.Json)
+            val AnnouncementsList = service.findByPrice(price).map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
         get("/api/announcements/year/{year}") {
             val year = call.parameters["year"]!!.toInt()
-            call.respondText(Json.encodeToString(service.findByYear(year)), contentType = ContentType.Application.Json)
+            val AnnouncementsList = service.findByYear(year).map(Announcements::toAnnouncementsData)
+            call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
     }
     log.info("[✓] Started Plugin - api - announcements.kt")
