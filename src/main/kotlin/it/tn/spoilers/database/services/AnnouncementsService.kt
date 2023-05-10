@@ -5,6 +5,7 @@ import it.tn.spoilers.database.models.Announcements
 import org.litote.kmongo.Id
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
+import org.litote.kmongo.lt
 import org.litote.kmongo.getCollection
 import java.util.*
 
@@ -84,6 +85,20 @@ class AnnouncementsService {
      */
     fun findByUser(UserID: String): List<Announcements> {
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_User eq UserID
+        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
+            .toList()
+        //client.close()
+        return result
+    }
+
+    /**
+     * Get a specific announcement from the database based of category
+     *
+     * @author Berti, Furlan
+     */
+    fun findByPrice(price: Double): List<Announcements> {
+
+        val caseSensitiveTypeSafeFilter = Announcements::Announcement_Price lt price
         val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
         //client.close()
