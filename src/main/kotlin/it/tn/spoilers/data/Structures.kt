@@ -122,12 +122,25 @@ data class book(
 )
 
 @Serializable
-data class insertionBook(
+data class InsertionBook(
     val author: String?,
     val name: String?,
     val isbn: Long?,
     val year : String?,
     val publishers : String?
+)
+@Serializable
+data class Announcement(
+    val ID: String?,
+    val User: String?,
+    val Book: Long?,
+    val Publish_Date: String?,
+    val Expire_Date: String?,
+    val Status: String?,
+    val Price: Double?,
+    val Book_Status: String?,
+    val Description: String?,
+    val Ebook: Boolean?
 )
 
 

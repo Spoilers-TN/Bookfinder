@@ -1,13 +1,15 @@
 package it.tn.spoilers.database.services
 
 
-import it.tn.spoilers.database.models.Announcements
-import it.tn.spoilers.database.models.Reviews
+import com.mongodb.client.model.Filters
+import com.mongodb.client.model.Updates
+import it.tn.spoilers.database.models.*
 import it.tn.spoilers.extras.generateUUID
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
+import it.tn.spoilers.plugins.database.toAnnouncementsData
+import it.tn.spoilers.plugins.database.toBooksData
+import org.bson.Document
+import org.bson.types.ObjectId
+import org.litote.kmongo.*
 import java.time.LocalDate
 import java.util.*
 
@@ -89,6 +91,39 @@ class AnnouncementsService {
         return result
     }
 
+
+    /**
+     * Get a specific announcement from the database
+     *
+     * @author Dalri Tiziano, Cristoforetti Alessio
+     * @param id[String] the announcement id
+     * @return [List] the announcement
+     */
+    fun findBySpecificID(id: String): AnnouncementsData?{
+        val caseSensitiveTypeSafeFilter = Announcements::Announcement_ID eq id
+        val result = announcementsCollection.findOne(caseSensitiveTypeSafeFilter)?.toAnnouncementsData()
+        //client.close
+        //()
+        return result
+    }
+
+    /**
+     * Modify a specific announcement from the database
+     *
+     * @author Dalri Tiziano, Cristoforetti Alessio
+     * @param id[String] the announcement id
+     */
+    //guarda che strunzata
+    fun modifyBySpecificID(id: String, price: Double, bookStatus: String, description: String, eBook: Boolean) {
+        val filter =  Filters.eq("Announcement_ID", id)
+        val update = Updates.combine(  Updates.set("Announcement_Price", price),
+                Updates.set("Announcement_Book_Status", bookStatus),
+        Updates.set("Announcement_Description", description),
+        Updates.set("Announcement_Ebook", eBook))
+        announcementsCollection.updateOne(filter, update)
+    }
+
+
     /**
      * Get a specific announcement from the database
      *
@@ -118,6 +153,7 @@ class AnnouncementsService {
         //client.close()
         return result
     }
+
 
     //Gestione filesecret
     fun obtainProperty(property : String) : String {
