@@ -59,7 +59,7 @@ fun Application.module() {
     configureCORS()
 
     //Configure APIs
-    configureAnnouncementsApi()
+    //configureAnnouncementsApi()
     configureBooksApi()
     configureSchoolsApi()
     configureUsersApi()
