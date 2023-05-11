@@ -1,12 +1,8 @@
 package it.tn.spoilers.database.services
 
-
 import it.tn.spoilers.database.models.Announcements
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.lt
-import org.litote.kmongo.getCollection
+import it.tn.spoilers.database.models.Books
+import org.litote.kmongo.*
 import java.util.*
 
 /**
@@ -77,16 +73,85 @@ class AnnouncementsService {
     }
 
     /**
-     * Get a specific announcement from the database
+     * Get all announcements for a user (used by logged-in user)
      *
-     * @author Francesco Masala
-     * @param UserID[String] the announcement user
-     * @return [List] the announcement
+     * @author Berti, Furlan
      */
-    fun findByUser(UserID: String): List<Announcements> {
+    fun findAllByUser(UserID: String): List<Announcements> {
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_User eq UserID
         val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
+        //client.close()
+        return result
+    }
+
+    /**
+     * Get all announcements for a category
+     *
+     * @author Berti, Furlan
+     */
+    fun findByCategory(Category :String): List<Announcements> {
+
+        val bServ = BooksService()
+        val books = bServ.findByCategory(Category);
+
+        var result = emptyList<Announcements>()
+
+        for(b:Books in books){
+            result = result.plus(findByISBN(b.Book_ISBN))
+        }
+
+        //client.close()
+        return result
+    }
+
+    /**
+     * Get all announcements for a book name
+     *
+     * @author Berti, Furlan
+     */
+    fun findByName(Name :String): List<Announcements> {
+
+        val bServ = BooksService()
+        val books = bServ.findByName(Name);
+
+        var result = emptyList<Announcements>()
+
+        for(b:Books in books){
+            result = result.plus(findByISBN(b.Book_ISBN))
+        }
+
+        //client.close()
+        return result
+    }
+
+    /**
+     * Get all announcements for a book year
+     *
+     * @author Berti, Furlan
+     */
+    fun findByYear(Year :Int): List<Announcements> {
+
+        val bServ = BooksService()
+        val books = bServ.findByYear(Year);
+
+        var result = emptyList<Announcements>()
+
+        for(b:Books in books){
+            result = result.plus(findByISBN(b.Book_ISBN))
+        }
+
+        //client.close()
+        return result
+    }
+
+    /**
+     * Get all announcements for a user (used by logged-in user for searching other users)
+     *
+     * @author Berti, Furlan
+     */
+    fun findByUser(UserID: String): List<Announcements> {
+        val result = announcementsCollection.find(Announcements::Announcement_User eq UserID, Announcements::Announcement_Status eq "Published").toList()
         //client.close()
         return result
     }

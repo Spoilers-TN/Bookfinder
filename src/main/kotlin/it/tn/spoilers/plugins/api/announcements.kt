@@ -40,12 +40,13 @@ fun Application.configureAnnouncementsApi() {
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
-                val param = call.receive<Parameters>()
-                val persUserID = UserData.User_ID
-                call.respondText("User not ?");
+                val id = UserData.User_ID
+
+                val AnnouncementsList = service.findAllByUser(id).map(Announcements::toAnnouncementsData)
+                call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
 
             } else {
-                call.respond(HttpStatusCode.fromValue(418), "Amio, un pò difficile vedere i propri libri se non sei loggato o no ?")
+                call.respond(HttpStatusCode.Unauthorized, "Amio, un pò difficile vedere i propri libri se non sei loggato o no ?")
             }
         }
         get("/api/announcements/user/{user}"){
