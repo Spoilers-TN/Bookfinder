@@ -1,5 +1,6 @@
 package it.tn.spoilers.database.models
 
+import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
@@ -8,6 +9,7 @@ import org.litote.kmongo.Id
  *
  * @author Francesco Masala
  */
+@Serializable
 data class Announcements(
     @BsonId
     val id: Id<Announcements>? = null,
@@ -28,6 +30,7 @@ data class Announcements(
  *
  * @author Francesco Masala
  */
+@Serializable
 data class AnnouncementsData(
     val id: String? = null,
     val Announcement_ID: String,
@@ -35,9 +38,9 @@ data class AnnouncementsData(
     val Announcement_Book: Long,
     val Announcement_Publish_Date: String,
     val Announcement_Expire_Date: String,
-    val Announcement_Status: String,
+    val Announcement_Status: String, //Stato del libro, CONDIZIONI
     val Announcement_Price: Double,
-    val Announcement_Book_Status: String,
+    val Announcement_Book_Status: String, //Stato dell'annuncio, DISPONIBILITA'
     val Announcement_Description: String,
     val Announcement_Ebook: Boolean
 )

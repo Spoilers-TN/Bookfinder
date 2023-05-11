@@ -38,12 +38,6 @@ fun main() {
     println("[✓] Started Server - BookFinder")
 }
 
-/**
- * Function containing all the developed modules
- *
- * @author Francesco Masala
- * @since Bookfinder - 2022.11.07
- */
 fun Application.module() {
 
     //Configure Application
