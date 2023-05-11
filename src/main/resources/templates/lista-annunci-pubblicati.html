@@ -28,16 +28,16 @@
                             <p class="card-text"><h4 class="card-title">{{book.Book_Title}}</h4>
                             <div class="row">
                                 <div class="col">
-                                    <span class="subtitle">Autore: {{book.Book_Author}}</span><br>
-                                    <span class="subtitle">Categoria : {{book.Book_Category}}</span><br>
-                                    <span class="subtitle">Codice ISBN: {{book.isbn}}</span><br>
-                                    <span class="subtitle">Prezzo: {{ann.Price}}</span>
+                                    <span class="subtitle">Autore : {{book.author}}</span><br>
+                                    <span class="subtitle">Categoria : {{book.category}}</span><br>
+                                    <span class="subtitle">Codice ISBN : {{book.isbn}}</span><br>
+                                    <span class="subtitle">Prezzo : {{ann.Price}}</span>
                                 </div>
                             </div></p>
                             <div class=" justify-content: flex-end">
-                                <form class="deletion-form" id="deletion-form-X" action="delete/announcement/{{ann.Id}}" method="post">
+                                <form class="deletion-form" id="deletion-form-X" action="/delete/announcement/{{ann.Id}}" method="post">
                                     <div style="text-align: right;margin-top: 15%">
-                                        <a class="btn btn-warning" href="insertion/modify/{{ann.Id}}">Modifica</a>
+                                        <a class="btn btn-warning" href="/insertion/modify/{{ann.Id}}">Modifica</a>
                                         <button type="submit" class="btn btn-danger">Elimina</button>
                                     </div>
                                 </form>

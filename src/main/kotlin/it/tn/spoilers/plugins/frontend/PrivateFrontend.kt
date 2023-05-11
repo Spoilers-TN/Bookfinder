@@ -10,6 +10,7 @@ import it.tn.spoilers.data.Announcement
 import it.tn.spoilers.data.InsertionBook
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
+import it.tn.spoilers.database.models.AnnouncementsData
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.AnnouncementsService
 import it.tn.spoilers.database.services.BooksService
@@ -101,16 +102,16 @@ fun Application.configurePrivateFrontend() {
                                 gsuite = UserData.User_GSuite,
                                 bio = UserData.User_Biog
                             ), "ann" to Announcement(
-                                ID = ann?.Announcement_ID,
-                                User = ann?.Announcement_User,
-                                Book = ann?.Announcement_Book,
-                                Publish_Date = ann?.Announcement_Publish_Date,
-                                Expire_Date = ann?.Announcement_Expire_Date,
-                                Status = ann?.Announcement_Status,
-                                Price = ann?.Announcement_Price,
-                                Book_Status = ann?.Announcement_Book_Status,
-                                Description = ann?.Announcement_Description,
-                                Ebook = ann?.Announcement_Ebook
+                                ID = AnnouncementsData.Announcement_ID,
+                                User = AnnouncementsData.Announcement_User,
+                                Book = AnnouncementsData.Announcement_Book,
+                                Publish_Date = AnnouncementsData.Announcement_Publish_Date,
+                                Expire_Date = AnnouncementsData.Announcement_Expire_Date,
+                                Status = AnnouncementsData.Announcement_Status,
+                                Price = AnnouncementsData.Announcement_Price,
+                                Book_Status = AnnouncementsData.Announcement_Book_Status,
+                                Description = AnnouncementsData.Announcement_Description,
+                                Ebook = AnnouncementsData.Announcement_Ebook
                             ), "book" to InsertionBook(
                                 author = book?.Book_Author,
                                 name = book?.Book_Title,
