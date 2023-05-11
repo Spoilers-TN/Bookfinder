@@ -85,8 +85,8 @@ fun Application.configurePrivateFrontend() {
         get("/insertion/manage") {
             val UserSession = call.sessions.get<UserSession>()
             val UserData = call.sessions.get<UsersData>()
-            val ann = AnnouncementsService().findBySpecificID("f0871c2a-2a8d-4f3f-a9ac-6517b09f8f41")
-            val book = BooksService().findBySpecificISBN(ann?.Announcement_Book!!.toLong())
+            var AnnouncementsData = AnnouncementsService().findBySpecificID("f0871c2a-2a8d-4f3f-a9ac-6517b09f8f41")
+            val BooksData = BooksService().findBySpecificISBN(AnnouncementsData?.Announcement_Book!!.toLong())
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
@@ -113,11 +113,11 @@ fun Application.configurePrivateFrontend() {
                                 Description = AnnouncementsData.Announcement_Description,
                                 Ebook = AnnouncementsData.Announcement_Ebook
                             ), "book" to InsertionBook(
-                                author = book?.Book_Author,
-                                name = book?.Book_Title,
-                                isbn = book?.Book_ISBN,
-                                category = book?.Book_Category,
-                                publishers = book?.Book_Publishers
+                                author = BooksData?.Book_Author,
+                                name = BooksData?.Book_Title,
+                                isbn = BooksData?.Book_ISBN,
+                                category = BooksData?.Book_Category,
+                                publishers = BooksData?.Book_Publishers
                             ),"logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )

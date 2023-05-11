@@ -7,6 +7,7 @@ import it.tn.spoilers.database.models.BooksData
 fun Books.toBooksData(): BooksData =
     BooksData(
         id = this.id.toString(),
+        Book_Study_Year = this.Book_Study_Year,
         Book_ISBN = this.Book_ISBN,
         Book_Title = this.Book_Title,
         Book_Author = this.Book_Author,
@@ -15,10 +16,10 @@ fun Books.toBooksData(): BooksData =
         Book_Publishers = Book_Publishers,
         Book_School_Type = this.Book_School_Type,
         Book_SchoolCode = this.Book_SchoolCode,
-        Book_Study_Year = this.Book_Study_Year,
-        Book_Volume = this.Book_Volume,
+        Book_Volume = this.Book_Volume.toInt(),
         Book_YearSelection = this.Book_YearSelection
     )
+
 
 fun BooksData.toBooks(): Books =
     Books(
