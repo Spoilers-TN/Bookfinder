@@ -114,13 +114,16 @@ class AnnouncementsService {
      * @param id[String] the announcement id
      */
     //guarda che strunzata
-    fun modifyBySpecificID(id: String, price: Double, bookStatus: String, description: String, eBook: Boolean) {
-        val filter =  Filters.eq("Announcement_ID", id)
-        val update = Updates.combine(  Updates.set("Announcement_Price", price),
-                Updates.set("Announcement_Book_Status", bookStatus),
-        Updates.set("Announcement_Description", description),
-        Updates.set("Announcement_Ebook", eBook))
-        announcementsCollection.updateOne(filter, update)
+    fun modifyBySpecificID(id: String, price: Double , bookStatus: String, description: String, eBook: Boolean) {
+        announcementsCollection.updateOne(
+            Announcements::Announcement_ID eq id,
+            combine(
+                setValue(Announcements::Announcement_Price, price),
+                setValue(Announcements::Announcement_Book_Status, bookStatus),
+                setValue(Announcements::Announcement_Description, description),
+                setValue(Announcements::Announcement_Ebook, eBook)
+            )
+        )
     }
 
 
@@ -152,6 +155,10 @@ class AnnouncementsService {
             .toList()
         //client.close()
         return result
+    }
+
+    fun deleteBySpecificId(id: String){
+        announcementsCollection.deleteOne(Announcements::Announcement_ID eq id)
     }
 
 

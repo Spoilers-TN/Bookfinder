@@ -24,7 +24,7 @@ fun Application.configureUserBackend() {
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
                 val formParameters = call.receiveParameters()
-                val username = formParameters["bio"].toString()
+                val username = formParameters["bio"].toString();
                 UsersService().updateUserBio(UserData.User_UUID, username)
                 call.sessions.set(UsersService().ReturnUserByUUID(UserData.User_UUID))
                 call.respondRedirect("/settings", permanent = false)
