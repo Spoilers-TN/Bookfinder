@@ -1,0 +1,74 @@
+
+    {% include "head.html" %}
+
+    <body>
+
+        {% if logged == false %}
+        {% include "unlogged-navbar.html" %}
+        {% else %}
+        {% include "logged-navbar.html" %}
+        {% endif %}
+
+        <!-- CONTENUTI -->
+        <br />
+        <center>
+            <h1>Annunci</h1>
+        </center>
+
+        <br>
+
+        <div class="container" style="margin-bottom: 50px" id="annuncio">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+                        <!-- Le info seguenti devono essere autocompilate in base all'ESBN - per programmatori -->
+                        <div class="row">
+                            <div class="col-md-3"><img alt="antologia" class="img-fluid"
+                                                       src="/assets/img/general/antologia.webp"> </div>
+                            <div class="col">
+                                <h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
+                                <div style="font-size: 18px; line-height: 30px">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="subtitle">Autore: </span><br>
+                                            <span class="subtitle">Anno di pubblicazione: </span><br>
+                                            <span class="subtitle">Codice ISBN: </span><br>
+                                            <span class="subtitle">Prezzo: </span>
+                                        </div>
+                                    </div>
+                                    <label>
+                                        Descrizione dello stato del libro:
+                                    </label>
+                                </div>
+                                <br>
+                                <h4 class="card-title">Annuncio creato da:</h4>
+                                <div style="font-size: 18px;">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="subtitle"><a href="profile">Nicola Leoni</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray; ">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">3</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Next</a></li>
+            </ul>
+        </nav>
+        <br>
+
+    </body>
+
+
+</html>

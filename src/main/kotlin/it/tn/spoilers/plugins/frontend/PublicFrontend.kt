@@ -67,54 +67,6 @@ fun Application.configurePublicFrontend() {
                 )
             )
         }
-        get("/search") {
-            val UserData = call.sessions.get<UsersData>()
-            with(call) {
-                respond(
-                    PebbleContent(
-                        "search.html", mapOf(
-                            "books" to BooksService().findAll(),
-                            "user" to user(
-                                name = UserData?.User_Name,
-                                surname = UserData?.User_Surname,
-                                photo = UserData?.User_Photo,
-                                id = UserData?.User_ID,
-                                uuid = UserData?.User_UUID,
-                                email = UserData?.User_Email,
-                                realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite,
-                                bio = UserData?.User_Biog
-                            ),
-                            "logged" to (sessions.get<UsersData>() != null)
-                        )
-                    )
-                )
-            }
-        }
-        get("/search/{id}") {
-            val UserData = call.sessions.get<UsersData>()
-            with(call) {
-                respond(
-                    PebbleContent(
-                        "search.html", mapOf(
-                            "books" to BooksService().findByISBN(call.parameters["isbn"]!!.toLong()),
-                            "user" to user(
-                                name = UserData?.User_Name,
-                                surname = UserData?.User_Surname,
-                                photo = UserData?.User_Photo,
-                                id = UserData?.User_ID,
-                                uuid = UserData?.User_UUID,
-                                email = UserData?.User_Email,
-                                realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite,
-                                bio = UserData?.User_Biog
-                            ),
-                            "logged" to (sessions.get<UsersData>() != null)
-                        )
-                    )
-                )
-            }
-        }
         get("/terms") {
             val UserData = call.sessions.get<UsersData>()
             call.respond(
@@ -160,6 +112,46 @@ fun Application.configurePublicFrontend() {
             call.respond(
                 PebbleContent(
                     "policy.html", mapOf(
+                        "user" to user(
+                            name = UserData?.User_Name,
+                            surname = UserData?.User_Surname,
+                            photo = UserData?.User_Photo,
+                            id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
+                            email = UserData?.User_Email,
+                            realm = UserData?.User_School_Domain,
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
+                        ), "logged" to (call.sessions.get<UsersData>() != null)
+                    )
+                )
+            )
+        }
+        get("/search") {
+            val UserData = call.sessions.get<UsersData>()
+            call.respond(
+                PebbleContent(
+                    "search.html", mapOf(
+                        "user" to user(
+                            name = UserData?.User_Name,
+                            surname = UserData?.User_Surname,
+                            photo = UserData?.User_Photo,
+                            id = UserData?.User_ID,
+                            uuid = UserData?.User_UUID,
+                            email = UserData?.User_Email,
+                            realm = UserData?.User_School_Domain,
+                            gsuite = UserData?.User_GSuite,
+                            bio = UserData?.User_Biog
+                        ), "logged" to (call.sessions.get<UsersData>() != null)
+                    )
+                )
+            )
+        }
+        get("/search/results") {
+            val UserData = call.sessions.get<UsersData>()
+            call.respond(
+                PebbleContent(
+                    "risultati-ricerca.html", mapOf(
                         "user" to user(
                             name = UserData?.User_Name,
                             surname = UserData?.User_Surname,

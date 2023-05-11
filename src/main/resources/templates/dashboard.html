@@ -50,18 +50,22 @@
                     <p class="text-center">Verrai reindirizzato alla pagina di ricerca.</p>
                     <div class="row">
                         <div class="col justify-self-center">
-                            <div class="input-group">
-                                <div class="input-group-prepend"></div>
-                                <input class="form-control" type="text"
-                                       style="background: #F6f6f6;border-top-left-radius: 8px;border-bottom-left-radius: 8px;"
-                                       placeholder="Cerca in tutte le categorie...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-warning" type="button"
-                                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;"><i
-                                            class="fas fa-search"></i>&nbsp;Cerca
-                                    </button>
+                            <form method="post" action="/search/results" class="user">
+                                <div class="input-group justify-content-center">
+                                    <div class="input-group-prepend w-75">
+                                        <input class="form-control" type="text"
+                                               style="background: #F6f6f6;border-top-left-radius: 8px;border-bottom-left-radius: 8px;"
+                                               placeholder="Cerca in tutte le categorie..." name="search-query">
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-warning" type="submit"
+                                                style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+                                            <i class="fas fa-search"></i>
+                                            Cerca
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
