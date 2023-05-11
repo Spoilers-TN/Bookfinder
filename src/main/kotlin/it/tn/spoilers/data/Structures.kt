@@ -109,6 +109,19 @@ data class UserInfoGSuite(
     val locale: String,
     val hd: String
 )
+@Serializable
+data class Announcement(
+    val ID: String?,
+    val User: String?,
+    val Book: Long?,
+    val Publish_Date: String?,
+    val Expire_Date: String?,
+    val Status: String?,
+    val Price: Double?,
+    val Book_Status: String?,
+    val Description: String?,
+    val Ebook: Boolean?
+)
 
 @Serializable
 data class MustacheUser(val id: Int, val name: String)
