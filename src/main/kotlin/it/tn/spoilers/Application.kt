@@ -6,10 +6,7 @@ import io.ktor.server.netty.*
 import it.tn.spoilers.extras.DisableLogging
 import it.tn.spoilers.extras.DisableMongoLogging
 import it.tn.spoilers.extras.EnableSentry
-import it.tn.spoilers.plugins.api.configureBooksApi
-import it.tn.spoilers.plugins.api.configureReviewsApi
-import it.tn.spoilers.plugins.api.configureSchoolsApi
-import it.tn.spoilers.plugins.api.configureUsersApi
+import it.tn.spoilers.plugins.api.*
 import it.tn.spoilers.plugins.backend.configurePublicBackend
 import it.tn.spoilers.plugins.backend.configureUserBackend
 import it.tn.spoilers.plugins.extras.configureMonitoring
@@ -40,13 +37,9 @@ fun main() {
     println("[✓] Started Server - BookFinder")
 }
 
-/**
- * Function containing all the developed modules
- *
- * @author Francesco Masala
- * @since Bookfinder - 2022.11.07
- */
 fun Application.module() {
+
+    //Configure Application
     configureRouting()
     configureAuthentication()
     configureErrors()
@@ -59,12 +52,17 @@ fun Application.module() {
     configureCORS()
 
     //Configure APIs
+    configureAnnouncementsApi()
     configureBooksApi()
     configureSchoolsApi()
     configureUsersApi()
     configureReviewsApi()
+
+    //Configure backend
     configurePublicBackend()
     configureUserBackend()
+
+    //Configure frontend
     configurePublicFrontend()
     configureHybridFrontend()
     configurePrivateFrontend()

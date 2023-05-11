@@ -24,7 +24,6 @@ data class Books(
     val Book_School_Type: String,
     val Book_Title: String,
     val Book_Volume: String
-
 )
 
 /**

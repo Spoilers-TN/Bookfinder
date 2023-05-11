@@ -14,3 +14,23 @@ Place in /src/main/resources an application.properties file with the following i
 * my.domain = Host domain
 * my.urlProvider = Callback provider
 
+## Customize
+* Change the port in `src/main/kotlin/it/tn/it/Bookfinder.kt`
+
+## Run
+* Run the server with `./gradlew run`
+* Run the tests with `./gradlew test`
+* Generate the documentation with `./gradlew dokka`
+* Generate the jar with `./gradlew shadowJar`
+* Run the jar with `java -jar build/libs/Bookfinder-Kotlin-all.jar`
+
+## Documentation
+The documentation is available at [https://bookfinder-docs.spoilers.tn.it/](https://bookfinder-docs.spoilers.tn.it/)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Acknowledgments
+* [Ktor](https://ktor.io/)
+* [MongoDB](https://www.mongodb.com/)
+* [Kotlin](https://kotlinlang.org/)
