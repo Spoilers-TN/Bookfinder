@@ -7,10 +7,12 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import it.tn.spoilers.data.InsertionBook
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.AnnouncementsService
+import it.tn.spoilers.database.services.BooksService
 
 /**
  * Function containing the pages and routing for the announcement backend
@@ -30,15 +32,19 @@ fun Application.configureAnnouncementBackend() {
                 if (!formParameters["announcement-ebook"].isNullOrBlank()) {
                     Ebook = true
                 }
-                AnnouncementsService().assistedCreate(
-                    formParameters["announcement-user"]?.toString() ?: "",
-                    formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L,
-                    "disponibile",
-                    formParameters["announcement-price"]?.toDoubleOrNull() ?: 0.0,
-                    formParameters["announcement-stato"].toString(),
-                    formParameters["announcement-description"]?.toString() ?: "",
-                    Ebook
-                )
+                if(BooksService().findBySpecificISBN(formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L)!= null) {
+                    AnnouncementsService().assistedCreate(
+                        formParameters["announcement-user"].toString(),
+                        formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L,
+                        "disponibile",
+                        formParameters["announcement-price"]?.toDoubleOrNull() ?: 0.0,
+                        formParameters["announcement-stato"].toString(),
+                        formParameters["announcement-description"]?.toString() ?: "",
+                        Ebook
+                    )
+                }else{
+                    call.respond(HttpStatusCode.Unauthorized, "Insert ISBN code")
+                }
                 call.respondRedirect("/dashboard", permanent = false)
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
@@ -51,16 +57,28 @@ fun Application.configureAnnouncementBackend() {
             if (UserSession != null && UserData != null) {
                 val formParameters = call.receiveParameters()
                 var Ebook = false
-                if (!formParameters["announcement-ebook"].isNullOrBlank()) {
+                if (!formParameters["EBook"].isNullOrBlank()) {
                     Ebook = true
                 }
                 AnnouncementsService().modifyBySpecificID(
-                    formParameters["id"]?.toString() ?: "",
+                    formParameters["id"].toString(),
                     formParameters["Price"]?.toDoubleOrNull() ?: 0.0,
                     formParameters["Stato"].toString(),
                     formParameters["Description"]?.toString() ?: "",
                     Ebook,
                 )
+                call.respondRedirect("/dashboard", permanent = false)
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+            }
+        }
+        get("/delete/announcement/{id}") {
+            val id = call.parameters["id"].toString()
+            val service = AnnouncementsService()
+            val UserData = call.sessions.get<UsersData>()
+            val UserSession = call.sessions.get<UserSession>()
+            if (UserSession != null && UserData != null) {
+               service.deleteBySpecificId(id)
                 call.respondRedirect("/dashboard", permanent = false)
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")

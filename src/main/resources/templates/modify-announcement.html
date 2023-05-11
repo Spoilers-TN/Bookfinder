@@ -29,10 +29,9 @@
                         <h4 class="card-title">{{book.name}}</h4>
                         <div class="row">
                             <div class="col">
-                                <form action="/update/announcement" enctype="application/x-www-form-urlencoded" method="POST">
                                     <br>
-                                    <p type="text" name="autore" class="subtitle">Autore :&#9&#9 {{ann.user}}</p>
-                                    <input type="text" style="display: none"name="id" value="{{ann.user}}">
+                                    <p type="text" name="autore" class="subtitle">Autore :&#9&#9 {{ann.id}}</p>
+                                    <input type="hidden" name="id" value="{{ann.id}}">
                                     <br>
                                     <p type="text" name="Book" class="subtitle">Book :&#9&#9 {{ann.Book}}</p>
                                     <br>
@@ -42,63 +41,90 @@
                                     <br>
                                     <p type="text" name="Status" class="subtitle">Status:&#9&#9 {{ann.Status}}</p>
                                     <br>
-                                    Price:&#9&#9
-                                    <input type="text" name="Price" class="" value="{{ann.Price}}">
-                                    <br>
-                                    <br>
-                                    Book Status:
-                                    <br>
-                                    <select name="Stato" style="width: 90%" role="menu">
-                                        <option>Pessimo stato</option>
-                                        <option>Cattivo stato</option>
-                                        <option selected>Discreto stato</option>
-                                        <option>Buono stato</option>
-                                        <option>Ottimo stato</option>
-                                        <div></div>
-                                    </select>
-                                    <br>
-                                    <br>
-                                    Description:&#9&#9
-                                    <input type="text" name="Description" class="subtitle" value="{{ann.Description}}">
-                                    <br>
-                                    <br>
-                                    EBook:&#9&#9
-                                    <input type="checkbox" name="EBook" class="subtitle" value="{{ann.EBook}}">
-                                    <div class="col col-auto">
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pubblicaAnnuncio">
-                                            Pubblica annuncio
-                                        </button>
-                                    </div>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col col-auto">
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="pubblicaAnnuncio" tabindex="-1" aria-labelledby="caricaAnnunico"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="caricaAnnunico">Carica annuncio</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">Sei sicuro di voler pubblicare l'annuncio?</div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                                <button class="btn btn-warning" type="submit">Si</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container">
+                <form action="/update/announcement" enctype="application/x-www-form-urlencoded" method="POST">
+                    <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">Compila accuratamente questi dettagli</h5>
+                            <input type="hidden" name="id" value="{{ann.id}}">
+                            <br>
+                            <div class="row">
+                                <div class="col-5">
+                                    <select name="Stato" style="width: 90%" role="menu" required>
+                                        <option selected disabled hidden>{{ann.Book_Status}}</option>
+                                        <option>Pessimo stato</option>
+                                        <option>Cattivo stato</option>
+                                        <option>Discreto stato</option>
+                                        <option>Buono stato</option>
+                                        <option>Ottimo stato</option>
+                                        <div></div>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <p>libro digitale compreso?</p>
+                                    <br>
+                                    <input style="span: 2px" type="checkbox" name="EBook" class="subtitle" value="{{ann.EBook}}">
+                                </div>
+                                <div class="col-3">
+                                    Price:
+                                    <br>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">€</span>
+                                        </div>
+                                        <input type="number" class="form-control" name="Price"
+                                               aria-label="Amount (to the nearest dollar)" required value="{{ann.Price}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <label>Descrizioni agguntive</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" rows="3" name="Description"
+                                       placeholder="Condizioni del libro" required value="{{ann.Description}}">
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Button trigger modal -->
+                        <div class="col col-auto">
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pubblicaAnnuncio">
+                                Modifica Annuncio
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-auto">
+                                <!-- Modal -->
+                                <div class="modal fade" id="pubblicaAnnuncio" tabindex="-1" aria-labelledby="caricaAnnunico"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="caricaAnnunico">Carica annuncio</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Sei sicuro di voler pubblicare l'annuncio?</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button class="btn btn-warning" type="submit">Si</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
