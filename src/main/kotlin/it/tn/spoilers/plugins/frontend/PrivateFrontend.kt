@@ -7,6 +7,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import it.tn.spoilers.data.Announcement
+import it.tn.spoilers.data.InsertionBook
 import it.tn.spoilers.data.UserSession
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
@@ -83,6 +84,8 @@ fun Application.configurePrivateFrontend() {
         get("/insertion/manage") {
             val UserSession = call.sessions.get<UserSession>()
             val UserData = call.sessions.get<UsersData>()
+            val ann = AnnouncementsService().findBySpecificID("f0871c2a-2a8d-4f3f-a9ac-6517b09f8f41")
+            val book = BooksService().findBySpecificISBN(ann?.Announcement_Book!!.toLong())
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
@@ -108,6 +111,12 @@ fun Application.configurePrivateFrontend() {
                                 Book_Status = ann?.Announcement_Book_Status,
                                 Description = ann?.Announcement_Description,
                                 Ebook = ann?.Announcement_Ebook
+                            ), "book" to InsertionBook(
+                                author = book?.Book_Author,
+                                name = book?.Book_Title,
+                                isbn = book?.Book_ISBN,
+                                category = book?.Book_Category,
+                                publishers = book?.Book_Publishers
                             ),"logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )

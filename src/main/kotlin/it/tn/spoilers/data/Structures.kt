@@ -124,6 +124,15 @@ data class Announcement(
 )
 
 @Serializable
+data class InsertionBook(
+    val author: String?,
+    val name: String?,
+    val isbn: Long?,
+    val category : String?,
+    val publishers : String?
+)
+
+@Serializable
 data class MustacheUser(val id: Int, val name: String)
 
 @Serializable

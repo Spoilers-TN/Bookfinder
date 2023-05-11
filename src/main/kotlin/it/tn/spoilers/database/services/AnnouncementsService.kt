@@ -2,10 +2,9 @@ package it.tn.spoilers.database.services
 
 
 import it.tn.spoilers.database.models.Announcements
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
+import it.tn.spoilers.database.models.AnnouncementsData
+import it.tn.spoilers.plugins.database.toAnnouncementsData
+import org.litote.kmongo.*
 import java.util.*
 
 /**
@@ -57,6 +56,22 @@ class AnnouncementsService {
         val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
             .toList()
         //client.close()
+        return result
+    }
+
+
+    /**
+     * Get a specific announcement from the database
+     *
+     * @author Dalri Tiziano, Cristoforetti Alessio
+     * @param id[String] the announcement id
+     * @return [List] the announcement
+     */
+    fun findBySpecificID(id: String): AnnouncementsData?{
+        val caseSensitiveTypeSafeFilter = Announcements::Announcement_ID eq id
+        val result = announcementsCollection.findOne(caseSensitiveTypeSafeFilter)?.toAnnouncementsData()
+        //client.close
+        //()
         return result
     }
 

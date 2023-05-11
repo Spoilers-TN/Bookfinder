@@ -17,101 +17,48 @@
 </center>
 
 <div id="listaAnnunci">
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img alt="antologia" class="img-fluid"
+                             src="/assets/img/general/antologia.webp" style="width: 100%; height: 400px">
+                        <div class="card-body">
+                            <p class="card-text"><h4 class="card-title">{{book.Book_Title}}</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="subtitle">Autore: {{book.Book_Author}}</span><br>
+                                    <span class="subtitle">Categoria : {{book.Book_Category}}</span><br>
+                                    <span class="subtitle">Codice ISBN: {{book.isbn}}</span><br>
+                                    <span class="subtitle">Prezzo: {{ann.Price}}</span>
+                                </div>
+                            </div></p>
+                            <div class=" justify-content: flex-end">
+                                <form class="deletion-form" id="deletion-form-X" action="delete/announcement/{{ann.Id}}" method="post">
+                                    <div style="text-align: right;margin-top: 15%">
+                                        <a class="btn btn-warning" href="insertion/modify/{{ann.Id}}">Modifica</a>
+                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img alt="antologia" class="img-fluid"
-                         src="/assets/img/general/antologia.webp" style="width: 100%; height: 400px">
-                    <div class="card-body">
-                        <p class="card-text"><h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
-                        <div class="row">
-                            <div class="col">
-                                <span class="subtitle">Autore: </span><br>
-                                <span class="subtitle">Anno di pubblicazione: </span><br>
-                                <span class="subtitle">Codice ISBN: </span><br>
-                                <span class="subtitle">Prezzo: </span>
-                            </div>
-                        </div></p>
-                        <div class=" justify-content: flex-end">
-                            <form class="deletion-form" id="deletion-form-X" action="delete/announcement" method="post">
-                                <div style="text-align: right;margin-top: 15%">
-                                    <button type="button" href="modifica annuncio..." class="btn btn-warning">Modifica</button>
-                                    <button type="submit" class="btn btn-danger">Elimina</button>
-                                    <input hidden name="id-annuncio" value="...">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img alt="antologia" class="img-fluid"
-                         src="/assets/img/general/antologia.webp" style="width: 100%; height: 400px">
-                    <div class="card-body">
-                        <p class="card-text"><h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
-                        <div class="row">
-                            <div class="col">
-                                <span class="subtitle">Autore: </span><br>
-                                <span class="subtitle">Anno di pubblicazione: </span><br>
-                                <span class="subtitle">Codice ISBN: </span><br>
-                                <span class="subtitle">Prezzo: </span>
-                            </div>
-                        </div></p>
-                        <div class=" justify-content: flex-end">
-                            <form class="deletion-form" id="deletion-form-X" action="delete/announcement" method="post">
-                                <div style="text-align: right;margin-top: 15%">
-                                    <button type="button" href="modifica annuncio..." class="btn btn-warning">Modifica</button>
-                                    <button type="submit" class="btn btn-danger">Elimina</button>
-                                    <input hidden name="id-annuncio" value="...">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img alt="antologia" class="img-fluid"
-                         src="/assets/img/general/antologia.webp" style="width: 100%; height: 400px">
-                    <div class="card-body">
-                        <p class="card-text"><h4 class="card-title">Letteratura e Storia Italiana terza edizione</h4>
-                        <div class="row">
-                            <div class="col">
-                                <span class="subtitle">Autore: </span><br>
-                                <span class="subtitle">Anno di pubblicazione: </span><br>
-                                <span class="subtitle">Codice ISBN: </span><br>
-                                <span class="subtitle">Prezzo: </span>
-                            </div>
-                        </div></p>
-                        <div class=" justify-content: flex-end">
-                            <form class="deletion-form" id="deletion-form-X" action="delete/announcement" method="post">
-                                <div style="text-align: right;margin-top: 15%">
-                                    <button type="button" href="modifica annuncio..." class="btn btn-warning">Modifica</button>
-                                    <button type="submit" class="btn btn-danger">Elimina</button>
-                                    <input hidden name="id-annuncio" value="...">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!--<nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray; ">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">3</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Next</a></li>
+            </ul>
+        </nav>-->
+        <br>
     </div>
-</div>
-
-<!--<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray; ">1</a></li>
-        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">2</a></li>
-        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">3</a></li>
-        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Next</a></li>
-    </ul>
-</nav>-->
-<br>
 </div>
 </body>
 </html>
