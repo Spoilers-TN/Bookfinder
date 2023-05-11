@@ -14,7 +14,7 @@ data class Books(
     @BsonId
     val id: Id<Books>? = null,
     val Book_Study_Year: Int,
-    val Book_Authors: String,
+    val Book_Author: String,
     val Book_ISBN: Long,
     val Book_SchoolCode: String,
     val Book_Category: String,
@@ -36,7 +36,7 @@ data class Books(
 data class BooksData(
     val id: String? = null,
     val Book_Study_Year: Int,
-    val Book_Authors: String,
+    val Book_Author: String,
     val Book_ISBN: Long,
     val Book_SchoolCode: String,
     val Book_Category: String,
