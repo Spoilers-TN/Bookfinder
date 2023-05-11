@@ -57,6 +57,8 @@ fun Application.module() {
     configureHeaders()
     configureCompression()
     configureCORS()
+
+    //Configure APIs
     configureBooksApi()
     configureSchoolsApi()
     configureUsersApi()
