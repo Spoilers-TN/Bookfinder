@@ -36,7 +36,7 @@ fun Application.configureAnnouncementBackend() {
                     AnnouncementsService().assistedCreate(
                         UserData.User_ID,
                         formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L,
-                        "disponibile",
+                        "Published",
                         formParameters["announcement-price"]?.toDoubleOrNull() ?: 0.0,
                         formParameters["announcement-stato"].toString(),
                         formParameters["announcement-description"]?.toString() ?: "",
