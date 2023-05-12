@@ -19,6 +19,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.time.Duration
 import java.util.*
+import kotlin.system.exitProcess
 
 /**
  * Function containing the OAuth2 Security - Cookies Security and Login/Logout
@@ -30,10 +31,16 @@ fun Application.configureAuthentication() {
     log.info("[!] Starting Plugin - OAuthSecurity.kt")
     var service = UsersService()
 
-    //Gestione filesecret
+    //Controlla se application.properties esiste
     val prop = Properties()
-    val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
-    prop.load(inputStream)
+    try {
+        val inputStream = javaClass.classLoader.getResourceAsStream("application.properties")
+        prop.load(inputStream)
+    } catch (ex: Exception){
+        log.info("[!] The application.properties file is missing.")
+        log.info(ex.message);
+        exitProcess(-1);
+    }
 
     install(Sessions) {
         val secretSignKey = hex(prop.getProperty("my.signKey"))

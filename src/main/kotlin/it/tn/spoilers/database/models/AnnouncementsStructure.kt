@@ -38,9 +38,9 @@ data class AnnouncementsData(
     val Announcement_Book: Long,
     val Announcement_Publish_Date: String,
     val Announcement_Expire_Date: String,
-    val Announcement_Status: String,
+    val Announcement_Status: String, //Stato del libro, CONDIZIONI
     val Announcement_Price: Double,
-    val Announcement_Book_Status: String,
+    val Announcement_Book_Status: String, //Stato dell'annuncio, DISPONIBILITA'
     val Announcement_Description: String,
     val Announcement_Ebook: Boolean
 )
