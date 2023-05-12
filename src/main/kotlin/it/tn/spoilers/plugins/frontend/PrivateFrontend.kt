@@ -132,7 +132,6 @@ fun Application.configurePrivateFrontend() {
                             )
                     )
                 }
-                println(announcementslist)
                 call.respond(PebbleContent("lista-annunci-pubblicati.html", mapOf(
                     "user" to user(
                         name = userData.User_Name,

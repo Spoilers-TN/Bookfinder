@@ -15,11 +15,11 @@
 <center>
     <h1>I tuoi annunci</h1>
 </center>
-{% for annEx in ann %}
 <div id="listaAnnunci">
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for annEx in ann %}
                 <div class="col">
                     <div class="card shadow-sm">
                         <img alt="antologia" class="img-fluid"
@@ -45,9 +45,9 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-{% endfor %}
         <!--<nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
@@ -60,9 +60,9 @@
         <br>
     </div>
 </div>
-</body>
-</html>
 
+<!-- PLACEHOLDER DEL FOOTER -->
+{% include "footer.html" %}
 <script>
     window.addEventListener('DOMContentLoaded', function() {
         var forms = document.querySelectorAll('.deletion-form');
@@ -80,3 +80,5 @@
         });
     });
   </script>
+</body>
+</html>
