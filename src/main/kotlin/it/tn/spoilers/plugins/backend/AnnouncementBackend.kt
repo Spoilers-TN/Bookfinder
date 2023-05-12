@@ -34,7 +34,7 @@ fun Application.configureAnnouncementBackend() {
                 }
                 if(BooksService().findBySpecificISBN(formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L)!= null) {
                     AnnouncementsService().assistedCreate(
-                        formParameters["announcement-user"].toString(),
+                        UserData.User_ID,
                         formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L,
                         "disponibile",
                         formParameters["announcement-price"]?.toDoubleOrNull() ?: 0.0,
@@ -43,7 +43,7 @@ fun Application.configureAnnouncementBackend() {
                         Ebook
                     )
                 }else{
-                    call.respond(HttpStatusCode.Unauthorized, "Insert ISBN code")
+                    call.respond(HttpStatusCode.BadRequest, "Insert ISBN code")
                 }
                 call.respondRedirect("/dashboard", permanent = false)
             } else {
@@ -54,19 +54,24 @@ fun Application.configureAnnouncementBackend() {
         post("/update/announcement") {
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
+            val service = AnnouncementsService()
             if (UserSession != null && UserData != null) {
                 val formParameters = call.receiveParameters()
-                var Ebook = false
-                if (!formParameters["EBook"].isNullOrBlank()) {
-                    Ebook = true
+                if(service.findBySpecificID(formParameters["id"].toString())?.Announcement_User == UserData.User_ID) {
+                    var Ebook = false
+                    if (!formParameters["EBook"].isNullOrBlank()) {
+                        Ebook = true
+                    }
+                    AnnouncementsService().modifyBySpecificID(
+                        formParameters["id"].toString(),
+                        formParameters["Price"]?.toDoubleOrNull() ?: 0.0,
+                        formParameters["Stato"].toString(),
+                        formParameters["Description"]?.toString() ?: "",
+                        Ebook,
+                    )
+                }else{
+                    call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
                 }
-                AnnouncementsService().modifyBySpecificID(
-                    formParameters["id"].toString(),
-                    formParameters["Price"]?.toDoubleOrNull() ?: 0.0,
-                    formParameters["Stato"].toString(),
-                    formParameters["Description"]?.toString() ?: "",
-                    Ebook,
-                )
                 call.respondRedirect("/dashboard", permanent = false)
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
@@ -78,7 +83,11 @@ fun Application.configureAnnouncementBackend() {
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
             if (UserSession != null && UserData != null) {
-               service.deleteBySpecificId(id)
+                if(service.findBySpecificID(id)?.Announcement_User == UserData.User_ID) {
+                    service.deleteBySpecificId(id)
+                }else{
+                    call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
+                }
                 call.respondRedirect("/dashboard", permanent = false)
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
