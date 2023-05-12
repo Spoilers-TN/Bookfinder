@@ -15,7 +15,7 @@
 <center>
     <h1>I tuoi annunci</h1>
 </center>
-
+{% for ((ann, book) in (ann.zip(book))) %}
 <div id="listaAnnunci">
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
@@ -25,7 +25,7 @@
                         <img alt="antologia" class="img-fluid"
                              src="/assets/img/general/antologia.webp" style="width: 100%; height: 400px">
                         <div class="card-body">
-                            <p class="card-text"><h4 class="card-title">{{book.Book_Title}}</h4>
+                            <p class="card-text"><h4 class="card-title">{{book.name}}</h4>
                             <div class="row">
                                 <div class="col">
                                     <span class="subtitle">Autore : {{book.author}}</span><br>
@@ -47,16 +47,16 @@
                 </div>
             </div>
         </div>
-
+        {% endfor %}
         <!--<nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray; ">1</a></li>
-                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">2</a></li>
-                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">3</a></li>
-                <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Next</a></li>
-            </ul>
-        </nav>-->
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray; ">1</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">2</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">3</a></li>
+        <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Next</a></li>
+    </ul>
+</nav>-->
         <br>
     </div>
 </div>

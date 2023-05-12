@@ -1,5 +1,6 @@
 package it.tn.spoilers.database.services
 
+import com.mongodb.client.model.TextSearchOptions
 import it.tn.spoilers.data.book
 import it.tn.spoilers.database.models.Books
 import java.util.*
@@ -62,7 +63,7 @@ class BooksService {
     /**
      * Get a specific book from the database
      *
-     * @author Francesco Masala
+     * @author Tiziano Dalri
      * @param isbn[Long] the book isbn
      * @return [BooksData] the book
      */
