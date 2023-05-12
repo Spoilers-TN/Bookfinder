@@ -87,11 +87,13 @@ fun Application.configurePrivateFrontend() {
             val userSession = call.sessions.get<UserSession>()
             val userData = call.sessions.get<UsersData>()
             if (userSession != null && userData != null) {
-                val announcements = AnnouncementsService().findAll()
+                println("utente: " + userData.User_ID)
+                val announcements = AnnouncementsService().findByUser(userData.User_ID)
+                println(announcements)
                 val annList = mutableListOf<Announcement>()
                 val bookList = mutableListOf<InsertionBook>()
                 for (ann in announcements) {
-                    val book = BooksService().findBySpecificISBN(ann.Announcement_Book.toLong())
+                    val book = BooksService().findBySpecificISBN(ann.Announcement_Book)
                     annList.add(Announcement(
                         ID = ann.Announcement_ID,
                         User = ann.Announcement_User,
@@ -114,9 +116,8 @@ fun Application.configurePrivateFrontend() {
                 }
                 val annBookPairs = annList.zip(bookList)
                 for ((ann, book) in annBookPairs) {
-                    call.respond(PebbleContent(
-                        "lista-annunci-pubblicati.html", mapOf(
-                            "ann" to Announcement(
+                    announcementslist.add(
+                            AnnouncementExtended(
                                 ID = ann.ID,
                                 User = ann.User,
                                 Book = ann.Book,
@@ -126,17 +127,14 @@ fun Application.configurePrivateFrontend() {
                                 Price = ann.Price,
                                 Book_Status = ann.Book_Status,
                                 Description = ann.Description,
-                                Ebook = ann.Ebook
-                            ),
-                            "book" to InsertionBook(
-                                author = book.author,
-                                name = book.name,
-                                isbn = book.isbn,
-                                category = book.category,
-                                publishers = book.publishers
+                                Ebook = ann.Ebook,
+                                Author = book.author,
+                                Name = book.name,
+                                ISBN = book.isbn,
+                                Category = book.category,
+                                Publishers = book.publishers
                             )
-                        )
-                    ))
+                    )
                 }
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")

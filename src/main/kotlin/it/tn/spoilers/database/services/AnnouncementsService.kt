@@ -70,8 +70,6 @@ class AnnouncementsService {
     fun findBySpecificID(id: String): AnnouncementsData?{
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_ID eq id
         val result = announcementsCollection.findOne(caseSensitiveTypeSafeFilter)?.toAnnouncementsData()
-        //client.close
-        //()
         return result
     }
 

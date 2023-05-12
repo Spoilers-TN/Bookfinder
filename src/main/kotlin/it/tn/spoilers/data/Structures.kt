@@ -133,6 +133,25 @@ data class InsertionBook(
 )
 
 @Serializable
+data class AnnouncementExtended(
+    val ID: String?,
+    val User: String?,
+    val Book: Long?,
+    val Publish_Date: String?,
+    val Expire_Date: String?,
+    val Status: String?,
+    val Price: Double?,
+    val Book_Status: String?,
+    val Description: String?,
+    val Ebook: Boolean?,
+    val Author: String?,
+    val Name: String?,
+    val ISBN: Long?,
+    val Category : String?,
+    val Publishers : String?
+)
+
+@Serializable
 data class MustacheUser(val id: Int, val name: String)
 
 @Serializable
