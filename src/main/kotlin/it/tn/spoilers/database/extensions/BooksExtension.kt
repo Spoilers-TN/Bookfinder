@@ -11,12 +11,10 @@ fun Books.toBooksData(): BooksData =
         Book_Title = this.Book_Title,
         Book_Author = this.Book_Author,
         Book_Category = this.Book_Category,
-        Book_Price = this.Book_Price,
         Book_Publishers = Book_Publishers,
         Book_School_Type = this.Book_School_Type,
         Book_SchoolCode = this.Book_SchoolCode,
         Book_Study_Year = this.Book_Study_Year,
-        Book_Volume = this.Book_Volume,
         Book_YearSelection = this.Book_YearSelection
     )
 
@@ -26,11 +24,9 @@ fun BooksData.toBooks(): Books =
         Book_Title = this.Book_Title,
         Book_Author = this.Book_Author,
         Book_Category = this.Book_Category,
-        Book_Price = this.Book_Price,
         Book_Publishers = Book_Publishers,
         Book_School_Type = this.Book_School_Type,
         Book_SchoolCode = this.Book_SchoolCode,
         Book_Study_Year = this.Book_Study_Year,
-        Book_Volume = this.Book_Volume.toInt(),
         Book_YearSelection = this.Book_YearSelection
     )

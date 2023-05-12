@@ -25,7 +25,7 @@ import kotlinx.serialization.json.Json
 fun Application.configureAnnouncementsApi() {
     log.info("[!] Starting Plugin - api - announcements.kt")
     val service = AnnouncementsService()
-
+/*
     routing {
         get("/api/announcements/list") {
             val AnnouncementsList = service.findAll().map(Announcements::toAnnouncementsData)
@@ -75,5 +75,7 @@ fun Application.configureAnnouncementsApi() {
             call.respondText(Json.encodeToString(AnnouncementsList), contentType = ContentType.Application.Json)
         }
     }
+    */
+
     log.info("[✓] Started Plugin - api - announcements.kt")
 }

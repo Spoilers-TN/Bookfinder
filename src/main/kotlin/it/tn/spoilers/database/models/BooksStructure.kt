@@ -19,11 +19,9 @@ data class Books(
     val Book_SchoolCode: String,
     val Book_Category: String,
     val Book_Publishers: String,
-    val Book_Price: Double,
-    val Book_YearSelection: String,
+    val Book_YearSelection: String?,
     val Book_School_Type: String,
-    val Book_Title: String,
-    val Book_Volume: String
+    val Book_Title: String
 )
 
 /**
@@ -40,9 +38,7 @@ data class BooksData(
     val Book_SchoolCode: String,
     val Book_Category: String,
     val Book_Publishers: String,
-    val Book_Price: Double,
-    val Book_YearSelection: String,
+    val Book_YearSelection: String?,
     val Book_School_Type: String,
-    val Book_Title: String,
-    val Book_Volume: String
+    val Book_Title: String
 )
