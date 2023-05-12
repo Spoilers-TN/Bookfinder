@@ -7,6 +7,7 @@ import it.tn.spoilers.extras.DisableLogging
 import it.tn.spoilers.extras.DisableMongoLogging
 import it.tn.spoilers.extras.EnableSentry
 import it.tn.spoilers.plugins.api.*
+import it.tn.spoilers.plugins.backend.configureAnnouncementBackend
 import it.tn.spoilers.plugins.backend.configurePublicBackend
 import it.tn.spoilers.plugins.backend.configureUserBackend
 import it.tn.spoilers.plugins.extras.configureMonitoring
@@ -53,12 +54,14 @@ fun Application.module() {
     configureCORS()
 
     //Configure APIs
+    configureAnnouncementsApi()
     configureBooksApi()
     configureSchoolsApi()
     configureUsersApi()
     configureReviewsApi()
 
     //Configure backend
+    configureAnnouncementBackend()
     configurePublicBackend()
     configureUserBackend()
 
