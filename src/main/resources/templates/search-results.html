@@ -18,18 +18,20 @@
                     <p class="text-center">Trova tra titoli, autori, categorie...</p>
                     <div class="row">
                         <div class="col justify-self-center">
-                            <div class="input-group">
-                                <div class="input-group-prepend"></div>
-                                <input class="form-control" type="text"
-                                       style="background: #F6f6f6;border-top-left-radius: 8px;border-bottom-left-radius: 8px;"
-                                       placeholder="Cerca in tutte le categorie...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-warning" type="button"
-                                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;"><i
-                                            class="fas fa-search"></i>&nbsp;Cerca
-                                    </button>
+                            <form method="post">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"></div>
+                                    <input class="form-control" type="text" name="search-query"
+                                           style="background: #F6f6f6;border-top-left-radius: 8px;border-bottom-left-radius: 8px;" value="{{ search }}"
+                                           placeholder="Cerca in tutte le categorie...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-warning" type="submit"
+                                                style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;"><i
+                                                class="fas fa-search"></i>&nbsp;Cerca
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="col col-md-auto justify-self-sm-center">
                             <div class="dropdown">
