@@ -35,7 +35,7 @@
                                 </div>
                             </div></p>
                             <div class=" justify-content: flex-end">
-                                <form class="deletion-form" id="deletion-form-X" action="/delete/announcement/{{ann.Id}}" method="post">
+                                <form class="deletion-form" id="deletion-form-X" action="/delete/announcement/{{annEx.ID}}" method="post">
                                     <div style="text-align: right;margin-top: 15%">
                                         <a class="btn btn-warning" href="/insertion/modify/{{annEx.ID}}">Modifica</a>
                                         <button type="submit" class="btn btn-danger">Elimina</button>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
+{% endfor %}
         <!--<nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item"><a class="page-link" href="#" style="border:1px solid lightgray;">Previous</a></li>

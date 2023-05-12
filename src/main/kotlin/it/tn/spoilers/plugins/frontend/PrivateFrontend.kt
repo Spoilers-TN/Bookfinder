@@ -6,10 +6,7 @@ import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import it.tn.spoilers.data.Announcement
-import it.tn.spoilers.data.InsertionBook
-import it.tn.spoilers.data.UserSession
-import it.tn.spoilers.data.user
+import it.tn.spoilers.data.*
 import it.tn.spoilers.database.models.AnnouncementsData
 import it.tn.spoilers.database.models.Books
 import it.tn.spoilers.database.models.UsersData
@@ -87,9 +84,7 @@ fun Application.configurePrivateFrontend() {
             val userSession = call.sessions.get<UserSession>()
             val userData = call.sessions.get<UsersData>()
             if (userSession != null && userData != null) {
-                println("utente: " + userData.User_ID)
-                val announcements = AnnouncementsService().findByUser(userData.User_ID)
-                println(announcements)
+                val announcements = AnnouncementsService().findByUser(userData.User_UUID)
                 val annList = mutableListOf<Announcement>()
                 val bookList = mutableListOf<InsertionBook>()
                 for (ann in announcements) {
@@ -115,6 +110,7 @@ fun Application.configurePrivateFrontend() {
                     ))
                 }
                 val annBookPairs = annList.zip(bookList)
+                val announcementslist = mutableListOf<AnnouncementExtended>()
                 for ((ann, book) in annBookPairs) {
                     announcementslist.add(
                             AnnouncementExtended(
@@ -136,6 +132,21 @@ fun Application.configurePrivateFrontend() {
                             )
                     )
                 }
+                println(announcementslist)
+                call.respond(PebbleContent("lista-annunci-pubblicati.html", mapOf(
+                    "user" to user(
+                        name = userData.User_Name,
+                        surname = userData.User_Surname,
+                        photo = userData.User_Photo,
+                        id = userData.User_ID,
+                        uuid = userData.User_UUID,
+                        email = userData.User_Email,
+                        realm = userData.User_School_Domain,
+                        gsuite = userData.User_GSuite,
+                        bio = userData.User_Biog
+                    ),"logged" to (call.sessions.get<UsersData>() != null),
+                    "ann" to announcementslist
+                )))
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
