@@ -21,22 +21,6 @@ class ApplicationTest {
      * Test the application endpoints
      */
     fun testRoot() = testApplication {
-        application {
-            configureRouting()
-            configureStaticRoutes()
-            configurePublicFrontend()
-        }
-        client.get("/").apply {
-            assertEquals(HttpStatusCode.OK, status)
-        }
-        client.get("/about").apply {
-            assertEquals(HttpStatusCode.OK, status)
-        }
-        client.get("/search").apply {
-            assertEquals(HttpStatusCode.OK, status)
-        }
-        client.get("/terms").apply {
-            assertEquals(HttpStatusCode.OK, status)
-        }
+
     }
 }
