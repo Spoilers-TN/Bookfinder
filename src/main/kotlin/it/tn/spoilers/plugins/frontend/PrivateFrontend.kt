@@ -125,7 +125,7 @@ fun Application.configurePrivateFrontend() {
                                 author = book?.Book_Author,
                                 name = book?.Book_Title,
                                 isbn = book?.Book_ISBN,
-                                year = book?.Book_Year,
+                                category = book?.Book_Category,
                                 publishers = book?.Book_Publishers
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null)

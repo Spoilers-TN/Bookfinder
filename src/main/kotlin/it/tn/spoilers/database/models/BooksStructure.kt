@@ -17,7 +17,7 @@ data class Books(
     val Book_Title: String,
     val Book_Author: String,
     val Book_Publishers: String,
-    val Book_Year: String,
+    val Book_Category: String,
     val Book_Study_Year: Int,
 )
 
@@ -33,6 +33,6 @@ data class BooksData(
     val Book_Title: String,
     val Book_Author: String,
     val Book_Publishers: String,
-    val Book_Year: String,
+    val Book_Category: String,
     val Book_Study_Year: Int,
 )

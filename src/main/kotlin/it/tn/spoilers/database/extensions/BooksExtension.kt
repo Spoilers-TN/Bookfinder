@@ -11,7 +11,7 @@ fun Books.toBooksData(): BooksData =
         Book_Title = this.Book_Title,
         Book_Author = this.Book_Author,
         Book_Publishers = this.Book_Publishers,
-        Book_Year = this.Book_Year,
+        Book_Category = this.Book_Category,
         Book_Study_Year = this.Book_Study_Year,
     )
 
@@ -21,6 +21,6 @@ fun BooksData.toBooks(): Books =
         Book_Title = this.Book_Title,
         Book_Author = this.Book_Author,
         Book_Publishers = this.Book_Publishers,
-        Book_Year = this.Book_Year,
+        Book_Category = this.Book_Category,
         Book_Study_Year = this.Book_Study_Year,
     )

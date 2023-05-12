@@ -126,7 +126,7 @@ data class InsertionBook(
     val author: String?,
     val name: String?,
     val isbn: Long?,
-    val year : String?,
+    val category : String?,
     val publishers : String?
 )
 @Serializable
