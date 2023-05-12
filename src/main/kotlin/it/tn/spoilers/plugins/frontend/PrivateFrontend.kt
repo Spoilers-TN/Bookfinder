@@ -84,7 +84,7 @@ fun Application.configurePrivateFrontend() {
             val userSession = call.sessions.get<UserSession>()
             val userData = call.sessions.get<UsersData>()
             if (userSession != null && userData != null) {
-                val announcements = AnnouncementsService().findByUser(userData.User_UUID)
+                val announcements = AnnouncementsService().findAllByUser(userData.User_ID)
                 val annList = mutableListOf<Announcement>()
                 val bookList = mutableListOf<InsertionBook>()
                 for (ann in announcements) {
