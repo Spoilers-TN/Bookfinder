@@ -1,6 +1,6 @@
 {% include "head.html" %}
 
-<body>
+<body xmlns="http://www.w3.org/1999/html">
 
 {% if logged == false %}
 {% include "unlogged-navbar.html" %}
@@ -42,10 +42,13 @@
         <div class="card-body">
             <div class="container">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
-                <div class="row">
-                    <div class="col-md-3"><img alt="antologia" class="img-fluid"
-                                               src="/assets/img/general/antologia.webp"></div>
-                    <div class="col">
+                <div class="row d-flex align-items-center" style="text-align: center">
+                    <div class="col-md-3" id="thedisplay" style="display: inline-block;display: table-cell;vertical-align: middle;">
+                        <img id="preview-image" alt="antologia" class="img-fluid"
+                             src="/assets/img/general/antologia.webp"
+                             style="max-height: 400px;min-height: 400px; max-width: 320px;min-width: 320px; border: 2px solid black">
+                    </div>
+                    <div class="col" style="display: inline-block">
                         <h4 class="card-title">{{book.name}}</h4>
                         <div class="row">
                             <div class="col">
@@ -65,13 +68,11 @@
         </div>
     </div>
 </div>
-
-
 <div class="container" style="margin-bottom: 50px">
     <div class="card">
         <div class="card-body">
             <div class="container">
-                <form action="/insert/announcement" enctype="application/x-www-form-urlencoded" method="POST">
+                <form action="/insert/announcement" enctype="multipart/form-data" method="POST">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
                     <div class="row">
                         <div class="col">
@@ -155,6 +156,23 @@
         </div>
     </div>
 </div>
+<script>
+  const input = document.getElementById('image');
+  const preview = document.getElementById('preview-image');
+
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        preview.src = reader.result;
+        document.getElementById('thedisplay').style.display="block";
+      };
+    }
+  });
+</script>
+
 
 {% include "footer.html" %}
 </body>

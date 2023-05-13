@@ -45,7 +45,7 @@ class AnnouncementsService {
      */
 
     fun assistedCreate(Announcement_User: String, Announcement_Book: Long, Announcement_Status: String,Announcement_Price: Double,
-                       Announcement_Book_Status: String, Announcement_Description: String, Announcement_Ebook: Boolean) {
+                       Announcement_Book_Status: String, Announcement_Description: String, Announcement_Ebook: Boolean, Announcement_ID : String) {
         this.create(
             Announcements(
             Announcement_ID = generateUUID(),

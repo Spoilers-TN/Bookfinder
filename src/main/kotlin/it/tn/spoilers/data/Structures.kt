@@ -148,7 +148,8 @@ data class AnnouncementExtended(
     val Name: String?,
     val ISBN: Long?,
     val Category : String?,
-    val Publishers : String?
+    val Publishers : String?,
+    val base64Image : String?
 )
 
 @Serializable
@@ -161,29 +162,6 @@ data class book(
     val title: String,
     val status: String
 )
-
-@Serializable
-data class InsertionBook(
-    val author: String?,
-    val name: String?,
-    val isbn: Long?,
-    val category : String?,
-    val publishers : String?
-)
-@Serializable
-data class Announcement(
-    val ID: String?,
-    val User: String?,
-    val Book: Long?,
-    val Publish_Date: String?,
-    val Expire_Date: String?,
-    val Status: String?,
-    val Price: Double?,
-    val Book_Status: String?,
-    val Description: String?,
-    val Ebook: Boolean?
-)
-
 
 
 @Serializable
