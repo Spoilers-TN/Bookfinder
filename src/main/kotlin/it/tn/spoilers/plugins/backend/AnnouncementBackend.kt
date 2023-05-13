@@ -32,7 +32,10 @@ fun Application.configureAnnouncementBackend() {
                 if (!formParameters["announcement-ebook"].isNullOrBlank()) {
                     Ebook = true
                 }
-                if(BooksService().findBySpecificISBN(formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L)!= null) {
+                val stati = arrayOf("Pessimo stato", "Cattivo stato", "Discreto stato", "Buono stato", "Ottimo stato")
+                if(BooksService().findBySpecificISBN(formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L)!= null
+                    && formParameters["announcement-price"]?.toDoubleOrNull() ?: 0.0 > 0
+                    && stati.contains(formParameters["announcement-stato"].toString())) {
                     AnnouncementsService().assistedCreate(
                         UserData.User_ID,
                         formParameters["announcement-isbn"]?.toLongOrNull() ?: 0L,
@@ -43,7 +46,7 @@ fun Application.configureAnnouncementBackend() {
                         Ebook
                     )
                 }else{
-                    call.respond(HttpStatusCode.BadRequest, "Insert ISBN code")
+                    call.respond(HttpStatusCode.Unauthorized, "Insert ISBN code")
                 }
                 call.respondRedirect("/dashboard", permanent = false)
             } else {
