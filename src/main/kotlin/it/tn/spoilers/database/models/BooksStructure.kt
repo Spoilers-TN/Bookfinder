@@ -1,5 +1,6 @@
 package it.tn.spoilers.database.models
 
+import com.typesafe.config.Optional
 import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
@@ -16,7 +17,7 @@ data class Books(
     val Book_ISBN: Long,
     val Book_Title: String,
     val Book_Author: String,
-    val Book_Publishers: String,
+    @Optional val Book_Publishers: String? = "",
     val Book_Category: String,
     val Book_Study_Year: Int,
 )
@@ -32,7 +33,7 @@ data class BooksData(
     val Book_ISBN: Long,
     val Book_Title: String,
     val Book_Author: String,
-    val Book_Publishers: String,
+    @Optional val Book_Publishers: String? = "",
     val Book_Category: String,
     val Book_Study_Year: Int,
 )
