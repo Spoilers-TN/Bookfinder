@@ -11,6 +11,7 @@ import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.AnnouncementsService
 import it.tn.spoilers.database.services.BooksService
 import it.tn.spoilers.database.services.ReviewsService
+import it.tn.spoilers.plugins.database.toAnnouncements
 
 
 /**
