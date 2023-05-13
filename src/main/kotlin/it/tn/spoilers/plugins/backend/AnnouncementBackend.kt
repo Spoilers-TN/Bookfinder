@@ -65,13 +65,17 @@ fun Application.configureAnnouncementBackend() {
                     if (!formParameters["EBook"].isNullOrBlank()) {
                         Ebook = true
                     }
-                    AnnouncementsService().modifyBySpecificID(
-                        formParameters["id"].toString(),
-                        formParameters["Price"]?.toDoubleOrNull() ?: 0.0,
-                        formParameters["Stato"].toString(),
-                        formParameters["Description"]?.toString() ?: "",
-                        Ebook,
-                    )
+                    val stati = arrayOf("Pessimo stato", "Cattivo stato", "Discreto stato", "Buono stato", "Ottimo stato")
+                    if(formParameters["Price"]?.toDoubleOrNull() ?: 0.0 > 0
+                        && stati.contains(formParameters["Stato"].toString())) {
+                        AnnouncementsService().modifyBySpecificID(
+                            formParameters["id"].toString(),
+                            formParameters["Price"]?.toDoubleOrNull() ?: 0.0,
+                            formParameters["Stato"].toString(),
+                            formParameters["Description"]?.toString() ?: "",
+                            Ebook,
+                        )
+                    }
                 }else{
                     call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
                 }
