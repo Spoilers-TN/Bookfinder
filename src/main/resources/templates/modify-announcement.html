@@ -22,29 +22,32 @@
         <div class="card-body">
             <div class="container">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
-                <div class="row">
-                    <div class="col-md-3"><img alt="antologia" class="img-fluid"
-                                               src="/assets/img/general/antologia.webp"></div>
-                    <div class="col">
+                <div class="row d-flex align-items-center" style="text-align: center">
+                    <div class="col-md-3" id="thedisplay" style="display: inline-block;display: table-cell;vertical-align: middle;">
+                        <img alt="antologia" class="img-fluid"
+                             src="data:image/png;base64,{{ base64Image }}" style="max-height: 400px;min-height: 400px; max-width: 320px;min-width: 320px; border: 2px solid black">
+                    </div>
+                    <div class="col" style="display: inline-block">
                         <h4 class="card-title">{{book.name}}</h4>
                         <div class="row">
                             <div class="col">
-                                    <br>
-                                    <input type="hidden" name="id" value="{{ann.id}}">
-                                    <br>
-                                    <p type="text" name="Book" class="subtitle">ISBN:&#9&#9 {{ann.Book}}</p>
-                                    <br>
-                                    <p type="text" name="Publish" class="subtitle">Publish Date:&#9&#9 {{ann.Publish_Date}}</p>
-                                    <br>
-                                    <p type="text" name="Expire" class="subtitle">Expire Date:&#9 {{ann.Expire_Date}}</p>
-                                    <br>
-                                    <p type="text" name="Status" class="subtitle">Status:&#9&#9 {{ann.Status}}</p>
-                                    <br>
+                                <br>
+                                <input type="hidden" name="id" value="{{ann.id}}">
+                                <br>
+                                <p type="text" name="Book" class="subtitle">ISBN:&#9&#9 {{ann.Book}}</p>
+                                <br>
+                                <p type="text" name="Publish" class="subtitle">Publish Date:&#9&#9 {{ann.Publish_Date}}</p>
+                                <br>
+                                <p type="text" name="Expire" class="subtitle">Expire Date:&#9 {{ann.Expire_Date}}</p>
+                                <br>
+                                <p type="text" name="Status" class="subtitle">Status:&#9&#9 {{ann.Status}}</p>
+                                <br>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="container">
                 <form action="/update/announcement" enctype="application/x-www-form-urlencoded" method="POST">
                     <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
@@ -103,12 +106,12 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="caricaAnnunico">Carica annuncio</h5>
+                                                <h5 class="modal-title" id="caricaAnnunico">Modifica annuncio</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">Sei sicuro di voler pubblicare l'annuncio?</div>
+                                            <div class="modal-body">Sei sicuro di voler modificare l'annuncio?</div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                                 <button class="btn btn-warning" type="submit">Si</button>
