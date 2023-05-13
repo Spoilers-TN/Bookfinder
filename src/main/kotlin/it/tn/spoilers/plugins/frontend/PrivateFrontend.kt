@@ -6,6 +6,7 @@ import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import io.sentry.protocol.User
 import it.tn.spoilers.data.*
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.AnnouncementsService
@@ -143,35 +144,40 @@ fun Application.configurePrivateFrontend() {
             val service = AnnouncementsService()
             val ann = service.findBySpecificID(id)
             if (UserSession != null && UserData != null) {
-                call.respond(
-                    PebbleContent(
-                        "modify-announcement.html", mapOf(
-                            "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
-                            ),
-                            "ann" to Announcement(
-                                ID = ann?.Announcement_ID,
-                                User = ann?.Announcement_User,
-                                Book = ann?.Announcement_Book,
-                                Publish_Date = ann?.Announcement_Publish_Date,
-                                Expire_Date = ann?.Announcement_Expire_Date,
-                                Status = ann?.Announcement_Status,
-                                Price = ann?.Announcement_Price,
-                                Book_Status = ann?.Announcement_Book_Status,
-                                Description = ann?.Announcement_Description,
-                                Ebook = ann?.Announcement_Ebook
-                            ), "logged" to (call.sessions.get<UsersData>() != null)
+                if(ann?.Announcement_User == UserData.User_ID) {
+                    call.respond(
+                        PebbleContent(
+                            "modify-announcement.html", mapOf(
+                                "user" to user(
+                                    name = UserData.User_Name,
+                                    surname = UserData.User_Surname,
+                                    photo = UserData.User_Photo,
+                                    id = UserData.User_ID,
+                                    uuid = UserData.User_UUID,
+                                    email = UserData.User_Email,
+                                    realm = UserData.User_School_Domain,
+                                    gsuite = UserData.User_GSuite,
+                                    bio = UserData.User_Biog
+                                ),
+                                "ann" to Announcement(
+                                    ID = ann?.Announcement_ID,
+                                    User = ann?.Announcement_User,
+                                    Book = ann?.Announcement_Book,
+                                    Publish_Date = ann?.Announcement_Publish_Date,
+                                    Expire_Date = ann?.Announcement_Expire_Date,
+                                    Status = ann?.Announcement_Status,
+                                    Price = ann?.Announcement_Price,
+                                    Book_Status = ann?.Announcement_Book_Status,
+                                    Description = ann?.Announcement_Description,
+                                    Ebook = ann?.Announcement_Ebook
+                                ), "logged" to (call.sessions.get<UsersData>() != null)
+                            )
                         )
                     )
-                )
+
+                }else {
+                    call.respond(HttpStatusCode.Unauthorized, "Not yours")
+                }
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
@@ -331,8 +337,5 @@ fun Application.configurePrivateFrontend() {
                 //call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
-
-
-
     }
 }
