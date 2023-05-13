@@ -8,9 +8,11 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import it.tn.spoilers.data.user
+import it.tn.spoilers.database.models.Announcements
 import it.tn.spoilers.database.services.*
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
+import it.tn.spoilers.plugins.database.toAnnouncementsData
 
 /**
  * Function containing the routing for the public frontend
@@ -173,7 +175,7 @@ fun Application.configurePublicFrontend() {
                                 bio = UserData?.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null),
                             "search" to search,
-                            "announcements" to AnnouncementsService().findByName(search)
+                            "ann" to AnnouncementsService().findByName(search).map(Announcements::toAnnouncementsData)
                         )
                     )
                 )

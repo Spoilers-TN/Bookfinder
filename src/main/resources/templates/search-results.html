@@ -232,6 +232,41 @@
 
     <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
     <div class="row gy-3">
+        <!-- foreach -->
+        {% for a in ann %}
+
+        <div class="col-md" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;"
+                     src="/assets/img/general/antologia.webp" alt="Copertina libro non caricata">
+
+                <div class="card-body mt-auto d-flex flex-column">
+
+              <span class="cc-venditore">
+                <a href="?profile=leoni_nicola" class="cc-venditore">{{ a.Announcement_User }}</a>
+              </span>
+
+                    <h5 class="card-title" href="?query=titololibro">
+                        <b>Tiolo</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>XXXX</b> - <i>{{ a.Announcement_Status }}</i></p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                  <a class="btn btn-secondary" href="#">Contatta</a>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        <!-- fine foreach -->
+
         <div class="col-md" style="margin-bottom: 40px;">
             <div class="card mt-auto d-flex flex-column h-100 text-center">
                 <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;"
@@ -253,8 +288,7 @@
 
                     <span class="cc-prezzo mt-auto d-flex flex-column">
                 <div class="btn-group">
-                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac 19.99</b></button>
-                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                    <a class="btn btn-secondary" href="#">Contatta</a>
                 </div>
               </span>
 
@@ -284,8 +318,7 @@
 
                     <span class="cc-prezzo mt-auto d-flex flex-column">
                 <div class="btn-group">
-                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac 0.49</b></button>
-                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                    <a class="btn btn-secondary" href="#">Contatta</a>
                 </div>
               </span>
 
@@ -313,8 +346,7 @@
 
                     <span class="cc-prezzo mt-auto d-flex flex-column">
                 <div class="btn-group">
-                  <button type="button" class="mt-auto btn btn-warning">Visualizza: <b>&#x20ac ????</b></button>
-                  <button type="button" class="btn btn-danger" style="max-width: 15%;">&#x2665</button>
+                    <a class="btn btn-secondary" href="#">Contatta</a>
                 </div>
               </span>
 
@@ -327,9 +359,6 @@
 
     <div class="row gy-3">
 
-        {% for book in books %}
-            {% include "Snippet-Book.html" %}
-        {% endfor %}
 
 
     </div>
@@ -338,9 +367,6 @@
 
     <div class="row gy-3">
 
-        {% for book in books %}
-            {% include "Snippet-Book.html" %}
-        {% endfor %}
 
 
     </div>
