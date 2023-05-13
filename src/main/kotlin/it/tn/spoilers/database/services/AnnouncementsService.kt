@@ -46,8 +46,8 @@ class AnnouncementsService {
 
     fun assistedCreate(Announcement_User: String, Announcement_Book: Long, Announcement_Status: String,Announcement_Price: Double,
                        Announcement_Book_Status: String, Announcement_Description: String, Announcement_Ebook: Boolean) {
-
-        val announcement = Announcements(
+        this.create(
+            Announcements(
             Announcement_ID = generateUUID(),
             Announcement_User = Announcement_User,
             Announcement_Book = Announcement_Book,
@@ -58,8 +58,8 @@ class AnnouncementsService {
             Announcement_Book_Status = Announcement_Book_Status,
             Announcement_Description = Announcement_Description,
             Announcement_Ebook = Announcement_Ebook
+            )
         )
-        this.create(announcement)
     }
 
 

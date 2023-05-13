@@ -6,7 +6,6 @@ import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import io.sentry.protocol.User
 import it.tn.spoilers.data.*
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.AnnouncementsService
@@ -103,10 +102,9 @@ fun Application.configurePrivateFrontend() {
         }
         get("/insertion/new/{isbn}") {
             val id = call.parameters["isbn"]!!.toLong()
-            val service = BooksService()
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
-            val book = service.findBySpecificISBN(id)
+            val book = BooksService().findBySpecificISBN(id)
             if (UserSession != null && UserData != null) {
                 call.respond(
                     PebbleContent(
@@ -141,10 +139,10 @@ fun Application.configurePrivateFrontend() {
             val id = call.parameters["id"]!!.toString()
             val UserData = call.sessions.get<UsersData>()
             val UserSession = call.sessions.get<UserSession>()
-            val service = AnnouncementsService()
-            val ann = service.findBySpecificID(id)
+            val ann = AnnouncementsService().findBySpecificID(id)
+            val book = BooksService().findBySpecificISBN(ann!!.Announcement_Book)
             if (UserSession != null && UserData != null) {
-                if(ann?.Announcement_User == UserData.User_ID) {
+                if(ann.Announcement_User == UserData.User_ID) {
                     call.respond(
                         PebbleContent(
                             "modify-announcement.html", mapOf(
@@ -160,21 +158,27 @@ fun Application.configurePrivateFrontend() {
                                     bio = UserData.User_Biog
                                 ),
                                 "ann" to Announcement(
-                                    ID = ann?.Announcement_ID,
-                                    User = ann?.Announcement_User,
-                                    Book = ann?.Announcement_Book,
-                                    Publish_Date = ann?.Announcement_Publish_Date,
-                                    Expire_Date = ann?.Announcement_Expire_Date,
-                                    Status = ann?.Announcement_Status,
-                                    Price = ann?.Announcement_Price,
-                                    Book_Status = ann?.Announcement_Book_Status,
-                                    Description = ann?.Announcement_Description,
-                                    Ebook = ann?.Announcement_Ebook
-                                ), "logged" to (call.sessions.get<UsersData>() != null)
+                                    ID = ann.Announcement_ID,
+                                    User = ann.Announcement_User,
+                                    Book = ann.Announcement_Book,
+                                    Publish_Date = ann.Announcement_Publish_Date,
+                                    Expire_Date = ann.Announcement_Expire_Date,
+                                    Status = ann.Announcement_Status,
+                                    Price = ann.Announcement_Price,
+                                    Book_Status = ann.Announcement_Book_Status,
+                                    Description = ann.Announcement_Description,
+                                    Ebook = ann.Announcement_Ebook
+                                ),"book" to  InsertionBook(
+                                    author = book?.Book_Author,
+                                    name = book?.Book_Title,
+                                    isbn = book?.Book_ISBN,
+                                    category = book?.Book_Category,
+                                    publishers = book?.Book_Publishers
+                                ),
+                                "logged" to (call.sessions.get<UsersData>() != null)
                             )
                         )
                     )
-
                 }else {
                     call.respond(HttpStatusCode.Unauthorized, "Not yours")
                 }

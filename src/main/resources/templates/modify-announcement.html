@@ -30,10 +30,9 @@
                         <div class="row">
                             <div class="col">
                                     <br>
-                                    <p type="text" name="autore" class="subtitle">Autore :&#9&#9 {{ann.id}}</p>
                                     <input type="hidden" name="id" value="{{ann.id}}">
                                     <br>
-                                    <p type="text" name="Book" class="subtitle">Book :&#9&#9 {{ann.Book}}</p>
+                                    <p type="text" name="Book" class="subtitle">ISBN:&#9&#9 {{ann.Book}}</p>
                                     <br>
                                     <p type="text" name="Publish" class="subtitle">Publish Date :&#9&#9 {{ann.Publish_Date}}</p>
                                     <br>
@@ -56,37 +55,33 @@
                             <br>
                             <div class="row">
                                 <div class="col-5">
-                                    <select name="Stato" style="width: 90%" role="menu" required>
+                                    <select name="Stato" class="form-select" required>
                                         <option selected disabled hidden>{{ann.Book_Status}}</option>
                                         <option>Pessimo stato</option>
                                         <option>Cattivo stato</option>
                                         <option>Discreto stato</option>
                                         <option>Buono stato</option>
                                         <option>Ottimo stato</option>
-                                        <div></div>
                                     </select>
                                 </div>
-                                <div class="col-4">
-                                    <p>libro digitale compreso?</p>
-                                    <br>
-                                    <input style="span: 2px" type="checkbox" name="EBook" class="subtitle" value="{{ann.EBook}}">
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="EBook" id="ebook-checkbox" value="{{ann.EBook}}">
+                                        <label class="form-check-label" for="ebook-checkbox">
+                                            Versione digitale
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="col-3">
-                                    Price:
-                                    <br>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">€</span>
-                                        </div>
-                                        <input type="number" class="form-control" name="Price"
-                                               aria-label="Amount (to the nearest dollar)" required value="{{ann.Price}}">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text">€</span>
+                                        <input type="number" class="form-control" name="Price" aria-label="Book Price" placeholder="Prezzo" required value="{{ann.Price}}">
                                     </div>
                                 </div>
                             </div>
                             <label>Descrizioni agguntive</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" rows="3" name="Description"
-                                       placeholder="Condizioni del libro" required value="{{ann.Description}}">
+                                <input type="text" class="form-control" rows="3" name="Description" placeholder="Condizioni del libro" required value="{{ann.Description}}">
                             </div>
                             <br>
                         </div>
@@ -129,8 +124,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 {% include "footer.html" %}

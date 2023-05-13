@@ -22,24 +22,19 @@
             <div class="container justify-items-center" style="justify-items: center;">
                 <h2>Compila tramite ISBN</h2>
                 <p>Tramite l'ISBN i campi verranno automaticamente compilati. ✨</p>
-                    <form action="#" id="form-isbn" method="POST">
-                    <input type="text" class="form-control" placeholder="Codice ISBN" style="length :100px"
-                           aria-label="Inserire l'ISBN del Libro" aria-describedby="basic-addon2" name="input-isbn" required>
-                    <button style="float : right" class="btn btn-outline-warning" type="submit">Carica</button>
-                    </form>
-                    <script type="text/javascript">
-                        const template = (isbn) => `/insertion/new/${isbn}`;
-
-                        document.getElementById('form-isbn').addEventListener('submit', function(s) {
-                        s.preventDefault();
-                        this.action = template(this.elements["input-isbn"].value);
-                        window.location.href = this.action;
-                        });
-                    </script>
+                <form action="/insertion/redirect" id="form-isbn" method="POST">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Codice ISBN" aria-label="Inserire l'ISBN del Libro" aria-describedby="basic-addon2" name="input-isbn" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-warning" type="submit">Carica</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <div class="container" style="margin-bottom: 50px">
@@ -75,21 +70,6 @@
 <div class="container" style="margin-bottom: 50px">
     <div class="card">
         <div class="card-body">
-            <!--
-            <div class="row">
-                <div class="col text-center" style="margin-bottom: 20px">
-                    <img class="img-thumbnail" src="/assets/img/categorie/"
-                         style="max-height: 230px;min-height: 230px;"/>
-                    <img class="img-thumbnail" src="/assets/img/categorie/"
-                         style="max-height: 230px;min-height: 230px;"/>
-                    <img class="img-thumbnail" src="/assets/img/categorie/"
-                         style="max-height: 230px;min-height: 230px;"/>
-                    <img class="img-thumbnail" src="/assets/img/categorie/"
-                         style="max-height: 230px;min-height: 230px;"/>
-                    VA COMPILATO
-                </div>
-            </div>
-            -->
             <div class="container">
                 <form action="/insert/announcement" enctype="application/x-www-form-urlencoded" method="POST">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
@@ -100,28 +80,31 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-5">
-                                        <select name="announcement-stato" style="width: 90%" role="menu" required>
+                                        <select name="announcement-stato" class="form-select" required>
+                                            <option selected disabled hidden value="">Seleziona lo stato del libro</option>
                                             <option>Pessimo stato</option>
                                             <option>Cattivo stato</option>
                                             <option>Discreto stato</option>
                                             <option>Buono stato</option>
                                             <option>Ottimo stato</option>
-                                            <div></div>
                                         </select>
                                     </div>
-                                    <div class="col-4">
-                                        <input type="checkbox" name="announcement-ebook" class="form-control" placeholder="Versione digitale">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="announcement-ebook" id="ebook-checkbox">
+                                            <label class="form-check-label" for="ebook-checkbox">
+                                                Versione digitale
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">€</span>
-                                            </div>
-                                            <input type="number" class="form-control" name="announcement-price"
-                                                   aria-label="Amount (to the nearest dollar)" required>
+                                    <div class="col-md-3">
+                                        <div class="input-group">
+                                            <span class="input-group-text">€</span>
+                                            <input type="number" class="form-control" name="announcement-price" aria-label="Book Price" placeholder="Prezzo" required>
                                         </div>
                                     </div>
                                 </div>
+                                <br>
                                 <label>Descrizioni agguntive</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" rows="3" id="stato" name="announcement-description"
@@ -169,7 +152,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
