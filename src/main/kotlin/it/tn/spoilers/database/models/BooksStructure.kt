@@ -1,4 +1,4 @@
-package it.tn.spoilers.database.models
+    package it.tn.spoilers.database.models
 
 import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
