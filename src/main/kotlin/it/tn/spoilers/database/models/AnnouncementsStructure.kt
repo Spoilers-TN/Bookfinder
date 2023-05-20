@@ -4,7 +4,7 @@ import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
 /**
- * Data class for the announcements table
+ * Data class for the Announcements table
  *
  * @author Francesco Masala
  */
