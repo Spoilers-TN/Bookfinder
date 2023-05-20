@@ -22,30 +22,32 @@
         <div class="card-body">
             <div class="container">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
-                <div class="row">
-                    <div class="col-md-3"><img alt="antologia" class="img-fluid"
-                                               src="/assets/img/general/antologia.webp"></div>
-                    <div class="col">
+                <div class="row d-flex align-items-center" style="text-align: center">
+                    <div class="col-md-3" id="thedisplay" style="display: inline-block;display: table-cell;vertical-align: middle;">
+                        <img alt="antologia" class="img-fluid"
+                             src="data:image/png;base64,{{ base64Image }}" style="max-height: 400px;min-height: 400px; max-width: 320px;min-width: 320px; border: 2px solid black">
+                    </div>
+                    <div class="col" style="display: inline-block">
                         <h4 class="card-title">{{book.name}}</h4>
                         <div class="row">
                             <div class="col">
-                                    <br>
-                                    <p type="text" name="autore" class="subtitle">Autore :&#9&#9 {{ann.User}}</p>
-                                    <input type="hidden" name="id" value="{{ann.id}}">
-                                    <br>
-                                    <p type="text" name="Book" class="subtitle">Book :&#9&#9 {{ann.Book}}</p>
-                                    <br>
-                                    <p type="text" name="Publish" class="subtitle">Publish Date :&#9&#9 {{ann.Publish_Date}}</p>
-                                    <br>
-                                    <p type="text" name="Expire" class="subtitle">Expire Date:&#9 {{ann.Expire_Date}}</p>
-                                    <br>
-                                    <p type="text" name="Status" class="subtitle">Status:&#9&#9 {{ann.Status}}</p>
-                                    <br>
+                                <br>
+                                <input type="hidden" name="id" value="{{ann.id}}">
+                                <br>
+                                <p type="text" name="Book" class="subtitle">ISBN:&#9&#9 {{ann.Book}}</p>
+                                <br>
+                                <p type="text" name="Publish" class="subtitle">Publish Date:&#9&#9 {{ann.Publish_Date}}</p>
+                                <br>
+                                <p type="text" name="Expire" class="subtitle">Expire Date:&#9 {{ann.Expire_Date}}</p>
+                                <br>
+                                <p type="text" name="Status" class="subtitle">Status:&#9&#9 {{ann.Status}}</p>
+                                <br>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="container">
                 <form action="/update/announcement" enctype="application/x-www-form-urlencoded" method="POST">
                     <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
@@ -56,43 +58,33 @@
                             <br>
                             <div class="row">
                                 <div class="col-5">
-                                    <select name="Stato" style="width: 90%" role="menu" required>
+                                    <select name="Stato" class="form-select" required>
                                         <option selected disabled hidden>{{ann.Book_Status}}</option>
                                         <option>Pessimo stato</option>
                                         <option>Cattivo stato</option>
                                         <option>Discreto stato</option>
                                         <option>Buono stato</option>
                                         <option>Ottimo stato</option>
-                                        <div></div>
                                     </select>
                                 </div>
-                                <div class="col-4">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <p>Libro digitale compreso?</p>
-                                        </div>
-                                        <br>
-                                    <div class="col-5">
-                                        <input style="width: 30px; height: 30px;" type="checkbox" name="EBook" class="subtitle" value="{{ann.EBook}}">
-                                    </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="EBook" id="ebook-checkbox" value="{{ann.EBook}}">
+                                        <label class="form-check-label" for="ebook-checkbox">
+                                            Versione digitale
+                                        </label>
                                     </div>
                                 </div>
-                                <div class="col-3">
-                                    Price:
-                                    <br>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">€</span>
-                                        </div>
-                                        <input type="number" class="form-control" name="Price"
-                                               aria-label="Amount (to the nearest dollar)" required value="{{ann.Price}}">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text">€</span>
+                                        <input type="number" class="form-control" name="Price" aria-label="Book Price" placeholder="Prezzo" required value="{{ann.Price}}">
                                     </div>
                                 </div>
                             </div>
                             <label>Descrizioni agguntive</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" rows="3" name="Description"
-                                       placeholder="Condizioni del libro" required value="{{ann.Description}}">
+                                <input type="text" class="form-control" rows="3" name="Description" placeholder="Condizioni del libro" required value="{{ann.Description}}">
                             </div>
                             <br>
                         </div>
@@ -114,12 +106,12 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="caricaAnnunico">Carica annuncio</h5>
+                                                <h5 class="modal-title" id="caricaAnnunico">Modifica annuncio</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">Sei sicuro di voler pubblicare l'annuncio?</div>
+                                            <div class="modal-body">Sei sicuro di voler modificare l'annuncio?</div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                                 <button class="btn btn-warning" type="submit">Si</button>
@@ -135,8 +127,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 {% include "footer.html" %}

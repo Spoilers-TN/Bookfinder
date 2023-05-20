@@ -1,0 +1,85 @@
+{% include "head.html" %}
+
+<body>
+
+{% if logged == false %}
+{% include "unlogged-navbar.html" %}
+{% else %}
+{% include "logged-navbar.html" %}
+{% endif %}
+
+
+<div id="ph-navbar"></div>
+<!-- CONTENUTI -->
+<br><br>
+<center>
+    <h1>I tuoi annunci</h1>
+</center>
+<div id="listaAnnunci">
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for annEx in ann %}
+                <div class="col" style="padding-bottom: 3%">
+                    <div class="card shadow-sm">
+                        <img alt="antologia" class="img-fluid"
+                             src="data:image/png;base64,{{ annEx.base64Image }}" style="width: 100%; height: 400px">
+                        <div class="card-body">
+                            <p class="card-text"><h4 class="card-title">{{annEx.Name}}</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="subtitle">Autore : {{annEx.Author}}</span><br>
+                                    <span class="subtitle">Categoria : {{annEx.Category}}</span><br>
+                                    <span class="subtitle">Codice ISBN : {{annEx.ISBN}}</span><br>
+                                    <span class="subtitle">Prezzo : {{annEx.Price}}</span>
+                                </div>
+                            </div></p>
+                            <div class=" justify-content: flex-end">
+
+                            </div>
+                            <form class="deletion-form" id="deletion-form-X" action="/delete/announcement/{{annEx.ID}}" method="get">
+                            <!-- data-target="#eliminaAnnuncio" -->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col col-auto">
+                                            <div style="text-align: right;margin-top: 15%">
+                                                <a class="btn btn-warning" href="/insertion/modify/{{annEx.ID}}">Modifica</a>
+                                                <button type="button" data-toggle="modal" data-target="#eliminaAnnuncio{{annEx.ID}}" class="btn btn-danger">Elimina</button>
+                                            </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="eliminaAnnuncio{{annEx.ID}}" tabindex="-1" aria-labelledby="caricaAnnunico"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="caricaAnnunico">Elimina Annuncio</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">Sei sicuro di voler eliminare l'annuncio?</div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                            <button class="btn btn-warning" type="submit">Si</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+<!-- PLACEHOLDER DEL FOOTER -->
+{% include "footer.html" %}
+</body>
+</html>

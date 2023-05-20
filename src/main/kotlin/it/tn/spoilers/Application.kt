@@ -22,6 +22,10 @@ import it.tn.spoilers.plugins.security.configureCORS
 import it.tn.spoilers.plugins.serving.configureCompression
 import it.tn.spoilers.plugins.serving.configureRouting
 import it.tn.spoilers.plugins.serving.configureStaticRoutes
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.routing.*
+import org.litote.kmongo.json
+
 
 /**
  * Function containing EVERYTHING
@@ -41,7 +45,6 @@ fun main() {
 
 fun Application.module() {
 
-    //Configure Application
     configureRouting()
     configureAuthentication()
     configureErrors()
