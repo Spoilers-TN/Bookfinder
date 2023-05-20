@@ -117,6 +117,12 @@ class AnnouncementsService {
 
         var result = emptyList<Announcements>()
 
+        var uniqueBooks = emptyList<Books>()
+
+        for(b:Books in books){ //ISBN UGUALE NON LIBRO INTERO UGUALE
+            if(!uniqueBooks.contains(b)) uniqueBooks.plus(b)
+        }
+
         for(b:Books in books){
             result = result.plus(findByISBN(b.Book_ISBN))
         }
