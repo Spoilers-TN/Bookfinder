@@ -16,6 +16,9 @@
         </div>
     </div>
 </div>
+{% if book.isbn == null %}
+<br><br><br><br><br><br><br><br><br>
+{% endif %}
 <div class="container" style="margin-bottom: 50px">
     <div class="card">
         <div class="card-body">
@@ -34,17 +37,19 @@
         </div>
     </div>
 </div>
+{% if book.isbn == null %}
+<br><br><br><br><br><br><br><br><br>
+{% endif %}
 
-
-
+{% if book.isbn != null %}
 <div class="container" style="margin-bottom: 50px">
     <div class="card">
         <div class="card-body">
             <div class="container">
                 <!-- Le info seguenti devono essere autocompilate in base all'ISBN - per programmatori -->
                 <div class="row d-flex align-items-center" style="text-align: center">
-                    <div class="col-md-3" id="thedisplay" style="display: inline-block;display: table-cell;vertical-align: middle;">
-                        <img id="preview-image" alt="antologia" class="img-fluid"
+                    <div class="col-md-3" id="thedisplay" style="display: none; vertical-align: middle;">
+                        <img id="preview-image" alt="Immagine Annuncio" class="img-fluid"
                              src="/assets/img/general/antologia.webp"
                              style="max-height: 400px;min-height: 400px; max-width: 320px;min-width: 320px; border: 2px solid black">
                     </div>
@@ -159,6 +164,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 <script>
   const input = document.getElementById('image');
   const preview = document.getElementById('preview-image');
