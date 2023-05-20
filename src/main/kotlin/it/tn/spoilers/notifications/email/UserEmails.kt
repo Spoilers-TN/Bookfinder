@@ -81,6 +81,8 @@ class UserEmails {
                 "        \n" +
                 "    </body>\n" +
                 "</html>"
+        val SendEmail = EmailSender()
 
+        SendEmail.sendEmail(buyerEmail, "BookFinder - Annuncio " + announcementCode + " acquistato", text)
     }
 }
