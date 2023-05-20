@@ -1,6 +1,7 @@
 {% include "head.html" %}
 
-<body xmlns="http://www.w3.org/1999/html">
+<body xmlns="http://www.w3.org/1999/html" {% if book.isbn == null %} style="overflow: hidden;" {% endif %}>
+
 
 {% if logged == false %}
 {% include "unlogged-navbar.html" %}
