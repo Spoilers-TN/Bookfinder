@@ -16,9 +16,9 @@ class UserEmails {
     /**
      * Function for sending an email
      *
-     * @param email[String] the email address of the recipient
-     * @param subject[String] the subject of the email
-     * @param EmailText[String] the content of the email
+     * @param seller[UsersData] the seller of the book
+     * @param buyer[UsersData] the buyer of the book
+     * @param announcement[AnnouncementsData] the related announcement
      */
     fun BookBuyedEmail(seller:UsersData, buyer:UsersData, announcement: AnnouncementsData){
         val sellerEmail = seller.User_Email
