@@ -7,6 +7,9 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import it.tn.spoilers.data.Announcement
+import it.tn.spoilers.data.AnnouncementExtended
+import it.tn.spoilers.data.InsertionBook
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.Announcements
 import it.tn.spoilers.database.services.*
@@ -160,6 +163,61 @@ fun Application.configurePublicFrontend() {
                 val postParam = call.receiveParameters()
                 val search = postParam.get("search-query").toString()
 
+                //?
+                val announcements = AnnouncementsService().findByName(search)
+                val user = UsersService()
+                val annList = mutableListOf<Announcement>()
+                val bookList = mutableListOf<InsertionBook>()
+                for (ann in announcements) {
+                    val book = BooksService().findBySpecificISBN(ann.Announcement_Book)
+                    annList.add(
+                        Announcement(
+                        ID = ann.Announcement_ID,
+                        User = ann.Announcement_User,
+                        Book = ann.Announcement_Book,
+                        Publish_Date = ann.Announcement_Publish_Date,
+                        Expire_Date = ann.Announcement_Expire_Date,
+                        Status = ann.Announcement_Status,
+                        Price = ann.Announcement_Price,
+                        Book_Status = ann.Announcement_Book_Status,
+                        Description = ann.Announcement_Description,
+                        Ebook = ann.Announcement_Ebook,
+                    )
+                    )
+                    bookList.add(
+                        InsertionBook(
+                        author = book?.Book_Author,
+                        name = book?.Book_Title,
+                        isbn = book?.Book_ISBN,
+                        category = book?.Book_Category,
+                        publishers = book?.Book_Publishers
+                    )
+                    )
+                }
+                val annBookPairs = annList.zip(bookList)
+                val announcementslist = mutableListOf<AnnouncementExtended>()
+                for ((ann, book) in annBookPairs) {
+                    announcementslist.add(
+                        AnnouncementExtended(
+                            ID = ann.ID,
+                            User = ann.User,
+                            Book = ann.Book,
+                            Publish_Date = ann.Publish_Date,
+                            Expire_Date = ann.Expire_Date,
+                            Status = ann.Status,
+                            Price = ann.Price,
+                            Book_Status = ann.Book_Status,
+                            Description = ann.Description,
+                            Ebook = ann.Ebook,
+                            Author = book.author,
+                            Name = book.name,
+                            ISBN = book.isbn,
+                            Category = book.category,
+                            Publishers = book.publishers
+                        )
+                    )
+                }
+
                 call.respond( //Invia la pagina all'utente
                     PebbleContent(
                         "search-results.html", mapOf(
@@ -175,7 +233,7 @@ fun Application.configurePublicFrontend() {
                                 bio = UserData?.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null),
                             "search" to search,
-                            "ann" to AnnouncementsService().findByName(search).map(Announcements::toAnnouncementsData)
+                            "ann" to announcementslist
                         )
                     )
                 )
