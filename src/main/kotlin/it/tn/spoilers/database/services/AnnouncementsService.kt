@@ -1,7 +1,9 @@
 package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Announcements
+import it.tn.spoilers.database.models.AnnouncementsData
 import it.tn.spoilers.database.models.Books
+import it.tn.spoilers.plugins.database.toAnnouncementsData
 import org.litote.kmongo.*
 import java.util.*
 
@@ -49,10 +51,9 @@ class AnnouncementsService {
      * @param id[String] the announcement id
      * @return [List] the announcement
      */
-    fun findByID(id: String): List<Announcements> {
+    fun findByID(id: String): AnnouncementsData? {
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_ID eq id
-        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
+        val result = announcementsCollection.findOne(caseSensitiveTypeSafeFilter)?.toAnnouncementsData()
         //client.close()
         return result
     }
@@ -96,9 +97,14 @@ class AnnouncementsService {
         val books = bServ.findByCategory(Category);
 
         var result = emptyList<Announcements>()
+        var isbns = emptyList<Long>()
+
 
         for(b:Books in books){
-            result = result.plus(findByISBN(b.Book_ISBN))
+            if(!isbns.contains(b.Book_ISBN)) {
+                isbns = isbns.plus(b.Book_ISBN)
+                result = result.plus(findByISBN(b.Book_ISBN))
+            }
         }
 
         //client.close()
@@ -116,9 +122,14 @@ class AnnouncementsService {
         val books = bServ.findByName(Name);
 
         var result = emptyList<Announcements>()
+        var isbns = emptyList<Long>()
 
         for(b:Books in books){
-            result = result.plus(findByISBN(b.Book_ISBN))
+            if(!isbns.contains(b.Book_ISBN)) {
+                isbns = isbns.plus(b.Book_ISBN)
+                result = result.plus(findByISBN(b.Book_ISBN))
+            }
+
         }
 
         //client.close()
@@ -136,9 +147,13 @@ class AnnouncementsService {
         val books = bServ.findByYear(Year);
 
         var result = emptyList<Announcements>()
+        var isbns = emptyList<Long>()
 
         for(b:Books in books){
-            result = result.plus(findByISBN(b.Book_ISBN))
+            if(!isbns.contains(b.Book_ISBN)) {
+                isbns = isbns.plus(b.Book_ISBN)
+                result = result.plus(findByISBN(b.Book_ISBN))
+            }
         }
 
         //client.close()
@@ -164,8 +179,7 @@ class AnnouncementsService {
     fun findByPrice(price: Double): List<Announcements> {
 
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_Price lt price
-        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
+        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter).toList()
         //client.close()
         return result
     }
