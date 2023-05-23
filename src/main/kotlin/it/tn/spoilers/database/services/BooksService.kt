@@ -1,10 +1,12 @@
 package it.tn.spoilers.database.services
 
 import com.mongodb.client.model.TextSearchOptions
+import it.tn.spoilers.data.book
 import it.tn.spoilers.database.models.Books
-import org.litote.kmongo.*
-import org.litote.kmongo.eq
 import java.util.*
+import it.tn.spoilers.database.models.BooksData
+import it.tn.spoilers.plugins.database.toBooksData
+import org.litote.kmongo.*
 
 /**
  * Service for the books table in the database
@@ -47,12 +49,26 @@ class BooksService {
      *
      * @author Francesco Masala
      * @param isbn[Long] the book isbn
-     * @return [List] the book
+     * @return [Books?] the book
      */
-    fun findByISBN(isbn: Long): List<Books> {
+    fun findByISBN(isbn: Long): Books? {
         val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
-        val result = booksCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
+        val result = booksCollection.findOne(caseSensitiveTypeSafeFilter)
+        //client.close
+        //()
+        return result
+    }
+
+    /**
+     * Get a specific book from the database
+     *
+     * @author Tiziano Dalri
+     * @param isbn[Long] the book isbn
+     * @return [BooksData] the book
+     */
+    fun findBySpecificISBN(isbn: Long): BooksData?{
+        val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
+        val result = booksCollection.findOne(caseSensitiveTypeSafeFilter)?.toBooksData()
         //client.close
         //()
         return result
