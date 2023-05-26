@@ -1,11 +1,12 @@
 package it.tn.spoilers.database.services
 
+import com.mongodb.client.model.TextSearchOptions
+import it.tn.spoilers.data.book
 import it.tn.spoilers.database.models.Books
-import org.litote.kmongo.Id
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
 import java.util.*
+import it.tn.spoilers.database.models.BooksData
+import it.tn.spoilers.plugins.database.toBooksData
+import org.litote.kmongo.*
 
 /**
  * Service for the books table in the database
@@ -48,12 +49,26 @@ class BooksService {
      *
      * @author Francesco Masala
      * @param isbn[Long] the book isbn
-     * @return [List] the book
+     * @return [Books?] the book
      */
-    fun findByISBN(isbn: Long): List<Books> {
+    fun findByISBN(isbn: Long): Books? {
         val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
-        val result = booksCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
+        val result = booksCollection.findOne(caseSensitiveTypeSafeFilter)
+        //client.close
+        //()
+        return result
+    }
+
+    /**
+     * Get a specific book from the database
+     *
+     * @author Tiziano Dalri
+     * @param isbn[Long] the book isbn
+     * @return [BooksData] the book
+     */
+    fun findBySpecificISBN(isbn: Long): BooksData?{
+        val caseSensitiveTypeSafeFilter = Books::Book_ISBN eq isbn
+        val result = booksCollection.findOne(caseSensitiveTypeSafeFilter)?.toBooksData()
         //client.close
         //()
         return result
@@ -70,6 +85,51 @@ class BooksService {
         booksCollection.deleteOne(caseSensitiveTypeSafeFilter)
         //client.close()
     }
+
+
+    /**
+     * Get a specific books from the database based on category
+     *
+     * @author Furlan, Berti
+     * @param
+     */
+    fun findByCategory(category : String): List<Books> {
+        val caseSensitiveTypeSafeFilter = Books::Book_Category eq category
+        val result = booksCollection.find(caseSensitiveTypeSafeFilter)
+            .toList()
+        //client.close
+        //()
+        return result
+    }
+
+    /**
+     * Get a specific books from the database based on name
+     *
+     * @author Furlan, Berti
+     * @param
+     */
+    fun findByName(name : String): List<Books> {
+
+        val result = booksCollection.find(text(name, TextSearchOptions().caseSensitive(false).diacriticSensitive(false))).toList()
+        return result
+    }
+
+
+    /**
+     * Get a specific books from the database based on study year
+     *
+     * @author Furlan, Berti
+     * @param
+     */
+    fun findByYear(year : Int): List<Books> {
+        val caseSensitiveTypeSafeFilter = Books::Book_Study_Year eq year
+        val result = booksCollection.find(caseSensitiveTypeSafeFilter)
+            .toList()
+        //client.close
+        //()
+        return result
+    }
+
 
     //Gestione filesecret
     fun obtainProperty(property : String) : String {

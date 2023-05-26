@@ -91,30 +91,6 @@ fun Application.configurePublicFrontend() {
                 )
             }
         }
-        get("/search/{id}") {
-            val UserData = call.sessions.get<UsersData>()
-            with(call) {
-                respond(
-                    PebbleContent(
-                        "search.html", mapOf(
-                            "books" to BooksService().findByISBN(call.parameters["isbn"]!!.toLong()),
-                            "user" to user(
-                                name = UserData?.User_Name,
-                                surname = UserData?.User_Surname,
-                                photo = UserData?.User_Photo,
-                                id = UserData?.User_ID,
-                                uuid = UserData?.User_UUID,
-                                email = UserData?.User_Email,
-                                realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite,
-                                bio = UserData?.User_Biog
-                            ),
-                            "logged" to (sessions.get<UsersData>() != null)
-                        )
-                    )
-                )
-            }
-        }
         get("/terms") {
             val UserData = call.sessions.get<UsersData>()
             call.respond(
