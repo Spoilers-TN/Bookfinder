@@ -1,16 +1,8 @@
 package it.tn.spoilers.database.services
 
-
-import com.mongodb.client.model.Filters
-import com.mongodb.client.model.Updates
-import it.tn.spoilers.database.models.*
-import it.tn.spoilers.extras.generateUUID
-import it.tn.spoilers.plugins.database.toAnnouncementsData
-import it.tn.spoilers.plugins.database.toBooksData
-import org.bson.Document
-import org.bson.types.ObjectId
+import it.tn.spoilers.database.models.Announcements
+import it.tn.spoilers.database.models.Books
 import org.litote.kmongo.*
-import java.time.LocalDate
 import java.util.*
 
 /**
@@ -141,6 +133,7 @@ class AnnouncementsService {
         //client.close()
         return result
     }
+
     /**
      * Get all announcements for a user (used by logged-in user)
      *
@@ -165,9 +158,14 @@ class AnnouncementsService {
         val books = bServ.findByCategory(Category);
 
         var result = emptyList<Announcements>()
+        var isbns = emptyList<Long>()
+
 
         for(b:Books in books){
-            result = result.plus(findByISBN(b.Book_ISBN))
+            if(!isbns.contains(b.Book_ISBN)) {
+                isbns = isbns.plus(b.Book_ISBN)
+                result = result.plus(findByISBN(b.Book_ISBN))
+            }
         }
 
         //client.close()
@@ -185,9 +183,14 @@ class AnnouncementsService {
         val books = bServ.findByName(Name);
 
         var result = emptyList<Announcements>()
+        var isbns = emptyList<Long>()
 
         for(b:Books in books){
-            result = result.plus(findByISBN(b.Book_ISBN))
+            if(!isbns.contains(b.Book_ISBN)) {
+                isbns = isbns.plus(b.Book_ISBN)
+                result = result.plus(findByISBN(b.Book_ISBN))
+            }
+
         }
 
         //client.close()
@@ -205,11 +208,26 @@ class AnnouncementsService {
         val books = bServ.findByYear(Year);
 
         var result = emptyList<Announcements>()
+        var isbns = emptyList<Long>()
 
         for(b:Books in books){
-            result = result.plus(findByISBN(b.Book_ISBN))
+            if(!isbns.contains(b.Book_ISBN)) {
+                isbns = isbns.plus(b.Book_ISBN)
+                result = result.plus(findByISBN(b.Book_ISBN))
+            }
         }
 
+        //client.close()
+        return result
+    }
+
+    /**
+     * Get all announcements for a user (used by logged-in user for searching other users)
+     *
+     * @author Berti, Furlan
+     */
+    fun findByUser(UserID: String): List<Announcements> {
+        val result = announcementsCollection.find(Announcements::Announcement_User eq UserID, Announcements::Announcement_Status eq "Published").toList()
         //client.close()
         return result
     }
@@ -222,8 +240,7 @@ class AnnouncementsService {
     fun findByPrice(price: Double): List<Announcements> {
 
         val caseSensitiveTypeSafeFilter = Announcements::Announcement_Price lt price
-        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
+        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter).toList()
         //client.close()
         return result
     }

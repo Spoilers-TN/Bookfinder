@@ -1,4 +1,4 @@
-package it.tn.spoilers.database.models
+    package it.tn.spoilers.database.models
 
 import com.typesafe.config.Optional
 import kotlinx.serialization.Serializable

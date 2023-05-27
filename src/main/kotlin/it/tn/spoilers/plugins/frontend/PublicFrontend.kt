@@ -1,11 +1,11 @@
 package it.tn.spoilers.plugins.frontend
 
-import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import io.ktor.server.application.*
 import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import io.pebbletemplates.pebble.loader.ClasspathLoader
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
@@ -74,30 +74,6 @@ fun Application.configurePublicFrontend() {
                     PebbleContent(
                         "search.html", mapOf(
                             "books" to BooksService().findAll(),
-                            "user" to user(
-                                name = UserData?.User_Name,
-                                surname = UserData?.User_Surname,
-                                photo = UserData?.User_Photo,
-                                id = UserData?.User_ID,
-                                uuid = UserData?.User_UUID,
-                                email = UserData?.User_Email,
-                                realm = UserData?.User_School_Domain,
-                                gsuite = UserData?.User_GSuite,
-                                bio = UserData?.User_Biog
-                            ),
-                            "logged" to (sessions.get<UsersData>() != null)
-                        )
-                    )
-                )
-            }
-        }
-        get("/search/{id}") {
-            val UserData = call.sessions.get<UsersData>()
-            with(call) {
-                respond(
-                    PebbleContent(
-                        "search.html", mapOf(
-                            "books" to BooksService().findByISBN(call.parameters["isbn"]!!.toLong()),
                             "user" to user(
                                 name = UserData?.User_Name,
                                 surname = UserData?.User_Surname,
