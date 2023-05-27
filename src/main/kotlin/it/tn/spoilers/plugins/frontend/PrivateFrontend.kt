@@ -7,11 +7,10 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import it.tn.spoilers.data.*
-import it.tn.spoilers.database.models.AnnouncementsData
-import it.tn.spoilers.database.models.Books
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.AnnouncementsService
 import it.tn.spoilers.database.services.BooksService
+import it.tn.spoilers.database.services.ImageService
 import it.tn.spoilers.database.services.ReviewsService
 
 
@@ -25,26 +24,26 @@ fun Application.configurePrivateFrontend() {
     log.info("[!] Starting Plugin - PrivateFrontend.kt")
     routing {
         get("/profile") {
-            val UserSession = call.sessions.get<UserSession>()
-            val UserData = call.sessions.get<UsersData>()
-            if (UserSession != null && UserData != null) {
+            val userSession = call.sessions.get<UserSession>()
+            val userData = call.sessions.get<UsersData>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "profile.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
-                            "numReviews" to ReviewsService().findByRecipient(UserData.User_UUID).size,
-                            "reviews" to ReviewsService().findByRecipient(UserData.User_UUID)
+                            "numReviews" to ReviewsService().findByRecipient(userData.User_UUID).size,
+                            "reviews" to ReviewsService().findByRecipient(userData.User_UUID)
                         )
                     )
                 )
@@ -53,26 +52,26 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/profile") {
-            val UserSession = call.sessions.get<UserSession>()
-            val UserData = call.sessions.get<UsersData>()
-            if (UserSession != null && UserData != null) {
+            val userSession = call.sessions.get<UserSession>()
+            val userData = call.sessions.get<UsersData>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "profile.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
-                            "numReviews" to ReviewsService().findByRecipient(UserData.User_UUID).size,
-                            "reviews" to ReviewsService().findByRecipient(UserData.User_UUID)
+                            "numReviews" to ReviewsService().findByRecipient(userData.User_UUID).size,
+                            "reviews" to ReviewsService().findByRecipient(userData.User_UUID)
                         )
                     )
                 )
@@ -87,6 +86,7 @@ fun Application.configurePrivateFrontend() {
                 val announcements = AnnouncementsService().findAllByUser(userData.User_ID)
                 val annList = mutableListOf<Announcement>()
                 val bookList = mutableListOf<InsertionBook>()
+                val imageList = mutableListOf<String>()
                 for (ann in announcements) {
                     val book = BooksService().findBySpecificISBN(ann.Announcement_Book)
                     annList.add(Announcement(
@@ -108,10 +108,11 @@ fun Application.configurePrivateFrontend() {
                         category = book?.Book_Category,
                         publishers = book?.Book_Publishers
                     ))
+                    imageList.add(ImageService().encodeImageToBase64(ImageService().getByFileName(ann.Announcement_ID)))
                 }
-                val annBookPairs = annList.zip(bookList)
+                val annBookPairs = zip3(annList,bookList,imageList) {a, b, c -> Triple(a,b,c)}
                 val announcementslist = mutableListOf<AnnouncementExtended>()
-                for ((ann, book) in annBookPairs) {
+                for ((ann, book, image) in annBookPairs) {
                     announcementslist.add(
                             AnnouncementExtended(
                                 ID = ann.ID,
@@ -128,7 +129,8 @@ fun Application.configurePrivateFrontend() {
                                 Name = book.name,
                                 ISBN = book.isbn,
                                 Category = book.category,
-                                Publishers = book.publishers
+                                Publishers = book.publishers,
+                                base64Image = image
                             )
                     )
                 }
@@ -151,22 +153,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/settings") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "settings.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
@@ -176,22 +178,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/dashboard") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "dashboard.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
@@ -200,24 +202,34 @@ fun Application.configurePrivateFrontend() {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
-        get("/insertion/new") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+        get("/insertion/new/{isbn}") {
+            val id = call.parameters["isbn"]!!.toLong()
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            val book = BooksService().findBySpecificISBN(id)
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "newInsertion.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
-                            ), "logged" to (call.sessions.get<UsersData>() != null)
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
+                            ),
+                            "book" to InsertionBook(
+                                author = book?.Book_Author,
+                                name = book?.Book_Title,
+                                isbn = book?.Book_ISBN,
+                                category = book?.Book_Category,
+                                publishers = book?.Book_Publishers
+                            ),
+                            "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
                 )
@@ -225,24 +237,78 @@ fun Application.configurePrivateFrontend() {
                 call.respond(HttpStatusCode.Unauthorized, "Not authenticated")
             }
         }
-
+        get("/insertion/modify/{id}") {
+            val id = call.parameters["id"]!!.toString()
+            val serviceImage = ImageService()
+            val imageStream = serviceImage.getByFileName(id)
+            val base64Image = serviceImage.encodeImageToBase64(imageStream)
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            val ann = AnnouncementsService().findBySpecificID(id)
+            val book = BooksService().findBySpecificISBN(ann!!.Announcement_Book)
+            if (userSession != null && userData != null) {
+                if(ann.Announcement_User == userData.User_ID) {
+                    call.respond(
+                        PebbleContent(
+                            "modify-announcement.html", mapOf(
+                                "user" to user(
+                                    name = userData.User_Name,
+                                    surname = userData.User_Surname,
+                                    photo = userData.User_Photo,
+                                    id = userData.User_ID,
+                                    uuid = userData.User_UUID,
+                                    email = userData.User_Email,
+                                    realm = userData.User_School_Domain,
+                                    gsuite = userData.User_GSuite,
+                                    bio = userData.User_Biog
+                                ),
+                                "ann" to Announcement(
+                                    ID = ann.Announcement_ID,
+                                    User = ann.Announcement_User,
+                                    Book = ann.Announcement_Book,
+                                    Publish_Date = ann.Announcement_Publish_Date,
+                                    Expire_Date = ann.Announcement_Expire_Date,
+                                    Status = ann.Announcement_Status,
+                                    Price = ann.Announcement_Price,
+                                    Book_Status = ann.Announcement_Book_Status,
+                                    Description = ann.Announcement_Description,
+                                    Ebook = ann.Announcement_Ebook
+                                ),"book" to  InsertionBook(
+                                    author = book?.Book_Author,
+                                    name = book?.Book_Title,
+                                    isbn = book?.Book_ISBN,
+                                    category = book?.Book_Category,
+                                    publishers = book?.Book_Publishers
+                                ),
+                                "logged" to (call.sessions.get<UsersData>() != null),
+                                "base64Image" to base64Image
+                            )
+                        )
+                    )
+                }else {
+                    call.respond(HttpStatusCode.Unauthorized, "Not yours")
+                }
+            } else {
+                call.respond(HttpStatusCode.NotFound, "Image not found")
+            }
+        }
         get("/messaggi") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "messages.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                uuid = UserData.User_UUID,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                email = UserData.User_Email,
-                                bio = UserData.User_Biog,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite
+                                name = userData.User_Name,
+                                uuid = userData.User_UUID,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                email = userData.User_Email,
+                                bio = userData.User_Biog,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite
                             ), "logged" to (call.sessions.get<UsersData>() != null)
                         )
                     )
@@ -252,22 +318,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/search/category") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "search.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
                         )
@@ -278,22 +344,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/search/name") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "search.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
                         )
@@ -304,22 +370,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/search/price") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "search.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
                         )
@@ -330,22 +396,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/search/year") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "search.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
                         )
@@ -356,22 +422,22 @@ fun Application.configurePrivateFrontend() {
             }
         }
         get("/search/category") {
-            val UserData = call.sessions.get<UsersData>()
-            val UserSession = call.sessions.get<UserSession>()
-            if (UserSession != null && UserData != null) {
+            val userData = call.sessions.get<UsersData>()
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null && userData != null) {
                 call.respond(
                     PebbleContent(
                         "search.html", mapOf(
                             "user" to user(
-                                name = UserData.User_Name,
-                                surname = UserData.User_Surname,
-                                photo = UserData.User_Photo,
-                                id = UserData.User_ID,
-                                uuid = UserData.User_UUID,
-                                email = UserData.User_Email,
-                                realm = UserData.User_School_Domain,
-                                gsuite = UserData.User_GSuite,
-                                bio = UserData.User_Biog
+                                name = userData.User_Name,
+                                surname = userData.User_Surname,
+                                photo = userData.User_Photo,
+                                id = userData.User_ID,
+                                uuid = userData.User_UUID,
+                                email = userData.User_Email,
+                                realm = userData.User_School_Domain,
+                                gsuite = userData.User_GSuite,
+                                bio = userData.User_Biog
                             ),
                             "logged" to (call.sessions.get<UsersData>() != null),
                         )
@@ -385,4 +451,15 @@ fun Application.configurePrivateFrontend() {
 
 
     }
+}
+
+fun <A, B, C, R> zip3(listA: List<A>, listB: List<B>, listC: List<C>, transform: (A, B, C) -> R): List<R> {
+    val minSize = minOf(listA.size, listB.size, listC.size)
+    val result = ArrayList<R>(minSize)
+
+    for (i in 0 until minSize) {
+        result.add(transform(listA[i], listB[i], listC[i]))
+    }
+
+    return result
 }
