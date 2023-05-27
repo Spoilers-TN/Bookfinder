@@ -1,8 +1,11 @@
 package it.tn.spoilers.database.services
 
 import it.tn.spoilers.database.models.Announcements
+import it.tn.spoilers.database.models.AnnouncementsData
 import it.tn.spoilers.database.models.Books
+import it.tn.spoilers.plugins.database.toAnnouncementsData
 import org.litote.kmongo.*
+import java.time.LocalDate
 import java.util.*
 
 /**
@@ -245,20 +248,6 @@ class AnnouncementsService {
         return result
     }
 
-    /**
-     * Get a specific announcement from the database
-     *
-     * @author Francesco Masala
-     * @param UserID[String] the announcement user
-     * @return [List] the announcement
-     */
-    fun findByUser(UserID: String): List<Announcements> {
-        val caseSensitiveTypeSafeFilter = Announcements::Announcement_User eq UserID
-        val result = announcementsCollection.find(caseSensitiveTypeSafeFilter)
-            .toList()
-        //client.close()
-        return result
-    }
 
     fun deleteBySpecificId(id: String){
         announcementsCollection.deleteOne(Announcements::Announcement_ID eq id)
