@@ -5,6 +5,7 @@ import it.tn.spoilers.plugins.database.toImageData
 import org.bson.types.Binary
 import org.litote.kmongo.*
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.io.InputStream
 import java.util.*
 
@@ -65,7 +66,13 @@ class ImageService {
     fun getByFileName(fileName: String): InputStream{
         val caseSensitiveTypeSafeFilter = Image::filename eq fileName
         val result = col.findOne(caseSensitiveTypeSafeFilter)?.toImageData()
-        return ByteArrayInputStream(result?.content?.data)
+
+
+        if(result?.content?.data?.size!! <= 1){
+            return File("src/main/resources/assets/img/general/notfound.webp").inputStream();
+        }else{
+            return ByteArrayInputStream(result?.content?.data)
+        }
     }
 
     /**
