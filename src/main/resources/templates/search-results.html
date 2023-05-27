@@ -243,16 +243,22 @@
                 <div class="card-body mt-auto d-flex flex-column">
 
               <span class="cc-venditore">
-                <a href="?profile=leoni_nicola" class="cc-venditore">{{ a.User }}</a>
+                <a href="/user/{{ a.User }}" class="cc-venditore">{{ a.User }}</a>
               </span>
 
                     <h5 class="card-title" href="?query=titololibro">
                         <b>{{ a.Name }}</b>
                     </h5>
 
-                    <span class="cc-stato">
-                <p>{{ a.Price }}€ - <i>{{ a.Book_Status }}</i></p>
+                    <p> {{ a.Publish_Date }}</p>
+
+                <span class="cc-stato">
+                    <p>{{ a.Price }}€ - <i>{{ a.Book_Status }}</i></p>
               </span>
+
+                    <div>
+                        <p> {{ a.Description }} </p>
+                    </div>
 <!-- da finire -->
                     <span class="cc-prezzo mt-auto d-flex flex-column">
                 <div class="btn-group">

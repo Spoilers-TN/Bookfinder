@@ -23,7 +23,7 @@ fun Application.configureHybridFrontend() {
         get("/user/{User_UUID}") {
             val GuestID = call.parameters["User_UUID"]!!.toString()
             println(GuestID)
-            val GuestUser = UsersService().ReturnUserByUUID(GuestID)
+            val GuestUser = UsersService().ReturnUserByID(GuestID)
             val UserData = call.sessions.get<UsersData>()
             call.respond(
                 PebbleContent(
