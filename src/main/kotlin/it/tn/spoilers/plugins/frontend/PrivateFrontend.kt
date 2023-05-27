@@ -12,6 +12,8 @@ import it.tn.spoilers.database.services.AnnouncementsService
 import it.tn.spoilers.database.services.BooksService
 import it.tn.spoilers.database.services.ImageService
 import it.tn.spoilers.database.services.ReviewsService
+import java.io.File
+import java.io.InputStream
 
 
 /**
@@ -87,6 +89,7 @@ fun Application.configurePrivateFrontend() {
                 val annList = mutableListOf<Announcement>()
                 val bookList = mutableListOf<InsertionBook>()
                 val imageList = mutableListOf<String>()
+
                 for (ann in announcements) {
                     val book = BooksService().findBySpecificISBN(ann.Announcement_Book)
                     annList.add(Announcement(
@@ -108,7 +111,9 @@ fun Application.configurePrivateFrontend() {
                         category = book?.Book_Category,
                         publishers = book?.Book_Publishers
                     ))
-                    imageList.add(ImageService().encodeImageToBase64(ImageService().getByFileName(ann.Announcement_ID)))
+                    var immagine = ImageService().getByFileName(ann.Announcement_ID)
+
+                    imageList.add(ImageService().encodeImageToBase64(immagine))
                 }
                 val annBookPairs = zip3(annList,bookList,imageList) {a, b, c -> Triple(a,b,c)}
                 val announcementslist = mutableListOf<AnnouncementExtended>()
@@ -241,7 +246,7 @@ fun Application.configurePrivateFrontend() {
             val id = call.parameters["id"]!!.toString()
             val serviceImage = ImageService()
             val imageStream = serviceImage.getByFileName(id)
-            val base64Image = serviceImage.encodeImageToBase64(imageStream)
+            val base64Image = serviceImage.encodeImageToBase64(imageStream!!)
             val userData = call.sessions.get<UsersData>()
             val userSession = call.sessions.get<UserSession>()
             val ann = AnnouncementsService().findBySpecificID(id)
