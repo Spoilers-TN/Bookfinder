@@ -10,10 +10,10 @@ val kmongo_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.8.21"
     id("org.jetbrains.dokka") version "1.7.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.10"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
 }
 
 group = "it.tn.spoilers"
@@ -73,9 +73,9 @@ dependencies {
 }
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }

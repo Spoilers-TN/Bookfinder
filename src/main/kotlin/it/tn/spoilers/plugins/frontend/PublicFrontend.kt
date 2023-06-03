@@ -1,18 +1,14 @@
 package it.tn.spoilers.plugins.frontend
 
-import com.mitchellbosecke.pebble.loader.ClasspathLoader
+import io.pebbletemplates.pebble.loader.ClasspathLoader
 import io.ktor.server.application.*
 import io.ktor.server.pebble.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import it.tn.spoilers.data.user
-import it.tn.spoilers.database.models.Announcements
-import it.tn.spoilers.database.services.*
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
-import it.tn.spoilers.plugins.database.toAnnouncementsData
 
 /**
  * Function containing the routing for the public frontend
