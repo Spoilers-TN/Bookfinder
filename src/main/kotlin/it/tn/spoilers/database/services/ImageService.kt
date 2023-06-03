@@ -71,7 +71,7 @@ class ImageService {
         if(result?.content?.data?.size!! <= 1){
             return File("src/main/resources/assets/img/general/notfound.webp").inputStream();
         }else{
-            return ByteArrayInputStream(result?.content?.data)
+            return ByteArrayInputStream(result.content.data)
         }
     }
 
