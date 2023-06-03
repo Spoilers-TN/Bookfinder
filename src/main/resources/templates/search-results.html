@@ -227,11 +227,187 @@
 </div>
 
 
+<!-- GRIGLIA DEI RISULTATI -->
+<div class="container">
+
+    <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
+    <div class="row gy-3">
+        <!-- foreach -->
+        {% for a in ann %}
+
+        <div class="col-md-4" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;"
+                     src="/assets/img/general/antologia.webp" alt="Copertina libro non caricata">
+
+                <div class="card-body mt-auto d-flex flex-column">
+
+              <span class="cc-venditore">
+                <a href="/user/{{ a.User }}" class="cc-venditore">{{ a.User }}</a>
+              </span>
+
+                    <h5 class="card-title" href="?query=titololibro">
+                        <b>{{ a.Name }}</b>
+                    </h5>
+
+                    <p> {{ a.Publish_Date }}</p>
+
+                <span class="cc-stato">
+                    <p>{{ a.Price }}€ - <i>{{ a.Book_Status }}</i></p>
+              </span>
+
+                    <div>
+                        <p> {{ a.Description }} </p>
+                    </div>
+<!-- da finire -->
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                      <div class="btn-group">
+                        <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Contatta</a>
+                      </div>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Invia messaggio</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <div class="form-floating">
+                                       <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px"></textarea>
+                                       <label for="floatingTextarea">Messaggio</label>
+                                    </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <a class="btn btn-warning" data-bs-dismiss="modal" href="">Invia</a>
+                                 </div>
+                              </div>
+                          </div>
+                      </div>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+
+
+        <!-- fine foreach -->
+<!--
+        <div class="col-md-4" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;"
+                     src="/assets/img/general/antologia.webp" alt="Copertina libro non caricata">
+
+                <div class="card-body mt-auto d-flex flex-column">
+
+              <span class="cc-venditore">
+                <a href="?profile=leoni_nicola" class="cc-venditore">Leoni Nicola</a>
+              </span>
+
+                    <h5 class="card-title" href="?query=titololibro">
+                        <b>Laboratorio di Letteratura 2 - Dal Barocco al Romanticismo</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>2017</b> - <i>In buone condizioni</i></p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                    <a class="btn btn-secondary" href="#">Contatta</a>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;"
+                     src="https://www.libraccio.it/images/9788868023065_0_500_0_75.jpg"
+                     alt="Copertina libro non caricata">
+
+                <div class="card-body mt-auto d-flex flex-column">
+
+              <span class="cc-venditore">
+                <a href="?profile=leoni_nicola" class="cc-venditore">Leoni Nicola</a>
+              </span>
+
+                    <h5 class="card-title" href="?query=titololibro">
+                        <b>L'ABC del Comunismo</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>1992</b> - <i>Quasi distrutto</i></p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                    <a class="btn btn-secondary" href="#">Contatta</a>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" style="margin-bottom: 40px;">
+            <div class="card mt-auto d-flex flex-column h-100 text-center">
+                <img class="img" style="max-height: 300px; min-height: 250px; object-fit: cover;"
+                     src="/assets/img/general/notfound.webp" alt="Copertina libro non caricata">
+                <div class="card-body">
+
+              <span class="cc-venditore">
+                <a href="?profile=venditore" class="cc-venditore">Nome venditore</a>
+              </span>
+
+                    <h5 class="card-title fw-bold" href="?query=titololibro">
+                        <b>Titolo del libro</b>
+                    </h5>
+
+                    <span class="cc-stato">
+                <p>Edizione <b>[AAAA]</b> - <i>Stato del libro</i> - Cantami, o Diva, del Pelìde Achille l'ira funesta che infiniti addusse lutti agli Achei, molte anzi tempo all'Orco generose travolse alme d'eroi, e di cani e d'augelli orrido pasto lor salme abbandonò (così di Giove l'alto consiglio s'adempía), da quando primamente disgiunse aspra contesa il re de' prodi Atride Achille.</p>
+              </span>
+
+                    <span class="cc-prezzo mt-auto d-flex flex-column">
+                <div class="btn-group">
+                    <a class="btn btn-secondary" href="#">Contatta</a>
+                </div>
+              </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+    </div>
+    <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
+
+    <div class="row gy-3">
+
+
+
+    </div>
+
+    <!-- 3 CARDS PER OGNI RIGA DI PRODOTTO -->
+
+    <div class="row gy-3">
+
+
+
+    </div>
+
+</div>
 
 <!-- PLACEHOLDER DEL FOOTER -->
 {% include "footer.html" %}
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </body>
 
 </html>
