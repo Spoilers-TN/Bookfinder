@@ -1,11 +1,11 @@
 package it.tn.spoilers.plugins.frontend
 
+import io.pebbletemplates.pebble.loader.ClasspathLoader
 import io.ktor.server.application.*
 import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import io.pebbletemplates.pebble.loader.ClasspathLoader
 import it.tn.spoilers.data.user
 import it.tn.spoilers.database.models.UsersData
 import it.tn.spoilers.database.services.BooksService
