@@ -7,6 +7,7 @@ import it.tn.spoilers.extras.DisableLogging
 import it.tn.spoilers.extras.DisableMongoLogging
 import it.tn.spoilers.extras.EnableSentry
 import it.tn.spoilers.plugins.api.*
+import it.tn.spoilers.plugins.backend.configureAnnouncementBackend
 import it.tn.spoilers.plugins.backend.configurePublicBackend
 import it.tn.spoilers.plugins.backend.configureUserBackend
 import it.tn.spoilers.plugins.extras.configureMonitoring
@@ -21,6 +22,10 @@ import it.tn.spoilers.plugins.security.configureCORS
 import it.tn.spoilers.plugins.serving.configureCompression
 import it.tn.spoilers.plugins.serving.configureRouting
 import it.tn.spoilers.plugins.serving.configureStaticRoutes
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.routing.*
+import org.litote.kmongo.json
+
 
 /**
  * Function containing EVERYTHING
@@ -40,7 +45,6 @@ fun main() {
 
 fun Application.module() {
 
-    //Configure Application
     configureRouting()
     configureAuthentication()
     configureErrors()
@@ -60,6 +64,7 @@ fun Application.module() {
     configureReviewsApi()
 
     //Configure backend
+    configureAnnouncementBackend()
     configurePublicBackend()
     configureUserBackend()
 

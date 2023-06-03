@@ -1,9 +1,13 @@
 package it.tn.spoilers.data
 
+import it.tn.spoilers.database.models.Image
 import it.tn.spoilers.database.models.Users
 import it.tn.spoilers.extras.generateUUID
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.bson.types.Binary
+import org.litote.kmongo.Id
 
 /**
  * Data class for the user session
@@ -148,14 +152,30 @@ data class AnnouncementExtended(
     val Name: String?,
     val ISBN: Long?,
     val Category : String?,
-    val Publishers : String?
+    val Publishers : String?,
+    val base64Image : String?
 )
 
 @Serializable
 data class MustacheUser(val id: Int, val name: String)
 
 @Serializable
-data class book(val image: String, val seller: String, val title: String, val status: String)
+data class book(
+    val image: String,
+    val seller: String,
+    val title: String,
+    val status: String
+)
+
+@Serializable
+data class Image(
+    val id: Id<Image>? = null,
+    val filename: String,
+    @Contextual
+    val content: Binary
+)
+
+
 
 @Serializable
 data class Error(val code: String, val descr: String, val meme: String)
@@ -174,3 +194,4 @@ fun UserInfo.toUsers(): Users =
         User_FullName = this.name,
         User_GSuite = false
     )
+
